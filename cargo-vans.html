@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cargo Vans | High-Roof &amp; Fleet Sourcing | Innovative Auto Sourcing</title>
+  <meta name="description" content="Ford Transit, Ram ProMaster, and Chevy Express cargo vans sourced at closed dealer-lane auction cost for HVAC, plumbing, and electrical trades across the GTA." />
+  <link rel="icon" href="assets/logo-transparent.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            obsidian: {
+              DEFAULT: '#070A12',
+              light: '#0D111C',
+              lighter: '#141A28',
+              panel: '#10141F',
+            },
+            gold: {
+              DEFAULT: '#D4AF37',
+              light: '#E8CA6A',
+              dark: '#A9862A',
+            },
+            cobalt: {
+              DEFAULT: '#1E88E5',
+              light: '#4FA3EE',
+              dark: '#155DA1',
+            },
+          },
+          fontFamily: {
+            display: ['Montserrat', 'sans-serif'],
+            body: ['Inter', 'sans-serif'],
+          },
+          boxShadow: {
+            gold: '0 0 0 1px rgba(212,175,55,0.35), 0 8px 30px -8px rgba(212,175,55,0.25)',
+            'gold-lg': '0 0 0 1px rgba(212,175,55,0.4), 0 20px 60px -12px rgba(212,175,55,0.35)',
+            cobalt: '0 0 0 1px rgba(30,136,229,0.5), 0 8px 24px -6px rgba(30,136,229,0.45)',
+            panel: 'inset 0 1px 0 0 rgba(255,255,255,0.04), 0 20px 50px -20px rgba(0,0,0,0.8)',
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: #070A12;
+      background-image:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(30,136,229,0.10), transparent),
+        radial-gradient(ellipse 60% 40% at 100% 0%, rgba(212,175,55,0.07), transparent);
+      font-family: 'Inter', sans-serif;
+      color: #E7E9EE;
+    }
+    h1, h2, h3, h4, .font-display { font-family: 'Montserrat', sans-serif; }
+
+    /* Glassmorphism beveled panels */
+    .panel {
+      background: linear-gradient(180deg, rgba(20,26,40,0.85) 0%, rgba(13,17,28,0.9) 100%);
+      border: 1px solid rgba(212,175,55,0.18);
+      border-radius: 1rem;
+      box-shadow: inset 0 1px 0 0 rgba(255,255,255,0.05), inset 0 0 0 1px rgba(0,0,0,0.4), 0 20px 50px -20px rgba(0,0,0,0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .panel-gold {
+      border: 1px solid rgba(212,175,55,0.45);
+      box-shadow: 0 0 0 1px rgba(212,175,55,0.18), inset 0 1px 0 0 rgba(255,255,255,0.06), 0 20px 50px -18px rgba(212,175,55,0.25);
+    }
+    .panel-cobalt {
+      border: 1px solid rgba(30,136,229,0.55);
+      box-shadow: 0 0 0 1px rgba(30,136,229,0.25), inset 0 1px 0 0 rgba(255,255,255,0.06), 0 20px 50px -18px rgba(30,136,229,0.35);
+    }
+
+    .gold-divider { background: linear-gradient(90deg, transparent, rgba(212,175,55,0.6), transparent); height: 1px; }
+
+    .btn-gold {
+      background: linear-gradient(180deg, #E8CA6A 0%, #D4AF37 45%, #A9862A 100%);
+      color: #0B0D14;
+      border: 1px solid rgba(255,255,255,0.25);
+      box-shadow: 0 8px 24px -6px rgba(212,175,55,0.5), inset 0 1px 0 0 rgba(255,255,255,0.5);
+      font-weight: 700;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+    }
+    .btn-gold:hover { filter: brightness(1.08); transform: translateY(-1px); box-shadow: 0 12px 30px -6px rgba(212,175,55,0.6), inset 0 1px 0 0 rgba(255,255,255,0.6); }
+
+    .btn-outline-gold {
+      background: rgba(212,175,55,0.06);
+      color: #E8CA6A;
+      border: 1px solid rgba(212,175,55,0.55);
+      transition: all 0.15s ease;
+    }
+    .btn-outline-gold:hover { background: rgba(212,175,55,0.14); border-color: #E8CA6A; }
+
+    .btn-cobalt {
+      background: linear-gradient(180deg, #4FA3EE 0%, #1E88E5 60%, #155DA1 100%);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.2);
+      box-shadow: 0 8px 24px -6px rgba(30,136,229,0.55), inset 0 1px 0 0 rgba(255,255,255,0.35);
+      transition: transform 0.15s ease, filter 0.15s ease;
+    }
+    .btn-cobalt:hover { filter: brightness(1.08); transform: translateY(-1px); }
+
+    .nav-link {
+      position: relative;
+      color: #B7BDC9;
+      font-weight: 500;
+      font-size: 0.875rem;
+      letter-spacing: 0.02em;
+      padding: 0.4rem 0;
+      transition: color 0.15s ease;
+    }
+    .nav-link:hover { color: #E8CA6A; }
+    .nav-link-active { color: #4FA3EE; }
+    .nav-link-active::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0; bottom: -4px;
+      height: 2px;
+      background: #1E88E5;
+      box-shadow: 0 0 8px rgba(30,136,229,0.8);
+      border-radius: 2px;
+    }
+
+    .mobile-nav-link {
+      display: block;
+      padding: 0.85rem 1.25rem;
+      color: #C9CEDA;
+      font-weight: 500;
+      border-bottom: 1px solid rgba(212,175,55,0.1);
+    }
+    .mobile-nav-link-active { color: #4FA3EE; background: rgba(30,136,229,0.08); }
+
+    .metal-text {
+      background: linear-gradient(180deg, #F4E7BE 0%, #D4AF37 45%, #9C7A26 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .chrome-text {
+      background: linear-gradient(180deg, #F3F5F9 0%, #B9C2D0 45%, #7C8698 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .badge-cobalt {
+      background: rgba(30,136,229,0.12);
+      border: 1px solid rgba(30,136,229,0.5);
+      color: #7DB8F4;
+    }
+    .badge-gold {
+      background: rgba(212,175,55,0.1);
+      border: 1px solid rgba(212,175,55,0.45);
+      color: #E8CA6A;
+    }
+
+    .hairline { border-color: rgba(212,175,55,0.15); }
+
+    ::selection { background: rgba(212,175,55,0.35); color: #fff; }
+
+    .glow-gold { filter: drop-shadow(0 0 18px rgba(212,175,55,0.35)); }
+
+    input[type=range].gold-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      height: 6px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #155DA1, #1E88E5 40%, #D4AF37 100%);
+      outline: none;
+    }
+    input[type=range].gold-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: linear-gradient(180deg,#E8CA6A,#A9862A);
+      border: 2px solid #0B0D14;
+      box-shadow: 0 0 0 4px rgba(212,175,55,0.25), 0 4px 10px rgba(0,0,0,0.5);
+      cursor: pointer;
+      margin-top: -8px;
+    }
+    input[type=range].gold-slider::-moz-range-thumb {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: linear-gradient(180deg,#E8CA6A,#A9862A);
+      border: 2px solid #0B0D14;
+      box-shadow: 0 0 0 4px rgba(212,175,55,0.25), 0 4px 10px rgba(0,0,0,0.5);
+      cursor: pointer;
+    }
+
+    .toggle-chip {
+      transition: all 0.15s ease;
+    }
+    .toggle-chip.active {
+      background: rgba(30,136,229,0.18);
+      border-color: #1E88E5;
+      color: #fff;
+      box-shadow: 0 0 0 1px rgba(30,136,229,0.4), 0 6px 18px -4px rgba(30,136,229,0.5);
+    }
+
+    .fade-up { animation: fadeUp 0.7s ease both; }
+    @keyframes fadeUp { from { opacity:0; transform: translateY(14px); } to { opacity:1; transform: translateY(0); } }
+
+    #mobile-menu { transition: max-height 0.3s ease, opacity 0.3s ease; }
+  </style>
+</head>
+<body class="antialiased">
+
+  <!-- ================= HEADER ================= -->
+  <header class="sticky top-0 z-50 border-b hairline bg-obsidian/85 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        <a href="index.html" class="flex items-center gap-3 group">
+          <img src="assets/logo-transparent.png" alt="Innovative Auto Sourcing shield logo" class="h-12 w-12 object-contain glow-gold" />
+          <div class="leading-tight">
+            <div class="font-display font-extrabold tracking-wide text-sm lg:text-base">
+              <span class="chrome-text">INNOVATIVE</span> <span class="metal-text">AUTO SOURCING</span>
+            </div>
+            <div class="text-[10px] lg:text-xs tracking-[0.25em] text-cobalt-light/80 font-body">GREATER TORONTO AREA</div>
+          </div>
+        </a>
+
+        <nav class="hidden lg:flex items-center gap-8">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="work-trucks.html" class="nav-link">Work Trucks</a>
+        <a href="cargo-vans.html" class="nav-link nav-link-active">Cargo Vans</a>
+        <a href="how-it-works.html" class="nav-link">How It Works</a>
+        <a href="savings-calculator.html" class="nav-link">Savings Calculator</a>
+        <a href="extended-warranty.html" class="nav-link">Warranty</a>
+        </nav>
+
+        <div class="hidden lg:flex items-center gap-4">
+          <a href="tel:+16475551234" class="flex items-center gap-2 text-sm text-gray-300 hover:text-gold-light transition-colors">
+            <i data-lucide="phone" class="w-4 h-4 text-gold"></i>
+            <span class="font-body">(647) 555-1234</span>
+          </a>
+          <a href="request-sourcing.html" class="btn-gold px-5 py-2.5 rounded-lg text-sm font-display tracking-wide">Request Sourcing</a>
+        </div>
+
+        <button id="mobile-menu-btn" class="lg:hidden p-2 text-gold" aria-label="Toggle menu">
+          <i data-lucide="menu" class="w-7 h-7"></i>
+        </button>
+      </div>
+    </div>
+
+    <div id="mobile-menu" class="lg:hidden overflow-hidden max-h-0 opacity-0 border-t hairline bg-obsidian-light/95">
+      <nav class="flex flex-col">
+        <a href="index.html" class="mobile-nav-link">Home</a>
+          <a href="work-trucks.html" class="mobile-nav-link">Work Trucks</a>
+          <a href="cargo-vans.html" class="mobile-nav-link mobile-nav-link-active">Cargo Vans</a>
+          <a href="how-it-works.html" class="mobile-nav-link">How It Works</a>
+          <a href="savings-calculator.html" class="mobile-nav-link">Savings Calculator</a>
+          <a href="extended-warranty.html" class="mobile-nav-link">Warranty</a>
+          <a href="request-sourcing.html" class="mobile-nav-link">Request Sourcing</a>
+      </nav>
+      <div class="p-4 border-t hairline flex flex-col gap-3">
+        <a href="tel:+16475551234" class="flex items-center gap-2 text-sm text-gray-300">
+          <i data-lucide="phone" class="w-4 h-4 text-gold"></i> (647) 555-1234
+        </a>
+        <a href="request-sourcing.html" class="btn-gold px-5 py-3 rounded-lg text-sm text-center font-display tracking-wide">Request Sourcing</a>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- ================= HERO ================= -->
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0">
+      <img src="assets/cargo-van.jpg" alt="Ford Transit high-roof cargo van" class="w-full h-full object-cover opacity-40" />
+      <div class="absolute inset-0 bg-gradient-to-b from-obsidian/60 via-obsidian/85 to-obsidian"></div>
+    </div>
+    <div class="relative max-w-7xl mx-auto px-5 lg:px-8 pt-20 pb-24 lg:pt-28 lg:pb-32">
+      <div class="max-w-3xl fade-up">
+        <div class="inline-flex items-center gap-2 badge-cobalt rounded-full px-4 py-1.5 text-xs font-display tracking-widest mb-6">
+          <i data-lucide="package" class="w-3.5 h-3.5"></i> COMMERCIAL HIGH-ROOF &amp; CARGO
+        </div>
+        <h1 class="font-display font-black text-4xl sm:text-5xl leading-[1.05] mb-6 chrome-text">Cargo Vans Built For The Trade.</h1>
+        <p class="text-lg text-gray-300 font-body leading-relaxed max-w-2xl">
+          High-roof and standard cargo vans for HVAC, plumbing, electrical, and delivery fleets &mdash;
+          sourced directly from closed dealer-only auction lanes and delivered shelving-ready, at true
+          wholesale cost.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CARGO VAN CARDS ================= -->
+  <section class="max-w-7xl mx-auto px-5 lg:px-8 py-20">
+    <div class="text-center max-w-2xl mx-auto mb-14">
+      <h2 class="font-display font-extrabold text-3xl chrome-text mb-4">Fleet-Ready Vans, Real Wholesale Numbers</h2>
+      <p class="text-gray-400 font-body">Representative spreads between closed dealer-lane auction cost and comparable retail lot pricing on recent GTA acquisitions.</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      
+        <div class="panel panel-cobalt rounded-2xl p-7 flex flex-col">
+          <div class="w-12 h-12 rounded-lg bg-cobalt/10 border border-cobalt/40 flex items-center justify-center mb-5">
+            <i data-lucide="truck" class="w-6 h-6 text-cobalt-light"></i>
+          </div>
+          <h3 class="font-display font-bold text-xl mb-1 chrome-text">Ford Transit 250</h3>
+          <p class="text-xs text-gray-500 font-body tracking-wide mb-4">Mid-Roof &middot; Cargo &middot; RWD/AWD</p>
+          <p class="text-sm text-gray-400 font-body leading-relaxed mb-6 flex-1">The trade-standard mid-roof cargo van, sourced with low-mile fleet history and full service records.</p>
+          <div class="flex items-center justify-between border-t hairline pt-5 mb-5">
+            <span class="text-xs text-gray-500 font-body tracking-widest">TYPICAL SPREAD</span>
+            <span class="font-display font-bold text-lg chrome-text">$7,200+</span>
+          </div>
+          <a href="request-sourcing.html?vehicle=Cargo%20Van" class="btn-cobalt text-center px-5 py-3 rounded-lg text-sm font-display tracking-wide">Source This Van</a>
+        </div>
+      
+        <div class="panel panel-cobalt rounded-2xl p-7 flex flex-col">
+          <div class="w-12 h-12 rounded-lg bg-cobalt/10 border border-cobalt/40 flex items-center justify-center mb-5">
+            <i data-lucide="truck" class="w-6 h-6 text-cobalt-light"></i>
+          </div>
+          <h3 class="font-display font-bold text-xl mb-1 chrome-text">Ford Transit 350</h3>
+          <p class="text-xs text-gray-500 font-body tracking-wide mb-4">High-Roof &middot; Extended &middot; Dually</p>
+          <p class="text-sm text-gray-400 font-body leading-relaxed mb-6 flex-1">Maximum cargo cube for HVAC and electrical crews running shelving, ladder racks, and bulk material.</p>
+          <div class="flex items-center justify-between border-t hairline pt-5 mb-5">
+            <span class="text-xs text-gray-500 font-body tracking-widest">TYPICAL SPREAD</span>
+            <span class="font-display font-bold text-lg chrome-text">$7,900+</span>
+          </div>
+          <a href="request-sourcing.html?vehicle=Cargo%20Van" class="btn-cobalt text-center px-5 py-3 rounded-lg text-sm font-display tracking-wide">Source This Van</a>
+        </div>
+      
+        <div class="panel panel-cobalt rounded-2xl p-7 flex flex-col">
+          <div class="w-12 h-12 rounded-lg bg-cobalt/10 border border-cobalt/40 flex items-center justify-center mb-5">
+            <i data-lucide="truck" class="w-6 h-6 text-cobalt-light"></i>
+          </div>
+          <h3 class="font-display font-bold text-xl mb-1 chrome-text">Ram ProMaster</h3>
+          <p class="text-xs text-gray-500 font-body tracking-wide mb-4">1500/2500/3500 &middot; High-Roof</p>
+          <p class="text-sm text-gray-400 font-body leading-relaxed mb-6 flex-1">Front-wheel-drive flat-floor cargo vans, ideal for delivery and courier fleet standardization.</p>
+          <div class="flex items-center justify-between border-t hairline pt-5 mb-5">
+            <span class="text-xs text-gray-500 font-body tracking-widest">TYPICAL SPREAD</span>
+            <span class="font-display font-bold text-lg chrome-text">$7,400+</span>
+          </div>
+          <a href="request-sourcing.html?vehicle=Cargo%20Van" class="btn-cobalt text-center px-5 py-3 rounded-lg text-sm font-display tracking-wide">Source This Van</a>
+        </div>
+      
+        <div class="panel panel-cobalt rounded-2xl p-7 flex flex-col">
+          <div class="w-12 h-12 rounded-lg bg-cobalt/10 border border-cobalt/40 flex items-center justify-center mb-5">
+            <i data-lucide="truck" class="w-6 h-6 text-cobalt-light"></i>
+          </div>
+          <h3 class="font-display font-bold text-xl mb-1 chrome-text">Chevy Express 2500/3500</h3>
+          <p class="text-xs text-gray-500 font-body tracking-wide mb-4">Cargo &middot; Extended &middot; Cutaway</p>
+          <p class="text-sm text-gray-400 font-body leading-relaxed mb-6 flex-1">Body-on-frame durability for heavier payloads and cutaway upfits &mdash; sourced from GM fleet lanes.</p>
+          <div class="flex items-center justify-between border-t hairline pt-5 mb-5">
+            <span class="text-xs text-gray-500 font-body tracking-widest">TYPICAL SPREAD</span>
+            <span class="font-display font-bold text-lg chrome-text">$7,600+</span>
+          </div>
+          <a href="request-sourcing.html?vehicle=Cargo%20Van" class="btn-cobalt text-center px-5 py-3 rounded-lg text-sm font-display tracking-wide">Source This Van</a>
+        </div>
+    </div>
+  </section>
+
+  <!-- ================= TRADE CHECKLIST ================= -->
+  <section class="max-w-7xl mx-auto px-5 lg:px-8 pb-20">
+    <div class="panel rounded-2xl p-8 lg:p-12">
+      <div class="text-center max-w-xl mx-auto mb-10">
+        <h2 class="font-display font-extrabold text-2xl chrome-text mb-3">Trade-Focused Sourcing Checklist</h2>
+        <p class="text-gray-400 font-body text-sm">What we verify before a cargo van is ever offered to an HVAC, plumbing, or electrical client.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-8">
+        
+        <div class="flex items-start gap-3">
+          <div class="w-8 h-8 rounded-full bg-gold/10 border border-gold/40 flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="check" class="w-4 h-4 text-gold-light"></i>
+          </div>
+          <div>
+            <p class="font-display font-semibold text-sm text-gray-200">Cargo Floor & Bulkhead Integrity</p>
+            <p class="text-xs text-gray-500 font-body mt-1">No corrosion, patching, or upfit damage that would compromise shelving or racking installs.</p>
+          </div>
+        </div>
+        
+        <div class="flex items-start gap-3">
+          <div class="w-8 h-8 rounded-full bg-gold/10 border border-gold/40 flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="check" class="w-4 h-4 text-gold-light"></i>
+          </div>
+          <div>
+            <p class="font-display font-semibold text-sm text-gray-200">Sliding & Rear Door Alignment</p>
+            <p class="text-xs text-gray-500 font-body mt-1">Verified smooth operation under full load conditions before certification.</p>
+          </div>
+        </div>
+        
+        <div class="flex items-start gap-3">
+          <div class="w-8 h-8 rounded-full bg-gold/10 border border-gold/40 flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="check" class="w-4 h-4 text-gold-light"></i>
+          </div>
+          <div>
+            <p class="font-display font-semibold text-sm text-gray-200">Auxiliary Battery / Upfitter Wiring</p>
+            <p class="text-xs text-gray-500 font-body mt-1">Confirmed factory upfitter switch package for HVAC and electrical van conversions.</p>
+          </div>
+        </div>
+        
+        <div class="flex items-start gap-3">
+          <div class="w-8 h-8 rounded-full bg-gold/10 border border-gold/40 flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="check" class="w-4 h-4 text-gold-light"></i>
+          </div>
+          <div>
+            <p class="font-display font-semibold text-sm text-gray-200">Payload & GVWR Documentation</p>
+            <p class="text-xs text-gray-500 font-body mt-1">Full GVWR and payload capacity confirmed against your equipment and material load plan.</p>
+          </div>
+        </div>
+        
+        <div class="flex items-start gap-3">
+          <div class="w-8 h-8 rounded-full bg-gold/10 border border-gold/40 flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="check" class="w-4 h-4 text-gold-light"></i>
+          </div>
+          <div>
+            <p class="font-display font-semibold text-sm text-gray-200">Roof Height Clearance Verified</p>
+            <p class="text-xs text-gray-500 font-body mt-1">Interior standing height confirmed for high-roof configurations before delivery.</p>
+          </div>
+        </div>
+        
+        <div class="flex items-start gap-3">
+          <div class="w-8 h-8 rounded-full bg-gold/10 border border-gold/40 flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="check" class="w-4 h-4 text-gold-light"></i>
+          </div>
+          <div>
+            <p class="font-display font-semibold text-sm text-gray-200">Commercial Registration Ready</p>
+            <p class="text-xs text-gray-500 font-body mt-1">Vin verification and commercial plate eligibility confirmed prior to bidding.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CTA ================= -->
+  <section class="max-w-7xl mx-auto px-5 lg:px-8 pb-28">
+    <div class="rounded-2xl panel panel-cobalt p-10 lg:p-14 text-center">
+      <h2 class="font-display font-black text-3xl mb-4 chrome-text">Ready to Fleet Up?</h2>
+      <p class="text-gray-300 font-body max-w-xl mx-auto mb-8">Tell us your roof height, payload needs, and unit count &mdash; we'll bid your spec inside closed dealer lanes this week.</p>
+      <a href="request-sourcing.html?vehicle=Cargo%20Van" class="btn-cobalt inline-block px-10 py-4 rounded-lg font-display tracking-wide">Source This Van</a>
+    </div>
+  </section>
+
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="border-t hairline bg-obsidian-light mt-24">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8 py-16">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div>
+          <a href="index.html" class="flex items-center gap-3 mb-4">
+            <img src="assets/logo-transparent.png" alt="IAS logo" class="h-10 w-10 object-contain" />
+            <span class="font-display font-bold text-sm chrome-text">INNOVATIVE AUTO SOURCING</span>
+          </a>
+          <p class="text-sm text-gray-400 leading-relaxed font-body">
+            A closed-lane wholesale vehicle sourcing partner for Ontario businesses and private clients.
+            100% open-book auction access, zero lot markup, turnkey commercial delivery across the
+            Greater Toronto Area.
+          </p>
+          <div class="flex gap-3 mt-5">
+            <a href="#" class="w-9 h-9 rounded-full border hairline flex items-center justify-center text-gold hover:border-gold hover:bg-gold/10 transition-colors" aria-label="Facebook"><i data-lucide="facebook" class="w-4 h-4"></i></a>
+            <a href="#" class="w-9 h-9 rounded-full border hairline flex items-center justify-center text-gold hover:border-gold hover:bg-gold/10 transition-colors" aria-label="Instagram"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+            <a href="#" class="w-9 h-9 rounded-full border hairline flex items-center justify-center text-gold hover:border-gold hover:bg-gold/10 transition-colors" aria-label="LinkedIn"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="font-display font-bold text-sm tracking-wide text-gold-light mb-4">QUICK LINKS</h4>
+          <ul class="space-y-2.5 text-sm font-body text-gray-400">
+            <li><a href="index.html" class="hover:text-cobalt-light transition-colors">Home</a></li>
+            <li><a href="work-trucks.html" class="hover:text-cobalt-light transition-colors">Work Trucks</a></li>
+            <li><a href="cargo-vans.html" class="hover:text-cobalt-light transition-colors">Cargo Vans</a></li>
+            <li><a href="how-it-works.html" class="hover:text-cobalt-light transition-colors">How It Works</a></li>
+            <li><a href="savings-calculator.html" class="hover:text-cobalt-light transition-colors">Savings Calculator</a></li>
+            <li><a href="extended-warranty.html" class="hover:text-cobalt-light transition-colors">Extended Warranty</a></li>
+            <li><a href="request-sourcing.html" class="hover:text-cobalt-light transition-colors">Request Sourcing</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-display font-bold text-sm tracking-wide text-gold-light mb-4">CONTACT</h4>
+          <ul class="space-y-3 text-sm font-body text-gray-400">
+            <li class="flex items-start gap-2.5"><i data-lucide="map-pin" class="w-4 h-4 text-cobalt-light mt-0.5 shrink-0"></i> Greater Toronto Area, Ontario, Canada</li>
+            <li class="flex items-start gap-2.5"><i data-lucide="phone" class="w-4 h-4 text-cobalt-light mt-0.5 shrink-0"></i> (647) 555-1234</li>
+            <li class="flex items-start gap-2.5"><i data-lucide="mail" class="w-4 h-4 text-cobalt-light mt-0.5 shrink-0"></i> sourcing@innovativeautosourcing.ca</li>
+            <li class="flex items-start gap-2.5"><i data-lucide="clock" class="w-4 h-4 text-cobalt-light mt-0.5 shrink-0"></i> Mon&ndash;Fri 9:00&ndash;6:00 ET</li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-display font-bold text-sm tracking-wide text-gold-light mb-4">REGULATORY</h4>
+          <p class="text-xs text-gray-500 leading-relaxed font-body">
+            Innovative Auto Sourcing operates as a registered vehicle sourcing intermediary in the
+            Province of Ontario and conducts all dealer-lane transactions in compliance with the
+            <span class="text-gray-400"> Ontario Motor Vehicle Industry Council (OMVIC)</span> Code of
+            Ethics and applicable Consumer Protection Ontario regulations. All wholesale acquisitions
+            are conducted through licensed dealer-only auction channels (OPENLANE, Manheim, EBlock) on
+            behalf of the client as sourcing agent.
+          </p>
+        </div>
+      </div>
+
+      <div class="gold-divider my-10"></div>
+
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-gray-500 font-body">
+        <p>&copy; <span id="year"></span> Innovative Auto Sourcing. All rights reserved.</p>
+        <div class="flex gap-6">
+          <a href="#" class="hover:text-gold-light transition-colors">Privacy Policy</a>
+          <a href="#" class="hover:text-gold-light transition-colors">Terms of Service</a>
+          <a href="#" class="hover:text-gold-light transition-colors">OMVIC Disclosure</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    lucide.createIcons();
+
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    let menuOpen = false;
+    menuBtn.addEventListener('click', () => {
+      menuOpen = !menuOpen;
+      if (menuOpen) {
+        mobileMenu.style.maxHeight = mobileMenu.scrollHeight + 'px';
+        mobileMenu.style.opacity = '1';
+        menuBtn.innerHTML = '<i data-lucide="x" class="w-7 h-7"></i>';
+      } else {
+        mobileMenu.style.maxHeight = '0px';
+        mobileMenu.style.opacity = '0';
+        menuBtn.innerHTML = '<i data-lucide="menu" class="w-7 h-7"></i>';
+      }
+      lucide.createIcons();
+    });
+  </script>
+
+
+</body>
+</html>

@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Request Sourcing | Commercial Intake | Innovative Auto Sourcing</title>
+  <meta name="description" content="Submit your vehicle sourcing parameters — target category, make/model, budget, and mileage threshold — to begin closed dealer-lane auction bidding." />
+  <link rel="icon" href="assets/logo-transparent.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            obsidian: {
+              DEFAULT: '#070A12',
+              light: '#0D111C',
+              lighter: '#141A28',
+              panel: '#10141F',
+            },
+            gold: {
+              DEFAULT: '#D4AF37',
+              light: '#E8CA6A',
+              dark: '#A9862A',
+            },
+            cobalt: {
+              DEFAULT: '#1E88E5',
+              light: '#4FA3EE',
+              dark: '#155DA1',
+            },
+          },
+          fontFamily: {
+            display: ['Montserrat', 'sans-serif'],
+            body: ['Inter', 'sans-serif'],
+          },
+          boxShadow: {
+            gold: '0 0 0 1px rgba(212,175,55,0.35), 0 8px 30px -8px rgba(212,175,55,0.25)',
+            'gold-lg': '0 0 0 1px rgba(212,175,55,0.4), 0 20px 60px -12px rgba(212,175,55,0.35)',
+            cobalt: '0 0 0 1px rgba(30,136,229,0.5), 0 8px 24px -6px rgba(30,136,229,0.45)',
+            panel: 'inset 0 1px 0 0 rgba(255,255,255,0.04), 0 20px 50px -20px rgba(0,0,0,0.8)',
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: #070A12;
+      background-image:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(30,136,229,0.10), transparent),
+        radial-gradient(ellipse 60% 40% at 100% 0%, rgba(212,175,55,0.07), transparent);
+      font-family: 'Inter', sans-serif;
+      color: #E7E9EE;
+    }
+    h1, h2, h3, h4, .font-display { font-family: 'Montserrat', sans-serif; }
+
+    /* Glassmorphism beveled panels */
+    .panel {
+      background: linear-gradient(180deg, rgba(20,26,40,0.85) 0%, rgba(13,17,28,0.9) 100%);
+      border: 1px solid rgba(212,175,55,0.18);
+      border-radius: 1rem;
+      box-shadow: inset 0 1px 0 0 rgba(255,255,255,0.05), inset 0 0 0 1px rgba(0,0,0,0.4), 0 20px 50px -20px rgba(0,0,0,0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .panel-gold {
+      border: 1px solid rgba(212,175,55,0.45);
+      box-shadow: 0 0 0 1px rgba(212,175,55,0.18), inset 0 1px 0 0 rgba(255,255,255,0.06), 0 20px 50px -18px rgba(212,175,55,0.25);
+    }
+    .panel-cobalt {
+      border: 1px solid rgba(30,136,229,0.55);
+      box-shadow: 0 0 0 1px rgba(30,136,229,0.25), inset 0 1px 0 0 rgba(255,255,255,0.06), 0 20px 50px -18px rgba(30,136,229,0.35);
+    }
+
+    .gold-divider { background: linear-gradient(90deg, transparent, rgba(212,175,55,0.6), transparent); height: 1px; }
+
+    .btn-gold {
+      background: linear-gradient(180deg, #E8CA6A 0%, #D4AF37 45%, #A9862A 100%);
+      color: #0B0D14;
+      border: 1px solid rgba(255,255,255,0.25);
+      box-shadow: 0 8px 24px -6px rgba(212,175,55,0.5), inset 0 1px 0 0 rgba(255,255,255,0.5);
+      font-weight: 700;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+    }
+    .btn-gold:hover { filter: brightness(1.08); transform: translateY(-1px); box-shadow: 0 12px 30px -6px rgba(212,175,55,0.6), inset 0 1px 0 0 rgba(255,255,255,0.6); }
+
+    .btn-outline-gold {
+      background: rgba(212,175,55,0.06);
+      color: #E8CA6A;
+      border: 1px solid rgba(212,175,55,0.55);
+      transition: all 0.15s ease;
+    }
+    .btn-outline-gold:hover { background: rgba(212,175,55,0.14); border-color: #E8CA6A; }
+
+    .btn-cobalt {
+      background: linear-gradient(180deg, #4FA3EE 0%, #1E88E5 60%, #155DA1 100%);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.2);
+      box-shadow: 0 8px 24px -6px rgba(30,136,229,0.55), inset 0 1px 0 0 rgba(255,255,255,0.35);
+      transition: transform 0.15s ease, filter 0.15s ease;
+    }
+    .btn-cobalt:hover { filter: brightness(1.08); transform: translateY(-1px); }
+
+    .nav-link {
+      position: relative;
+      color: #B7BDC9;
+      font-weight: 500;
+      font-size: 0.875rem;
+      letter-spacing: 0.02em;
+      padding: 0.4rem 0;
+      transition: color 0.15s ease;
+    }
+    .nav-link:hover { color: #E8CA6A; }
+    .nav-link-active { color: #4FA3EE; }
+    .nav-link-active::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0; bottom: -4px;
+      height: 2px;
+      background: #1E88E5;
+      box-shadow: 0 0 8px rgba(30,136,229,0.8);
+      border-radius: 2px;
+    }
+
+    .mobile-nav-link {
+      display: block;
+      padding: 0.85rem 1.25rem;
+      color: #C9CEDA;
+      font-weight: 500;
+      border-bottom: 1px solid rgba(212,175,55,0.1);
+    }
+    .mobile-nav-link-active { color: #4FA3EE; background: rgba(30,136,229,0.08); }
+
+    .metal-text {
+      background: linear-gradient(180deg, #F4E7BE 0%, #D4AF37 45%, #9C7A26 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .chrome-text {
+      background: linear-gradient(180deg, #F3F5F9 0%, #B9C2D0 45%, #7C8698 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .badge-cobalt {
+      background: rgba(30,136,229,0.12);
+      border: 1px solid rgba(30,136,229,0.5);
+      color: #7DB8F4;
+    }
+    .badge-gold {
+      background: rgba(212,175,55,0.1);
+      border: 1px solid rgba(212,175,55,0.45);
+      color: #E8CA6A;
+    }
+
+    .hairline { border-color: rgba(212,175,55,0.15); }
+
+    ::selection { background: rgba(212,175,55,0.35); color: #fff; }
+
+    .glow-gold { filter: drop-shadow(0 0 18px rgba(212,175,55,0.35)); }
+
+    input[type=range].gold-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      height: 6px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #155DA1, #1E88E5 40%, #D4AF37 100%);
+      outline: none;
+    }
+    input[type=range].gold-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: linear-gradient(180deg,#E8CA6A,#A9862A);
+      border: 2px solid #0B0D14;
+      box-shadow: 0 0 0 4px rgba(212,175,55,0.25), 0 4px 10px rgba(0,0,0,0.5);
+      cursor: pointer;
+      margin-top: -8px;
+    }
+    input[type=range].gold-slider::-moz-range-thumb {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: linear-gradient(180deg,#E8CA6A,#A9862A);
+      border: 2px solid #0B0D14;
+      box-shadow: 0 0 0 4px rgba(212,175,55,0.25), 0 4px 10px rgba(0,0,0,0.5);
+      cursor: pointer;
+    }
+
+    .toggle-chip {
+      transition: all 0.15s ease;
+    }
+    .toggle-chip.active {
+      background: rgba(30,136,229,0.18);
+      border-color: #1E88E5;
+      color: #fff;
+      box-shadow: 0 0 0 1px rgba(30,136,229,0.4), 0 6px 18px -4px rgba(30,136,229,0.5);
+    }
+
+    .fade-up { animation: fadeUp 0.7s ease both; }
+    @keyframes fadeUp { from { opacity:0; transform: translateY(14px); } to { opacity:1; transform: translateY(0); } }
+
+    #mobile-menu { transition: max-height 0.3s ease, opacity 0.3s ease; }
+  </style>
+</head>
+<body class="antialiased">
+
+  <!-- ================= HEADER ================= -->
+  <header class="sticky top-0 z-50 border-b hairline bg-obsidian/85 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        <a href="index.html" class="flex items-center gap-3 group">
+          <img src="assets/logo-transparent.png" alt="Innovative Auto Sourcing shield logo" class="h-12 w-12 object-contain glow-gold" />
+          <div class="leading-tight">
+            <div class="font-display font-extrabold tracking-wide text-sm lg:text-base">
+              <span class="chrome-text">INNOVATIVE</span> <span class="metal-text">AUTO SOURCING</span>
+            </div>
+            <div class="text-[10px] lg:text-xs tracking-[0.25em] text-cobalt-light/80 font-body">GREATER TORONTO AREA</div>
+          </div>
+        </a>
+
+        <nav class="hidden lg:flex items-center gap-8">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="work-trucks.html" class="nav-link">Work Trucks</a>
+        <a href="cargo-vans.html" class="nav-link">Cargo Vans</a>
+        <a href="how-it-works.html" class="nav-link">How It Works</a>
+        <a href="savings-calculator.html" class="nav-link">Savings Calculator</a>
+        <a href="extended-warranty.html" class="nav-link">Warranty</a>
+        </nav>
+
+        <div class="hidden lg:flex items-center gap-4">
+          <a href="tel:+16475551234" class="flex items-center gap-2 text-sm text-gray-300 hover:text-gold-light transition-colors">
+            <i data-lucide="phone" class="w-4 h-4 text-gold"></i>
+            <span class="font-body">(647) 555-1234</span>
+          </a>
+          <a href="request-sourcing.html" class="btn-gold px-5 py-2.5 rounded-lg text-sm font-display tracking-wide">Request Sourcing</a>
+        </div>
+
+        <button id="mobile-menu-btn" class="lg:hidden p-2 text-gold" aria-label="Toggle menu">
+          <i data-lucide="menu" class="w-7 h-7"></i>
+        </button>
+      </div>
+    </div>
+
+    <div id="mobile-menu" class="lg:hidden overflow-hidden max-h-0 opacity-0 border-t hairline bg-obsidian-light/95">
+      <nav class="flex flex-col">
+        <a href="index.html" class="mobile-nav-link">Home</a>
+          <a href="work-trucks.html" class="mobile-nav-link">Work Trucks</a>
+          <a href="cargo-vans.html" class="mobile-nav-link">Cargo Vans</a>
+          <a href="how-it-works.html" class="mobile-nav-link">How It Works</a>
+          <a href="savings-calculator.html" class="mobile-nav-link">Savings Calculator</a>
+          <a href="extended-warranty.html" class="mobile-nav-link">Warranty</a>
+          <a href="request-sourcing.html" class="mobile-nav-link mobile-nav-link-active">Request Sourcing</a>
+      </nav>
+      <div class="p-4 border-t hairline flex flex-col gap-3">
+        <a href="tel:+16475551234" class="flex items-center gap-2 text-sm text-gray-300">
+          <i data-lucide="phone" class="w-4 h-4 text-gold"></i> (647) 555-1234
+        </a>
+        <a href="request-sourcing.html" class="btn-gold px-5 py-3 rounded-lg text-sm text-center font-display tracking-wide">Request Sourcing</a>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- ================= HERO ================= -->
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0">
+      <img src="assets/sourcing-keys.jpg" alt="Vehicle key handover, Toronto Elite Sourcing" class="w-full h-full object-cover opacity-35" />
+      <div class="absolute inset-0 bg-gradient-to-b from-obsidian/70 via-obsidian/90 to-obsidian"></div>
+    </div>
+    <div class="relative max-w-7xl mx-auto px-5 lg:px-8 pt-20 pb-16 lg:pt-28 text-center">
+      <div class="inline-flex items-center gap-2 badge-gold rounded-full px-4 py-1.5 text-xs font-display tracking-widest mb-6">
+        <i data-lucide="clipboard-list" class="w-3.5 h-3.5"></i> COMMERCIAL INTAKE MODULE
+      </div>
+      <h1 class="font-display font-black text-4xl sm:text-5xl leading-[1.05] mb-6 metal-text max-w-3xl mx-auto">Request Sourcing.</h1>
+      <p class="text-lg text-gray-300 font-body leading-relaxed max-w-2xl mx-auto">
+        Give us your exact parameters and we'll begin bidding inside closed dealer-only auction lanes.
+        A $500 deposit locks in your intake &mdash; fully applied to the flat $1,500 sourcing fee.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= FORM ================= -->
+  <section class="max-w-3xl mx-auto px-5 lg:px-8 pb-28">
+
+    <!-- FORM CARD -->
+    <div id="formCard" class="panel panel-gold rounded-2xl p-6 lg:p-10">
+      <form id="sourcingForm" class="space-y-6">
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div>
+            <label for="clientName" class="block text-xs font-display tracking-widest text-gray-400 mb-2">CLIENT NAME <span class="text-gold-light">*</span></label>
+            <input required type="text" id="clientName" name="clientName" placeholder="Jordan Reyes"
+              class="w-full bg-obsidian-lighter/70 border hairline focus:border-cobalt focus:ring-1 focus:ring-cobalt rounded-lg px-4 py-3 text-sm font-body text-gray-100 placeholder-gray-600 outline-none transition-colors" />
+          </div>
+          <div>
+            <label for="companyName" class="block text-xs font-display tracking-widest text-gray-400 mb-2">COMPANY NAME</label>
+            <input type="text" id="companyName" name="companyName" placeholder="Reyes Mechanical Ltd."
+              class="w-full bg-obsidian-lighter/70 border hairline focus:border-cobalt focus:ring-1 focus:ring-cobalt rounded-lg px-4 py-3 text-sm font-body text-gray-100 placeholder-gray-600 outline-none transition-colors" />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div>
+            <label for="phone" class="block text-xs font-display tracking-widest text-gray-400 mb-2">PHONE <span class="text-gold-light">*</span></label>
+            <input required type="tel" id="phone" name="phone" placeholder="(647) 555-1234"
+              class="w-full bg-obsidian-lighter/70 border hairline focus:border-cobalt focus:ring-1 focus:ring-cobalt rounded-lg px-4 py-3 text-sm font-body text-gray-100 placeholder-gray-600 outline-none transition-colors" />
+          </div>
+          <div>
+            <label for="email" class="block text-xs font-display tracking-widest text-gray-400 mb-2">EMAIL <span class="text-gold-light">*</span></label>
+            <input required type="email" id="email" name="email" placeholder="jordan@reyesmechanical.ca"
+              class="w-full bg-obsidian-lighter/70 border hairline focus:border-cobalt focus:ring-1 focus:ring-cobalt rounded-lg px-4 py-3 text-sm font-body text-gray-100 placeholder-gray-600 outline-none transition-colors" />
+          </div>
+        </div>
+
+        <div>
+          <label for="vehicleCategory" class="block text-xs font-display tracking-widest text-gray-400 mb-2">TARGET VEHICLE CATEGORY <span class="text-gold-light">*</span></label>
+          <select required id="vehicleCategory" name="vehicleCategory"
+            class="w-full bg-obsidian-lighter/70 border hairline focus:border-cobalt focus:ring-1 focus:ring-cobalt rounded-lg px-4 py-3 text-sm font-body text-gray-100 outline-none transition-colors">
+            <option value="">Select a category&hellip;</option>
+            <option value="Work Truck">Work Truck (Super Duty / Heavy-Duty)</option>
+            <option value="Cargo Van">Cargo Van (High-Roof / Fleet)</option>
+            <option value="Executive Vehicle">Executive / Luxury Vehicle</option>
+            <option value="Passenger Vehicle">Passenger Sedan / SUV</option>
+            <option value="Other">Other / Multiple Units</option>
+          </select>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div>
+            <label for="makeModel" class="block text-xs font-display tracking-widest text-gray-400 mb-2">TARGET MAKE / MODEL</label>
+            <input type="text" id="makeModel" name="makeModel" placeholder="e.g. Ford F-250 Super Duty XLT"
+              class="w-full bg-obsidian-lighter/70 border hairline focus:border-cobalt focus:ring-1 focus:ring-cobalt rounded-lg px-4 py-3 text-sm font-body text-gray-100 placeholder-gray-600 outline-none transition-colors" />
+          </div>
+          <div>
+            <label for="maxBudget" class="block text-xs font-display tracking-widest text-gray-400 mb-2">MAX BUDGET (CAD) <span class="text-gold-light">*</span></label>
+            <input required type="number" min="0" step="500" id="maxBudget" name="maxBudget" placeholder="45000"
+              class="w-full bg-obsidian-lighter/70 border hairline focus:border-cobalt focus:ring-1 focus:ring-cobalt rounded-lg px-4 py-3 text-sm font-body text-gray-100 placeholder-gray-600 outline-none transition-colors" />
+          </div>
+        </div>
+
+        <div>
+          <label for="mileage" class="block text-xs font-display tracking-widest text-gray-400 mb-2">MAX MILEAGE THRESHOLD (KM)</label>
+          <input type="number" min="0" step="1000" id="mileage" name="mileage" placeholder="120000"
+            class="w-full bg-obsidian-lighter/70 border hairline focus:border-cobalt focus:ring-1 focus:ring-cobalt rounded-lg px-4 py-3 text-sm font-body text-gray-100 placeholder-gray-600 outline-none transition-colors" />
+        </div>
+
+        <div>
+          <label for="notes" class="block text-xs font-display tracking-widest text-gray-400 mb-2">ADDITIONAL PARAMETERS</label>
+          <textarea id="notes" name="notes" rows="4" placeholder="Trim level, upfit requirements, timeline, number of units, extended warranty interest, etc."
+            class="w-full bg-obsidian-lighter/70 border hairline focus:border-cobalt focus:ring-1 focus:ring-cobalt rounded-lg px-4 py-3 text-sm font-body text-gray-100 placeholder-gray-600 outline-none transition-colors resize-none"></textarea>
+        </div>
+
+        <div class="flex items-start gap-3 bg-obsidian-lighter/50 rounded-lg p-4 border hairline">
+          <i data-lucide="info" class="w-4 h-4 text-cobalt-light mt-0.5 shrink-0"></i>
+          <p class="text-xs text-gray-500 font-body leading-relaxed">
+            Submitting this form does not charge you. Our sourcing team will follow up to confirm your
+            parameters and process the $500 refundable deposit before bidding begins.
+          </p>
+        </div>
+
+        <button type="submit" class="btn-gold w-full py-4 rounded-lg font-display tracking-wide text-sm">Submit Sourcing Request &rarr;</button>
+      </form>
+    </div>
+
+    <!-- CONFIRMATION CARD (hidden by default) -->
+    <div id="confirmCard" class="hidden panel panel-cobalt rounded-2xl p-10 lg:p-14 text-center">
+      <div class="w-16 h-16 rounded-full bg-cobalt/15 border border-cobalt/50 flex items-center justify-center mx-auto mb-6">
+        <i data-lucide="check-circle-2" class="w-9 h-9 text-cobalt-light"></i>
+      </div>
+      <h2 class="font-display font-black text-3xl chrome-text mb-4">Request Received.</h2>
+      <p class="text-gray-300 font-body max-w-lg mx-auto mb-8">
+        Thank you, <span id="confirmName" class="text-gold-light font-semibold"></span>. Our sourcing
+        team will contact you within one business day at <span id="confirmContact" class="text-cobalt-light font-semibold"></span>
+        to confirm your parameters for a <span id="confirmVehicle" class="text-gold-light font-semibold"></span>
+        and process your $500 deposit.
+      </p>
+      <div class="panel rounded-xl p-6 max-w-md mx-auto text-left mb-8">
+        <p class="text-xs font-display tracking-widest text-gray-500 mb-3">SUBMITTED PARAMETERS</p>
+        <dl id="confirmSummary" class="space-y-2 text-sm font-body"></dl>
+      </div>
+      <a href="index.html" class="btn-outline-gold inline-block px-8 py-3.5 rounded-lg font-display tracking-wide text-sm">Return to Home</a>
+    </div>
+
+  </section>
+
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="border-t hairline bg-obsidian-light mt-24">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8 py-16">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div>
+          <a href="index.html" class="flex items-center gap-3 mb-4">
+            <img src="assets/logo-transparent.png" alt="IAS logo" class="h-10 w-10 object-contain" />
+            <span class="font-display font-bold text-sm chrome-text">INNOVATIVE AUTO SOURCING</span>
+          </a>
+          <p class="text-sm text-gray-400 leading-relaxed font-body">
+            A closed-lane wholesale vehicle sourcing partner for Ontario businesses and private clients.
+            100% open-book auction access, zero lot markup, turnkey commercial delivery across the
+            Greater Toronto Area.
+          </p>
+          <div class="flex gap-3 mt-5">
+            <a href="#" class="w-9 h-9 rounded-full border hairline flex items-center justify-center text-gold hover:border-gold hover:bg-gold/10 transition-colors" aria-label="Facebook"><i data-lucide="facebook" class="w-4 h-4"></i></a>
+            <a href="#" class="w-9 h-9 rounded-full border hairline flex items-center justify-center text-gold hover:border-gold hover:bg-gold/10 transition-colors" aria-label="Instagram"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+            <a href="#" class="w-9 h-9 rounded-full border hairline flex items-center justify-center text-gold hover:border-gold hover:bg-gold/10 transition-colors" aria-label="LinkedIn"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="font-display font-bold text-sm tracking-wide text-gold-light mb-4">QUICK LINKS</h4>
+          <ul class="space-y-2.5 text-sm font-body text-gray-400">
+            <li><a href="index.html" class="hover:text-cobalt-light transition-colors">Home</a></li>
+            <li><a href="work-trucks.html" class="hover:text-cobalt-light transition-colors">Work Trucks</a></li>
+            <li><a href="cargo-vans.html" class="hover:text-cobalt-light transition-colors">Cargo Vans</a></li>
+            <li><a href="how-it-works.html" class="hover:text-cobalt-light transition-colors">How It Works</a></li>
+            <li><a href="savings-calculator.html" class="hover:text-cobalt-light transition-colors">Savings Calculator</a></li>
+            <li><a href="extended-warranty.html" class="hover:text-cobalt-light transition-colors">Extended Warranty</a></li>
+            <li><a href="request-sourcing.html" class="hover:text-cobalt-light transition-colors">Request Sourcing</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-display font-bold text-sm tracking-wide text-gold-light mb-4">CONTACT</h4>
+          <ul class="space-y-3 text-sm font-body text-gray-400">
+            <li class="flex items-start gap-2.5"><i data-lucide="map-pin" class="w-4 h-4 text-cobalt-light mt-0.5 shrink-0"></i> Greater Toronto Area, Ontario, Canada</li>
+            <li class="flex items-start gap-2.5"><i data-lucide="phone" class="w-4 h-4 text-cobalt-light mt-0.5 shrink-0"></i> (647) 555-1234</li>
+            <li class="flex items-start gap-2.5"><i data-lucide="mail" class="w-4 h-4 text-cobalt-light mt-0.5 shrink-0"></i> sourcing@innovativeautosourcing.ca</li>
+            <li class="flex items-start gap-2.5"><i data-lucide="clock" class="w-4 h-4 text-cobalt-light mt-0.5 shrink-0"></i> Mon&ndash;Fri 9:00&ndash;6:00 ET</li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-display font-bold text-sm tracking-wide text-gold-light mb-4">REGULATORY</h4>
+          <p class="text-xs text-gray-500 leading-relaxed font-body">
+            Innovative Auto Sourcing operates as a registered vehicle sourcing intermediary in the
+            Province of Ontario and conducts all dealer-lane transactions in compliance with the
+            <span class="text-gray-400"> Ontario Motor Vehicle Industry Council (OMVIC)</span> Code of
+            Ethics and applicable Consumer Protection Ontario regulations. All wholesale acquisitions
+            are conducted through licensed dealer-only auction channels (OPENLANE, Manheim, EBlock) on
+            behalf of the client as sourcing agent.
+          </p>
+        </div>
+      </div>
+
+      <div class="gold-divider my-10"></div>
+
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-gray-500 font-body">
+        <p>&copy; <span id="year"></span> Innovative Auto Sourcing. All rights reserved.</p>
+        <div class="flex gap-6">
+          <a href="#" class="hover:text-gold-light transition-colors">Privacy Policy</a>
+          <a href="#" class="hover:text-gold-light transition-colors">Terms of Service</a>
+          <a href="#" class="hover:text-gold-light transition-colors">OMVIC Disclosure</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    lucide.createIcons();
+
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    let menuOpen = false;
+    menuBtn.addEventListener('click', () => {
+      menuOpen = !menuOpen;
+      if (menuOpen) {
+        mobileMenu.style.maxHeight = mobileMenu.scrollHeight + 'px';
+        mobileMenu.style.opacity = '1';
+        menuBtn.innerHTML = '<i data-lucide="x" class="w-7 h-7"></i>';
+      } else {
+        mobileMenu.style.maxHeight = '0px';
+        mobileMenu.style.opacity = '0';
+        menuBtn.innerHTML = '<i data-lucide="menu" class="w-7 h-7"></i>';
+      }
+      lucide.createIcons();
+    });
+  </script>
+
+
+  <script>
+    // Auto-select vehicle category based on URL query parameters
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const vehicleParam = params.get('vehicle');
+      const select = document.getElementById('vehicleCategory');
+      if (vehicleParam && select) {
+        const options = Array.from(select.options).map(o => o.value.toLowerCase());
+        const match = options.find(o => o === vehicleParam.toLowerCase());
+        if (match) {
+          select.value = Array.from(select.options).find(o => o.value.toLowerCase() === match).value;
+        }
+      }
+      const budgetParam = params.get('budget');
+      if (budgetParam) {
+        const budgetInput = document.getElementById('maxBudget');
+        if (budgetInput) budgetInput.value = budgetParam;
+      }
+      const notesParam = params.get('savings');
+      if (notesParam) {
+        const notesInput = document.getElementById('notes');
+        if (notesInput) {
+          notesInput.value = 'Estimated via Savings Calculator — projected savings of $' + Number(notesParam).toLocaleString('en-CA') + '.';
+        }
+      }
+    })();
+
+    const form = document.getElementById('sourcingForm');
+    const formCard = document.getElementById('formCard');
+    const confirmCard = document.getElementById('confirmCard');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const data = new FormData(form);
+
+      document.getElementById('confirmName').textContent = data.get('clientName') || 'there';
+      document.getElementById('confirmContact').textContent = data.get('email') || data.get('phone') || '';
+      document.getElementById('confirmVehicle').textContent = data.get('vehicleCategory') || 'your target vehicle';
+
+      const summary = document.getElementById('confirmSummary');
+      summary.innerHTML = '';
+      const rows = [
+        ['Company', data.get('companyName') || '—'],
+        ['Vehicle Category', data.get('vehicleCategory') || '—'],
+        ['Make / Model', data.get('makeModel') || '—'],
+        ['Max Budget', data.get('maxBudget') ? '$' + Number(data.get('maxBudget')).toLocaleString('en-CA') : '—'],
+        ['Max Mileage', data.get('mileage') ? Number(data.get('mileage')).toLocaleString('en-CA') + ' km' : '—'],
+      ];
+      rows.forEach(([label, value]) => {
+        const row = document.createElement('div');
+        row.className = 'flex justify-between gap-4 border-b hairline pb-2';
+        row.innerHTML = '<dt class="text-gray-500">' + label + '</dt><dd class="text-gray-200 font-medium text-right">' + value + '</dd>';
+        summary.appendChild(row);
+      });
+
+      formCard.classList.add('hidden');
+      confirmCard.classList.remove('hidden');
+      lucide.createIcons();
+      confirmCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  </script>
+
+</body>
+</html>
