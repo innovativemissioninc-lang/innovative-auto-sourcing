@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Savings Calculator | Live Wholesale vs Retail Pricing | Innovative Auto Sourcing</title>
   <meta name="description" content="Interactive calculator: see your real-time savings between retail dealer lot pricing and closed-lane wholesale auction sourcing." />
-  <link rel="icon" href="assets/logo-transparent.png" type="image/png" />
+  <link rel="icon" href="assets/logo-favicon.png" type="image/png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
@@ -218,7 +218,7 @@
     <div class="max-w-7xl mx-auto px-5 lg:px-8">
       <div class="flex items-center justify-between h-20">
         <a href="index.html" class="flex items-center gap-3 group">
-          <img src="assets/logo-transparent.png" alt="Innovative Auto Sourcing shield logo" class="h-12 w-12 object-contain glow-gold" />
+          <img src="assets/logo-icon.png" alt="Innovative Auto Sourcing shield logo" class="h-12 w-auto object-contain glow-gold" />
           <div class="leading-tight">
             <div class="font-display font-extrabold tracking-wide text-sm lg:text-base">
               <span class="chrome-text">INNOVATIVE</span> <span class="metal-text">AUTO SOURCING</span>
@@ -344,7 +344,8 @@
           <p class="text-xs text-cobalt-light font-body tracking-widest mb-1">IAS CLOSED-LANE SOURCING</p>
           <p id="iasPrice" class="font-display font-black text-3xl text-white mb-4">$44,500</p>
           <ul class="space-y-2 text-xs text-gray-300 font-body">
-            <li class="flex justify-between"><span>Auction Cost</span><span id="iasBase">$42,000</span></li>
+            <li class="flex justify-between"><span>Auction Hammer Price</span><span id="iasBase">$42,000</span></li>
+            <li class="flex justify-between"><span>Auction Buy Fee</span><span id="iasBuyFee">$1,050</span></li>
             <li class="flex justify-between"><span>Flat Sourcing Fee</span><span>$1,500</span></li>
             <li class="flex justify-between"><span>DriveON Safety</span><span>$250</span></li>
             <li class="flex justify-between"><span>Reconditioning (at cost)</span><span id="iasRecon">$1,000</span></li>
@@ -358,6 +359,10 @@
         <div class="relative">
           <p class="font-display font-semibold text-sm tracking-widest text-gold-light mb-2">TOTAL ESTIMATED SAVINGS</p>
           <p id="savingsAmount" class="font-display font-black text-5xl lg:text-6xl metal-text glow-gold mb-6">$5,770</p>
+          <p class="text-xs text-gray-400 font-body max-w-md mx-auto -mt-4 mb-6">
+            Includes estimated auction buy fee, the $1,500 flat sourcing fee, the $250 DriveON digital
+            safety inspection, and your chosen reconditioning budget.
+          </p>
           <a href="request-sourcing.html" id="lockInBtn" class="btn-gold inline-block px-10 py-4 rounded-lg font-display tracking-wide">Lock In This Sourcing Budget</a>
         </div>
       </div>
@@ -377,7 +382,7 @@
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
         <div>
           <a href="index.html" class="flex items-center gap-3 mb-4">
-            <img src="assets/logo-transparent.png" alt="IAS logo" class="h-10 w-10 object-contain" />
+            <img src="assets/logo-icon.png" alt="IAS logo" class="h-10 w-auto object-contain" />
             <span class="font-display font-bold text-sm chrome-text">INNOVATIVE AUTO SOURCING</span>
           </a>
           <p class="text-sm text-gray-400 leading-relaxed font-body">
@@ -418,12 +423,13 @@
         <div>
           <h4 class="font-display font-bold text-sm tracking-wide text-gold-light mb-4">REGULATORY</h4>
           <p class="text-xs text-gray-500 leading-relaxed font-body">
-            Innovative Auto Sourcing operates as a registered vehicle sourcing intermediary in the
-            Province of Ontario and conducts all dealer-lane transactions in compliance with the
-            <span class="text-gray-400"> Ontario Motor Vehicle Industry Council (OMVIC)</span> Code of
-            Ethics and applicable Consumer Protection Ontario regulations. All wholesale acquisitions
+            Innovative Auto Sourcing is a registered trade name of Innovative Auto Sourcing
+            Incorporated. <span class="text-gray-400">OMVIC General Dealer registration in progress
+            &mdash; the company is not yet trading retail vehicles.</span> All wholesale acquisitions
             are conducted through licensed dealer-only auction channels (OPENLANE, Manheim, EBlock) on
-            behalf of the client as sourcing agent.
+            behalf of the client as sourcing agent, in accordance with applicable
+            <span class="text-gray-400">Ontario Motor Vehicle Industry Council (OMVIC)</span> Code of
+            Ethics and Consumer Protection Ontario guidelines.
           </p>
         </div>
       </div>
@@ -475,6 +481,22 @@
 
     const fmt = (n) => '$' + Math.round(n).toLocaleString('en-CA');
 
+    // Auction buy fees scale with hammer price in brackets, mirroring how
+    // closed dealer-only lanes (OPENLANE, Manheim, EBlock) actually price buy fees.
+    function auctionBuyFee(hammerPrice) {
+      const brackets = [
+        { max: 10000, fee: 400 },
+        { max: 20000, fee: 600 },
+        { max: 30000, fee: 750 },
+        { max: 40000, fee: 900 },
+        { max: 50000, fee: 1050 },
+        { max: 60000, fee: 1200 },
+        { max: Infinity, fee: 1400 },
+      ];
+      const bracket = brackets.find(b => hammerPrice < b.max) || brackets[brackets.length - 1];
+      return bracket.fee;
+    }
+
     function recalc() {
       const base = parseInt(valueSlider.value, 10);
       valueDisplay.textContent = fmt(base);
@@ -483,9 +505,10 @@
       const dealerRecon = 710;
       const retailTotal = base + markup + dealerRecon;
 
+      const buyFee = auctionBuyFee(base);
       const sourcingFee = 1500;
       const driveOn = 250;
-      const iasTotal = base + sourcingFee + driveOn + reconCost;
+      const iasTotal = base + buyFee + sourcingFee + driveOn + reconCost;
 
       document.getElementById('retailBase').textContent = fmt(base);
       document.getElementById('retailMarkup').textContent = fmt(markup);
@@ -493,6 +516,7 @@
       document.getElementById('retailPrice').textContent = fmt(retailTotal);
 
       document.getElementById('iasBase').textContent = fmt(base);
+      document.getElementById('iasBuyFee').textContent = fmt(buyFee);
       document.getElementById('iasRecon').textContent = fmt(reconCost);
       document.getElementById('iasPrice').textContent = fmt(iasTotal);
 
