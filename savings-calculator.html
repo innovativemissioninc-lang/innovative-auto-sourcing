@@ -448,6 +448,11 @@
             <td id="retailWarrantyVal">+$2,850.00</td>
             <td id="wholesaleWarrantyVal">+$1,250.00 <span class="tag-sub">(Wholesale Pass-Through)</span></td>
           </tr>
+          <tr id="rowFinance" style="display:none;">
+            <td>Financing Interest <span class="tag-detail" id="financeRateLabel">(60 mo @ 4.45% prime rate)</span></td>
+            <td id="retailFinanceInterest" class="text-primary">+$3,240.11</td>
+            <td id="wholesaleFinanceInterest" class="text-primary">+$2,745.62</td>
+          </tr>
 
           <tr class="cat-header"><td colspan="3">4. REGULATORY, HST &amp; LICENSING</td></tr>
           <tr>
@@ -467,9 +472,15 @@
           </tr>
 
           <tr class="total-row">
-            <td>Total Drive-Away Investment</td>
-            <td id="retailGrandTotal">$28,242.33</td>
-            <td id="wholesaleGrandTotal">$23,949.46</td>
+            <td id="grandTotalLabel">Total Drive-Away Investment</td>
+            <td>
+              <div id="retailGrandTotal">$28,242.33</div>
+              <div class="tag-sub" id="retailMonthlyPayment" style="display:none;"></div>
+            </td>
+            <td>
+              <div id="wholesaleGrandTotal">$23,949.46</div>
+              <div class="tag-sub" id="wholesaleMonthlyPayment" style="display:none;"></div>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -588,6 +599,11 @@
 
 
   <script>
+    // Financing math uses Canada's prime rate (checked live: 4.45% as of Aug 2026 --
+    // https://wowa.ca/banks/prime-rates-canada) amortized over 60 months.
+    const FINANCE_APR = 0.0445;
+    const FINANCE_MONTHS = 60;
+
     const state = { hammerPrice: 18000, paymentMethod: 'cash', hasWarranty: false };
 
     const hammerSlider = document.getElementById('hammerPriceSlider');
@@ -609,10 +625,22 @@
       return 900;
     }
 
+    // Standard loan amortization: monthly payment for principal P over n months at APR.
+    function monthlyPayment(principal, apr, months) {
+      const r = apr / 12;
+      return principal * r * Math.pow(1 + r, months) / (Math.pow(1 + r, months) - 1);
+    }
+
     function setPaymentMethod(method) {
       state.paymentMethod = method;
       btnPayCash.classList.toggle('active', method === 'cash');
       btnPayFinance.classList.toggle('active', method === 'finance');
+      document.getElementById('rowFinance').style.display = method === 'finance' ? 'table-row' : 'none';
+      document.getElementById('retailMonthlyPayment').style.display = method === 'finance' ? 'block' : 'none';
+      document.getElementById('wholesaleMonthlyPayment').style.display = method === 'finance' ? 'block' : 'none';
+      document.getElementById('grandTotalLabel').textContent = method === 'finance'
+        ? 'Total Cost, Financed (60 Mo)'
+        : 'Total Drive-Away Investment';
       recalc();
     }
 
@@ -637,7 +665,7 @@
 
       const wholesaleTaxable = hammer + auctionFee + psiFee + transportFee + driveOnSafety + safetyParts + sourcingFee + omvicFee + warrantyWholesale;
       const wholesaleHST = wholesaleTaxable * 0.13;
-      const wholesaleTotal = wholesaleTaxable + wholesaleHST + licensingFee;
+      const wholesaleCashTotal = wholesaleTaxable + wholesaleHST + licensingFee;
 
       // --- Traditional Retail Dealer side ---
       // Retail lots mark the same underlying wholesale unit up by ~25.7% at the curb.
@@ -647,8 +675,17 @@
 
       const retailTaxable = retailBaseVehicle + retailSafetyDoc + retailAdminDoc + retailEtchFee + omvicFee + retailWarranty;
       const retailHST = retailTaxable * 0.13;
-      const retailTotal = retailTaxable + retailHST + licensingFee;
+      const retailCashTotal = retailTaxable + retailHST + licensingFee;
 
+      // --- Financing (only matters when Prime Finance is selected) ---
+      const isFinanced = state.paymentMethod === 'finance';
+      const wholesaleMonthly = monthlyPayment(wholesaleCashTotal, FINANCE_APR, FINANCE_MONTHS);
+      const retailMonthly = monthlyPayment(retailCashTotal, FINANCE_APR, FINANCE_MONTHS);
+      const wholesaleFinanceInterest = wholesaleMonthly * FINANCE_MONTHS - wholesaleCashTotal;
+      const retailFinanceInterest = retailMonthly * FINANCE_MONTHS - retailCashTotal;
+
+      const wholesaleTotal = isFinanced ? wholesaleCashTotal + wholesaleFinanceInterest : wholesaleCashTotal;
+      const retailTotal = isFinanced ? retailCashTotal + retailFinanceInterest : retailCashTotal;
       const netSavings = retailTotal - wholesaleTotal;
 
       document.getElementById('wholesaleBasePrice').innerHTML = fmtMoney(hammer) + ' <span class="tag-sub">(Auction Bid)</span>';
@@ -656,11 +693,15 @@
       document.getElementById('wholesaleHST').textContent = fmtMoney(wholesaleHST);
       document.getElementById('wholesaleGrandTotal').textContent = fmtMoney(wholesaleTotal);
       document.getElementById('wholesaleWarrantyVal').innerHTML = '+' + fmtMoney(warrantyWholesale) + ' <span class="tag-sub">(Wholesale Pass-Through)</span>';
+      document.getElementById('wholesaleFinanceInterest').textContent = '+' + fmtMoney(wholesaleFinanceInterest);
+      document.getElementById('wholesaleMonthlyPayment').textContent = fmtMoney(wholesaleMonthly) + '/mo';
 
       document.getElementById('retailBasePrice').textContent = fmtMoney(retailBaseVehicle);
       document.getElementById('retailHST').textContent = fmtMoney(retailHST);
       document.getElementById('retailGrandTotal').textContent = fmtMoney(retailTotal);
       document.getElementById('retailWarrantyVal').textContent = '+' + fmtMoney(retailWarranty);
+      document.getElementById('retailFinanceInterest').textContent = '+' + fmtMoney(retailFinanceInterest);
+      document.getElementById('retailMonthlyPayment').textContent = fmtMoney(retailMonthly) + '/mo';
 
       document.getElementById('displayNetSavings').textContent = fmtMoney(netSavings) + ' CAD';
 
