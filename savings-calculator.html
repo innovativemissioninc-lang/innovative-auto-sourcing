@@ -6,6 +6,35 @@
   <title>Savings Calculator | Live Wholesale vs Retail Pricing | Innovative Auto Sourcing</title>
   <meta name="description" content="Interactive calculator: see your real-time savings between retail dealer lot pricing and closed-lane wholesale auction sourcing." />
   <link rel="icon" href="/assets/logo-favicon.png" type="image/png" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Innovative Auto Sourcing",
+    "alternateName": "Innovative Auto Sourcing Incorporated",
+    "description": "Closed dealer-lane vehicle sourcing agency serving the Greater Toronto Area. We proxy-bid client-specified work trucks, cargo vans, and executive vehicles inside licensed dealer-only auctions (OPENLANE, Manheim, EBlock) for a flat sourcing fee, with a fully itemized, open-book invoice.",
+    "url": "https://innovativeautosourcing.ca",
+    "telephone": "+1-647-555-1234",
+    "email": "sourcing@innovativeautosourcing.ca",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Toronto",
+      "addressRegion": "ON",
+      "addressCountry": "CA"
+    },
+    "areaServed": ["Toronto", "Etobicoke", "Mississauga", "Brampton", "Vaughan", "Markham", "Oakville"],
+    "priceRange": "$$",
+    "makesOffer": [
+      {
+        "@type": "Offer",
+        "name": "Vehicle Sourcing Service",
+        "price": "1500.00",
+        "priceCurrency": "CAD",
+        "description": "Flat-fee, open-book closed-lane auction proxy sourcing. Client pays actual auction hammer price plus this flat fee -- no dealer lot markup."
+      }
+    ]
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
@@ -298,10 +327,10 @@
           <label for="valueSlider" class="font-display font-semibold text-sm tracking-wide text-gray-300">TARGET RETAIL VEHICLE VALUE</label>
           <span id="valueDisplay" class="font-display font-black text-2xl metal-text">$42,000</span>
         </div>
-        <input type="range" id="valueSlider" class="gold-slider w-full" min="10000" max="75000" step="500" value="42000" />
+        <input type="range" id="valueSlider" class="gold-slider w-full" min="20000" max="90000" step="500" value="42000" />
         <div class="flex justify-between text-xs text-gray-500 font-body mt-2">
-          <span>$10,000</span>
-          <span>$75,000</span>
+          <span>$20,000</span>
+          <span>$90,000</span>
         </div>
       </div>
 
@@ -335,8 +364,8 @@
           <p class="text-xs text-gray-500 font-body tracking-widest mb-1">RETAIL DEALER LOT</p>
           <p id="retailPrice" class="font-display font-black text-3xl text-gray-300 mb-4">$50,270</p>
           <ul class="space-y-2 text-xs text-gray-500 font-body">
-            <li class="flex justify-between"><span>Vehicle Value</span><span id="retailBase">$42,000</span></li>
-            <li class="flex justify-between"><span>Avg. Lot Markup (18%)</span><span id="retailMarkup">$7,560</span></li>
+            <li class="flex justify-between"><span>Wholesale-Equivalent Value</span><span id="retailBase">$32,760</span></li>
+            <li class="flex justify-between"><span>Avg. Dealer Lot Markup</span><span id="retailMarkup">$8,530</span></li>
             <li class="flex justify-between"><span>Dealer Recon &amp; Fees</span><span id="retailRecon">$710</span></li>
           </ul>
         </div>
@@ -498,24 +527,28 @@
     }
 
     function recalc() {
-      const base = parseInt(valueSlider.value, 10);
-      valueDisplay.textContent = fmt(base);
+      // The slider represents the TARGET RETAIL price -- what a dealer lot would
+      // sticker this vehicle at. We back out the wholesale-equivalent hammer price
+      // (closed dealer-lane auctions typically run ~22% below retail), then price
+      // the IAS side up from that real hammer price instead of the retail number.
+      const retailTotal = parseInt(valueSlider.value, 10);
+      valueDisplay.textContent = fmt(retailTotal);
 
-      const markup = base * 0.18;
       const dealerRecon = 710;
-      const retailTotal = base + markup + dealerRecon;
+      const hammerPrice = Math.round(retailTotal * 0.78);
+      const markup = retailTotal - hammerPrice - dealerRecon;
 
-      const buyFee = auctionBuyFee(base);
+      const buyFee = auctionBuyFee(hammerPrice);
       const sourcingFee = 1500;
       const driveOn = 250;
-      const iasTotal = base + buyFee + sourcingFee + driveOn + reconCost;
+      const iasTotal = hammerPrice + buyFee + sourcingFee + driveOn + reconCost;
 
-      document.getElementById('retailBase').textContent = fmt(base);
+      document.getElementById('retailBase').textContent = fmt(hammerPrice);
       document.getElementById('retailMarkup').textContent = fmt(markup);
       document.getElementById('retailRecon').textContent = fmt(dealerRecon);
       document.getElementById('retailPrice').textContent = fmt(retailTotal);
 
-      document.getElementById('iasBase').textContent = fmt(base);
+      document.getElementById('iasBase').textContent = fmt(hammerPrice);
       document.getElementById('iasBuyFee').textContent = fmt(buyFee);
       document.getElementById('iasRecon').textContent = fmt(reconCost);
       document.getElementById('iasPrice').textContent = fmt(iasTotal);
@@ -523,7 +556,7 @@
       const savings = retailTotal - iasTotal;
       document.getElementById('savingsAmount').textContent = fmt(savings);
 
-      const params = new URLSearchParams({ budget: base, recon: reconCost, savings: Math.round(savings) });
+      const params = new URLSearchParams({ budget: retailTotal, recon: reconCost, savings: Math.round(savings) });
       lockInBtn.href = '/request-sourcing.html?' + params.toString();
     }
 
