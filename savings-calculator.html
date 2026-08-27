@@ -327,9 +327,9 @@
           <label for="valueSlider" class="font-display font-semibold text-sm tracking-wide text-gray-300">TARGET RETAIL VEHICLE VALUE</label>
           <span id="valueDisplay" class="font-display font-black text-2xl metal-text">$42,000</span>
         </div>
-        <input type="range" id="valueSlider" class="gold-slider w-full" min="20000" max="90000" step="500" value="42000" />
+        <input type="range" id="valueSlider" class="gold-slider w-full" min="17500" max="90000" step="500" value="35000" />
         <div class="flex justify-between text-xs text-gray-500 font-body mt-2">
-          <span>$20,000</span>
+          <span>$17,500</span>
           <span>$90,000</span>
         </div>
       </div>
@@ -338,17 +338,17 @@
       <div class="mb-10">
         <p class="font-display font-semibold text-sm tracking-wide text-gray-300 mb-4">RECONDITIONING TIER</p>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-          <button type="button" data-recon="1000" class="recon-btn toggle-chip active border hairline rounded-xl px-4 py-4 text-left">
+          <button type="button" data-tier="standard" class="recon-btn toggle-chip active border hairline rounded-xl px-4 py-4 text-left">
             <span class="block font-display font-bold text-sm text-gray-100">Standard</span>
             <span class="block text-xs text-gray-500 font-body mt-1">Sedans &amp; light SUVs</span>
             <span class="block font-display font-bold text-cobalt-light mt-2">$1,000</span>
           </button>
-          <button type="button" data-recon="1500" class="recon-btn toggle-chip border hairline rounded-xl px-4 py-4 text-left">
+          <button type="button" data-tier="truck_van" class="recon-btn toggle-chip border hairline rounded-xl px-4 py-4 text-left">
             <span class="block font-display font-bold text-sm text-gray-100">Truck / Van</span>
             <span class="block text-xs text-gray-500 font-body mt-1">Work trucks &amp; cargo vans</span>
             <span class="block font-display font-bold text-cobalt-light mt-2">$1,500</span>
           </button>
-          <button type="button" data-recon="2000" class="recon-btn toggle-chip border hairline rounded-xl px-4 py-4 text-left">
+          <button type="button" data-tier="luxury" class="recon-btn toggle-chip border hairline rounded-xl px-4 py-4 text-left">
             <span class="block font-display font-bold text-sm text-gray-100">Luxury</span>
             <span class="block text-xs text-gray-500 font-body mt-1">Executive &amp; premium units</span>
             <span class="block font-display font-bold text-cobalt-light mt-2">$2,000</span>
@@ -506,7 +506,16 @@
     const reconBtns = document.querySelectorAll('.recon-btn');
     const lockInBtn = document.getElementById('lockInBtn');
 
-    let reconCost = 1000;
+    // Each vehicle class has its own wholesale/retail spread: commercial and luxury
+    // units carry deeper closed-lane discounts and higher retail-side markups than
+    // an ordinary sedan, so switching tiers moves BOTH sides of the comparison --
+    // not just the IAS reconditioning line.
+    const TIERS = {
+      standard:  { hammerRatio: 0.80, reconDocFee: 900,  reconCost: 1000 },
+      truck_van: { hammerRatio: 0.76, reconDocFee: 1300, reconCost: 1500 },
+      luxury:    { hammerRatio: 0.73, reconDocFee: 1700, reconCost: 2000 },
+    };
+    let tierKey = 'standard';
 
     const fmt = (n) => '$' + Math.round(n).toLocaleString('en-CA');
 
@@ -529,19 +538,20 @@
     function recalc() {
       // The slider represents the TARGET RETAIL price -- what a dealer lot would
       // sticker this vehicle at. We back out the wholesale-equivalent hammer price
-      // (closed dealer-lane auctions typically run ~22% below retail), then price
-      // the IAS side up from that real hammer price instead of the retail number.
+      // using the selected tier's typical closed-lane discount, then price both the
+      // retail breakdown and the IAS side up from that same real hammer price.
       const retailTotal = parseInt(valueSlider.value, 10);
       valueDisplay.textContent = fmt(retailTotal);
 
-      const dealerRecon = 710;
-      const hammerPrice = Math.round(retailTotal * 0.78);
+      const tier = TIERS[tierKey];
+      const hammerPrice = Math.round(retailTotal * tier.hammerRatio);
+      const dealerRecon = tier.reconDocFee;
       const markup = retailTotal - hammerPrice - dealerRecon;
 
       const buyFee = auctionBuyFee(hammerPrice);
       const sourcingFee = 1500;
       const driveOn = 250;
-      const iasTotal = hammerPrice + buyFee + sourcingFee + driveOn + reconCost;
+      const iasTotal = hammerPrice + buyFee + sourcingFee + driveOn + tier.reconCost;
 
       document.getElementById('retailBase').textContent = fmt(hammerPrice);
       document.getElementById('retailMarkup').textContent = fmt(markup);
@@ -550,13 +560,13 @@
 
       document.getElementById('iasBase').textContent = fmt(hammerPrice);
       document.getElementById('iasBuyFee').textContent = fmt(buyFee);
-      document.getElementById('iasRecon').textContent = fmt(reconCost);
+      document.getElementById('iasRecon').textContent = fmt(tier.reconCost);
       document.getElementById('iasPrice').textContent = fmt(iasTotal);
 
       const savings = retailTotal - iasTotal;
       document.getElementById('savingsAmount').textContent = fmt(savings);
 
-      const params = new URLSearchParams({ budget: retailTotal, recon: reconCost, savings: Math.round(savings) });
+      const params = new URLSearchParams({ budget: retailTotal, tier: tierKey, savings: Math.round(savings) });
       lockInBtn.href = '/request-sourcing.html?' + params.toString();
     }
 
@@ -566,7 +576,7 @@
       btn.addEventListener('click', () => {
         reconBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        reconCost = parseInt(btn.dataset.recon, 10);
+        tierKey = btn.dataset.tier;
         recalc();
       });
     });
