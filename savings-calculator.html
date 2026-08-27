@@ -305,102 +305,189 @@
       <img src="/assets/inspection-bay.jpg" alt="DriveON inspection facility with live savings dashboard" class="w-full h-full object-cover opacity-40" />
       <div class="absolute inset-0 bg-gradient-to-b from-obsidian/70 via-obsidian/90 to-obsidian"></div>
     </div>
-    <div class="relative max-w-7xl mx-auto px-5 lg:px-8 pt-20 pb-14 lg:pt-28 text-center">
-      <div class="inline-flex items-center gap-2 badge-cobalt rounded-full px-4 py-1.5 text-xs font-display tracking-widest mb-6">
-        <i data-lucide="calculator" class="w-3.5 h-3.5"></i> LIVE INTERACTIVE CALCULATOR
+    <div class="relative max-w-7xl mx-auto px-5 lg:px-8 pt-20 pb-10 lg:pt-28 text-center">
+      <div class="inline-flex items-center gap-2 badge-gold rounded-full px-4 py-1.5 text-xs font-display tracking-widest mb-6">
+        <i data-lucide="shield-check" class="w-3.5 h-3.5"></i> RADICAL TRANSPARENCY
       </div>
-      <h1 class="font-display font-black text-4xl sm:text-5xl leading-[1.05] mb-6 chrome-text max-w-3xl mx-auto">See Your Exact Sourcing Budget.</h1>
-      <p class="text-lg text-gray-300 font-body leading-relaxed max-w-2xl mx-auto">
-        Slide to your target retail vehicle value and select a reconditioning tier &mdash; we'll show
-        the real-time spread between a retail dealer lot and closed-lane auction sourcing.
+      <h1 class="font-display font-black text-4xl sm:text-5xl leading-[1.05] mb-4 chrome-text max-w-3xl mx-auto">Detailed Cost Breakdown: Wholesale vs. Retail Dealer.</h1>
+      <p class="text-gray-400 font-body italic mb-3">&ldquo;Your Trust. Our Transparency. Our #1 Priority.&rdquo;</p>
+      <p class="text-xs text-gray-500 font-body max-w-2xl mx-auto">
+        All dollar figures below are estimates based on typical wholesale auction and service costs, and
+        are subject to change until confirmed by current supplier quotes. This is not a guaranteed quote.
       </p>
     </div>
   </section>
 
   <!-- ================= CALCULATOR ================= -->
-  <section class="max-w-5xl mx-auto px-5 lg:px-8 pb-24">
-    <div class="panel panel-gold rounded-2xl p-6 lg:p-12">
+  <section class="max-w-5xl mx-auto px-5 lg:px-8 pb-24" id="savings-calculator">
+    <style>
+      .calc-controls-card { background: #10141F; border: 1px solid rgba(212,175,55,0.18); border-radius: 1rem; padding: 1.5rem; }
+      @media (min-width: 1024px) { .calc-controls-card { padding: 2rem; } }
+      .slider-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.75rem; }
+      .slider-header label { font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 0.875rem; letter-spacing: 0.02em; color: #D1D5DB; }
+      .highlight-val { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.5rem; color: #E8CA6A; }
+      .slider-scale { display: flex; justify-content: space-between; font-size: 0.75rem; color: #6B7280; margin-top: 0.5rem; font-family: 'Inter', sans-serif; }
+      .toggle-row { display: flex; flex-wrap: wrap; gap: 1.25rem; margin-top: 1.5rem; }
+      .toggle-group { flex: 1; min-width: 230px; }
+      .toggle-label { display: block; font-family: 'Montserrat', sans-serif; font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.08em; color: #9CA3AF; margin-bottom: 0.5rem; }
+      .btn-toggle-group { display: flex; background: #070A12; border-radius: 0.6rem; padding: 4px; }
+      .toggle-btn { flex: 1; background: transparent; border: none; color: #9CA3AF; padding: 0.55rem 0.75rem; font-family: 'Inter', sans-serif; font-size: 0.8125rem; font-weight: 600; border-radius: 0.4rem; cursor: pointer; transition: 0.15s ease; }
+      .toggle-btn.active { background: rgba(30,136,229,0.18); color: #fff; box-shadow: 0 0 0 1px rgba(30,136,229,0.4); }
+      .table-responsive { overflow-x: auto; margin-top: 1.5rem; }
+      .calc-table { width: 100%; min-width: 640px; border-collapse: collapse; background: #10141F; border: 1px solid rgba(212,175,55,0.15); border-radius: 0.75rem; overflow: hidden; font-size: 0.8125rem; font-family: 'Inter', sans-serif; }
+      .calc-table th { padding: 1rem; text-align: left; background: #141A28; font-family: 'Montserrat', sans-serif; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.04em; }
+      .col-retail { color: #F87171; }
+      .col-wholesale { color: #4FA3EE; }
+      .calc-table td { padding: 0.75rem 1rem; border-bottom: 1px solid rgba(212,175,55,0.1); vertical-align: top; }
+      .cat-header td { background: #070A12; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.6875rem; color: #9CA3AF; padding: 0.5rem 1rem; letter-spacing: 0.04em; }
+      .tag-sub { font-size: 0.6875rem; color: #6B7280; margin-left: 4px; }
+      .tag-detail { display: block; font-size: 0.6875rem; color: #6B7280; margin-top: 2px; }
+      .text-muted { color: #6B7280; }
+      .text-success { color: #4ade80; }
+      .text-primary { color: #4FA3EE; }
+      .total-row td { font-family: 'Montserrat', sans-serif; font-size: 1rem; font-weight: 700; background: #141A28; border-top: 2px solid #4FA3EE; }
+      .calc-summary-banner { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1.25rem; background: linear-gradient(135deg, rgba(212,175,55,0.1), rgba(30,136,229,0.08)); border: 1px solid rgba(212,175,55,0.35); border-radius: 1rem; padding: 1.5rem; margin-top: 1.5rem; }
+      .summary-text .sub-title { font-family: 'Montserrat', sans-serif; font-size: 0.75rem; font-weight: 700; color: #4FA3EE; letter-spacing: 0.08em; }
+      .summary-text h3 { font-family: 'Montserrat', sans-serif; font-size: 2rem; color: #E8CA6A; margin: 0.25rem 0; font-weight: 800; }
+      .summary-text p { color: #9CA3AF; font-size: 0.8125rem; margin: 0; font-family: 'Inter', sans-serif; }
+      @media (max-width: 768px) { .calc-summary-banner { flex-direction: column; text-align: center; } }
+    </style>
 
-      <!-- Slider -->
-      <div class="mb-10">
-        <div class="flex items-center justify-between mb-4">
-          <label for="valueSlider" class="font-display font-semibold text-sm tracking-wide text-gray-300">TARGET RETAIL VEHICLE VALUE</label>
-          <span id="valueDisplay" class="font-display font-black text-2xl metal-text">$42,000</span>
-        </div>
-        <input type="range" id="valueSlider" class="gold-slider w-full" min="17500" max="90000" step="500" value="35000" />
-        <div class="flex justify-between text-xs text-gray-500 font-body mt-2">
-          <span>$17,500</span>
-          <span>$90,000</span>
-        </div>
+    <div class="calc-controls-card">
+      <div class="slider-header">
+        <label for="hammerPriceSlider">Target Wholesale Auction Hammer Price:</label>
+        <span class="highlight-val" id="displayHammerVal">$18,000 CAD</span>
+      </div>
+      <input type="range" id="hammerPriceSlider" class="gold-slider w-full" min="10000" max="65000" step="500" value="18000">
+      <div class="slider-scale">
+        <span>$10,000</span>
+        <span>$35,000</span>
+        <span>$65,000</span>
       </div>
 
-      <!-- Reconditioning toggle -->
-      <div class="mb-10">
-        <p class="font-display font-semibold text-sm tracking-wide text-gray-300 mb-4">RECONDITIONING TIER</p>
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-          <button type="button" data-tier="standard" class="recon-btn toggle-chip active border hairline rounded-xl px-4 py-4 text-left">
-            <span class="block font-display font-bold text-sm text-gray-100">Standard</span>
-            <span class="block text-xs text-gray-500 font-body mt-1">Sedans &amp; light SUVs</span>
-            <span class="block font-display font-bold text-cobalt-light mt-2">$1,000</span>
-          </button>
-          <button type="button" data-tier="truck_van" class="recon-btn toggle-chip border hairline rounded-xl px-4 py-4 text-left">
-            <span class="block font-display font-bold text-sm text-gray-100">Truck / Van</span>
-            <span class="block text-xs text-gray-500 font-body mt-1">Work trucks &amp; cargo vans</span>
-            <span class="block font-display font-bold text-cobalt-light mt-2">$1,500</span>
-          </button>
-          <button type="button" data-tier="luxury" class="recon-btn toggle-chip border hairline rounded-xl px-4 py-4 text-left">
-            <span class="block font-display font-bold text-sm text-gray-100">Luxury</span>
-            <span class="block text-xs text-gray-500 font-body mt-1">Executive &amp; premium units</span>
-            <span class="block font-display font-bold text-cobalt-light mt-2">$2,000</span>
-          </button>
+      <div class="toggle-row">
+        <div class="toggle-group">
+          <span class="toggle-label">PAYMENT METHOD</span>
+          <div class="btn-toggle-group">
+            <button type="button" class="toggle-btn active" id="btnPayCash" data-method="cash">Cash Purchase</button>
+            <button type="button" class="toggle-btn" id="btnPayFinance" data-method="finance">Prime Finance (60 Mo)</button>
+          </div>
         </div>
-      </div>
-
-      <div class="gold-divider mb-10"></div>
-
-      <!-- Side by side comparison -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-        <div class="bg-obsidian-lighter/60 rounded-xl p-6 border hairline">
-          <p class="text-xs text-gray-500 font-body tracking-widest mb-1">RETAIL DEALER LOT</p>
-          <p id="retailPrice" class="font-display font-black text-3xl text-gray-300 mb-4">$50,270</p>
-          <ul class="space-y-2 text-xs text-gray-500 font-body">
-            <li class="flex justify-between"><span>Wholesale-Equivalent Value</span><span id="retailBase">$32,760</span></li>
-            <li class="flex justify-between"><span>Avg. Dealer Lot Markup</span><span id="retailMarkup">$8,530</span></li>
-            <li class="flex justify-between"><span>Dealer Recon &amp; Fees</span><span id="retailRecon">$710</span></li>
-          </ul>
-        </div>
-        <div class="bg-cobalt/10 rounded-xl p-6 border border-cobalt/40">
-          <p class="text-xs text-cobalt-light font-body tracking-widest mb-1">IAS CLOSED-LANE SOURCING</p>
-          <p id="iasPrice" class="font-display font-black text-3xl text-white mb-4">$44,500</p>
-          <ul class="space-y-2 text-xs text-gray-300 font-body">
-            <li class="flex justify-between"><span>Auction Hammer Price</span><span id="iasBase">$42,000</span></li>
-            <li class="flex justify-between"><span>Auction Buy Fee</span><span id="iasBuyFee">$1,050</span></li>
-            <li class="flex justify-between"><span>Flat Sourcing Fee</span><span>$1,500</span></li>
-            <li class="flex justify-between"><span>DriveON Safety</span><span>$250</span></li>
-            <li class="flex justify-between"><span>Reconditioning (at cost)</span><span id="iasRecon">$1,000</span></li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Savings badge -->
-      <div class="relative rounded-2xl panel-gold panel p-8 lg:p-10 text-center overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-br from-gold/15 via-transparent to-gold/5 animate-pulse"></div>
-        <div class="relative">
-          <p class="font-display font-semibold text-sm tracking-widest text-gold-light mb-2">TOTAL ESTIMATED SAVINGS</p>
-          <p id="savingsAmount" class="font-display font-black text-5xl lg:text-6xl metal-text glow-gold mb-6">$5,770</p>
-          <p class="text-xs text-gray-400 font-body max-w-md mx-auto -mt-4 mb-6">
-            Includes estimated auction buy fee, the $1,500 flat sourcing fee, the $250 DriveON digital
-            safety inspection, and your chosen reconditioning budget.
-          </p>
-          <a href="/request-sourcing.html" id="lockInBtn" class="btn-gold inline-block px-10 py-4 rounded-lg font-display tracking-wide">Lock In This Sourcing Budget</a>
+        <div class="toggle-group">
+          <span class="toggle-label">2-YEAR COMPREHENSIVE WARRANTY</span>
+          <div class="btn-toggle-group">
+            <button type="button" class="toggle-btn active" id="btnWarnNo" data-warranty="0">No Warranty</button>
+            <button type="button" class="toggle-btn" id="btnWarnYes" data-warranty="1">Add 2-Yr Warranty</button>
+          </div>
         </div>
       </div>
     </div>
 
+    <div class="table-responsive">
+      <table class="calc-table">
+        <thead>
+          <tr>
+            <th class="col-desc">FEE / EXPENSE BREAKDOWN</th>
+            <th class="col-retail">TRADITIONAL RETAIL DEALER</th>
+            <th class="col-wholesale">IAS WHOLESALE SOURCING</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="cat-header"><td colspan="3">1. VEHICLE ACQUISITION &amp; LOGISTICS</td></tr>
+          <tr>
+            <td>Base Vehicle Price</td>
+            <td id="retailBasePrice">$22,626.00</td>
+            <td id="wholesaleBasePrice">$18,000.00 <span class="tag-sub">(Auction Bid)</span></td>
+          </tr>
+          <tr>
+            <td>Auction Buyer &amp; Platform Fee <span class="tag-detail">(Tiered pass-through based on hammer price)</span></td>
+            <td class="text-muted">Hidden in Retail Price</td>
+            <td id="wholesaleAuctionFee">+$485.00 <span class="tag-sub">(Pass-Through)</span></td>
+          </tr>
+          <tr>
+            <td>PSI Mechanical Arbitration Guarantee</td>
+            <td class="text-muted">Not Disclosed</td>
+            <td>+$175.00 <span class="tag-sub">(Wholesale Direct)</span></td>
+          </tr>
+          <tr>
+            <td>Dedicated Flatbed Transport to Hub</td>
+            <td class="text-muted">Hidden in Retail Price</td>
+            <td>+$350.00 <span class="tag-sub">(Pass-Through)</span></td>
+          </tr>
+
+          <tr class="cat-header"><td colspan="3">2. SAFETY INSPECTION &amp; MECHANICAL PARTS</td></tr>
+          <tr>
+            <td>DriveON Safety Certification</td>
+            <td>+$595.00</td>
+            <td>+$160.00 <span class="tag-sub">(Provincial Rate)</span></td>
+          </tr>
+          <tr>
+            <td>Safety Parts &amp; Mechanical Wear Items <span class="tag-detail">(Brakes, tires, suspension adjustments)</span></td>
+            <td class="text-muted">Hidden in Retail Markup</td>
+            <td>+$500.00 <span class="tag-sub">(Average Estimate)</span></td>
+          </tr>
+
+          <tr class="cat-header"><td colspan="3">3. DEALERSHIP PROFIT VS. FIXED SOURCING FEE</td></tr>
+          <tr>
+            <td>Dealer Administration &amp; Documentation Fee</td>
+            <td>+$799.00</td>
+            <td class="text-success">$0.00 <span class="tag-sub">(Eliminated)</span></td>
+          </tr>
+          <tr>
+            <td>Mandatory Anti-Theft / Security Glass Etch</td>
+            <td>+$499.00</td>
+            <td class="text-success">$0.00 <span class="tag-sub">(Eliminated)</span></td>
+          </tr>
+          <tr>
+            <td>Flat Sourcing Service Fee</td>
+            <td>$0.00</td>
+            <td class="text-primary">+$1,500.00 <span class="tag-sub">(Fixed Sourcing Fee)</span></td>
+          </tr>
+          <tr id="rowWarranty" style="display:none;">
+            <td>2-Year Extended Comprehensive Warranty</td>
+            <td id="retailWarrantyVal">+$2,850.00</td>
+            <td id="wholesaleWarrantyVal">+$1,250.00 <span class="tag-sub">(Wholesale Pass-Through)</span></td>
+          </tr>
+
+          <tr class="cat-header"><td colspan="3">4. REGULATORY, HST &amp; LICENSING</td></tr>
+          <tr>
+            <td>OMVIC Regulatory Transaction Fee</td>
+            <td>+$22.00</td>
+            <td>+$22.00 <span class="tag-sub">(Pass-Through)</span></td>
+          </tr>
+          <tr>
+            <td>Ontario HST (13%)</td>
+            <td id="retailHST">$3,181.33</td>
+            <td id="wholesaleHST">$2,867.46</td>
+          </tr>
+          <tr>
+            <td>ServiceOntario Registration &amp; Plate Transfer</td>
+            <td>+$59.00</td>
+            <td>+$59.00 <span class="tag-sub">(Pass-Through)</span></td>
+          </tr>
+
+          <tr class="total-row">
+            <td>Total Drive-Away Investment</td>
+            <td id="retailGrandTotal">$28,242.33</td>
+            <td id="wholesaleGrandTotal">$23,949.46</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="calc-summary-banner">
+      <div class="summary-text">
+        <span class="sub-title">TOTAL ESTIMATED SAVINGS</span>
+        <h3 id="displayNetSavings">$4,292.87 CAD</h3>
+        <p>Direct out-of-pocket cash saved by eliminating retail dealership markups.</p>
+      </div>
+      <a href="/request-sourcing.html" id="lockInBtn" class="btn-gold inline-block px-8 py-4 rounded-lg font-display tracking-wide whitespace-nowrap">Start Sourcing Order &rarr;</a>
+    </div>
+
     <p class="text-xs text-gray-500 font-body text-center mt-6 max-w-2xl mx-auto">
-      Figures are illustrative estimates based on typical Ontario retail dealer markups and closed-lane
-      auction spreads. Actual sourcing cost depends on real-time auction conditions and final vehicle
-      condition report.
+      Figures are illustrative estimates based on typical Ontario retail dealer pricing and closed-lane
+      auction costs. Actual sourcing cost depends on real-time auction conditions, the final vehicle
+      condition report, and confirmed supplier quotes.
     </p>
   </section>
 
@@ -501,85 +588,91 @@
 
 
   <script>
-    const valueSlider = document.getElementById('valueSlider');
-    const valueDisplay = document.getElementById('valueDisplay');
-    const reconBtns = document.querySelectorAll('.recon-btn');
+    const state = { hammerPrice: 18000, paymentMethod: 'cash', hasWarranty: false };
+
+    const hammerSlider = document.getElementById('hammerPriceSlider');
+    const btnPayCash = document.getElementById('btnPayCash');
+    const btnPayFinance = document.getElementById('btnPayFinance');
+    const btnWarnNo = document.getElementById('btnWarnNo');
+    const btnWarnYes = document.getElementById('btnWarnYes');
     const lockInBtn = document.getElementById('lockInBtn');
 
-    // Each vehicle class has its own wholesale/retail spread: commercial and luxury
-    // units carry deeper closed-lane discounts and higher retail-side markups than
-    // an ordinary sedan, so switching tiers moves BOTH sides of the comparison --
-    // not just the IAS reconditioning line.
-    const TIERS = {
-      standard:  { hammerRatio: 0.80, reconDocFee: 900,  reconCost: 1000 },
-      truck_van: { hammerRatio: 0.76, reconDocFee: 1300, reconCost: 1500 },
-      luxury:    { hammerRatio: 0.73, reconDocFee: 1700, reconCost: 2000 },
-    };
-    let tierKey = 'standard';
+    const fmtMoney = (n) => '$' + n.toLocaleString('en-CA', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
-    const fmt = (n) => '$' + Math.round(n).toLocaleString('en-CA');
+    // Auction buyer/platform fees scale with hammer price, mirroring how closed
+    // dealer-only lanes (OPENLANE, Manheim, EBlock) actually tier buy fees.
+    function auctionBuyFee(hammer) {
+      if (hammer < 15000) return 435;
+      if (hammer < 25000) return 485;
+      if (hammer < 40000) return 650;
+      if (hammer < 55000) return 750;
+      return 900;
+    }
 
-    // Auction buy fees scale with hammer price in brackets, mirroring how
-    // closed dealer-only lanes (OPENLANE, Manheim, EBlock) actually price buy fees.
-    function auctionBuyFee(hammerPrice) {
-      const brackets = [
-        { max: 10000, fee: 400 },
-        { max: 20000, fee: 600 },
-        { max: 30000, fee: 750 },
-        { max: 40000, fee: 900 },
-        { max: 50000, fee: 1050 },
-        { max: 60000, fee: 1200 },
-        { max: Infinity, fee: 1400 },
-      ];
-      const bracket = brackets.find(b => hammerPrice < b.max) || brackets[brackets.length - 1];
-      return bracket.fee;
+    function setPaymentMethod(method) {
+      state.paymentMethod = method;
+      btnPayCash.classList.toggle('active', method === 'cash');
+      btnPayFinance.classList.toggle('active', method === 'finance');
+      recalc();
+    }
+
+    function setWarranty(enabled) {
+      state.hasWarranty = enabled;
+      btnWarnNo.classList.toggle('active', !enabled);
+      btnWarnYes.classList.toggle('active', enabled);
+      document.getElementById('rowWarranty').style.display = enabled ? 'table-row' : 'none';
+      recalc();
     }
 
     function recalc() {
-      // The slider represents the TARGET RETAIL price -- what a dealer lot would
-      // sticker this vehicle at. We back out the wholesale-equivalent hammer price
-      // using the selected tier's typical closed-lane discount, then price both the
-      // retail breakdown and the IAS side up from that same real hammer price.
-      const retailTotal = parseInt(valueSlider.value, 10);
-      valueDisplay.textContent = fmt(retailTotal);
+      const hammer = parseFloat(hammerSlider.value);
+      state.hammerPrice = hammer;
+      document.getElementById('displayHammerVal').textContent = fmtMoney(hammer) + ' CAD';
 
-      const tier = TIERS[tierKey];
-      const hammerPrice = Math.round(retailTotal * tier.hammerRatio);
-      const dealerRecon = tier.reconDocFee;
-      const markup = retailTotal - hammerPrice - dealerRecon;
+      // --- IAS Wholesale Sourcing side ---
+      const auctionFee = auctionBuyFee(hammer);
+      const psiFee = 175, transportFee = 350, driveOnSafety = 160, safetyParts = 500;
+      const sourcingFee = 1500, omvicFee = 22, licensingFee = 59;
+      const warrantyWholesale = state.hasWarranty ? 1250 : 0;
 
-      const buyFee = auctionBuyFee(hammerPrice);
-      const sourcingFee = 1500;
-      const driveOn = 250;
-      const iasTotal = hammerPrice + buyFee + sourcingFee + driveOn + tier.reconCost;
+      const wholesaleTaxable = hammer + auctionFee + psiFee + transportFee + driveOnSafety + safetyParts + sourcingFee + omvicFee + warrantyWholesale;
+      const wholesaleHST = wholesaleTaxable * 0.13;
+      const wholesaleTotal = wholesaleTaxable + wholesaleHST + licensingFee;
 
-      document.getElementById('retailBase').textContent = fmt(hammerPrice);
-      document.getElementById('retailMarkup').textContent = fmt(markup);
-      document.getElementById('retailRecon').textContent = fmt(dealerRecon);
-      document.getElementById('retailPrice').textContent = fmt(retailTotal);
+      // --- Traditional Retail Dealer side ---
+      // Retail lots mark the same underlying wholesale unit up by ~25.7% at the curb.
+      const retailBaseVehicle = hammer * 1.257;
+      const retailSafetyDoc = 595, retailAdminDoc = 799, retailEtchFee = 499;
+      const retailWarranty = state.hasWarranty ? 2850 : 0;
 
-      document.getElementById('iasBase').textContent = fmt(hammerPrice);
-      document.getElementById('iasBuyFee').textContent = fmt(buyFee);
-      document.getElementById('iasRecon').textContent = fmt(tier.reconCost);
-      document.getElementById('iasPrice').textContent = fmt(iasTotal);
+      const retailTaxable = retailBaseVehicle + retailSafetyDoc + retailAdminDoc + retailEtchFee + omvicFee + retailWarranty;
+      const retailHST = retailTaxable * 0.13;
+      const retailTotal = retailTaxable + retailHST + licensingFee;
 
-      const savings = retailTotal - iasTotal;
-      document.getElementById('savingsAmount').textContent = fmt(savings);
+      const netSavings = retailTotal - wholesaleTotal;
 
-      const params = new URLSearchParams({ budget: retailTotal, tier: tierKey, savings: Math.round(savings) });
+      document.getElementById('wholesaleBasePrice').innerHTML = fmtMoney(hammer) + ' <span class="tag-sub">(Auction Bid)</span>';
+      document.getElementById('wholesaleAuctionFee').innerHTML = '+' + fmtMoney(auctionFee) + ' <span class="tag-sub">(Pass-Through)</span>';
+      document.getElementById('wholesaleHST').textContent = fmtMoney(wholesaleHST);
+      document.getElementById('wholesaleGrandTotal').textContent = fmtMoney(wholesaleTotal);
+      document.getElementById('wholesaleWarrantyVal').innerHTML = '+' + fmtMoney(warrantyWholesale) + ' <span class="tag-sub">(Wholesale Pass-Through)</span>';
+
+      document.getElementById('retailBasePrice').textContent = fmtMoney(retailBaseVehicle);
+      document.getElementById('retailHST').textContent = fmtMoney(retailHST);
+      document.getElementById('retailGrandTotal').textContent = fmtMoney(retailTotal);
+      document.getElementById('retailWarrantyVal').textContent = '+' + fmtMoney(retailWarranty);
+
+      document.getElementById('displayNetSavings').textContent = fmtMoney(netSavings) + ' CAD';
+
+      const params = new URLSearchParams({ hammer: Math.round(hammer), payment: state.paymentMethod, warranty: state.hasWarranty ? 1 : 0, savings: Math.round(netSavings) });
       lockInBtn.href = '/request-sourcing.html?' + params.toString();
     }
 
-    valueSlider.addEventListener('input', recalc);
-
-    reconBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        reconBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        tierKey = btn.dataset.tier;
-        recalc();
-      });
-    });
+    hammerSlider.addEventListener('input', recalc);
+    btnPayCash.addEventListener('click', () => setPaymentMethod('cash'));
+    btnPayFinance.addEventListener('click', () => setPaymentMethod('finance'));
+    btnWarnNo.addEventListener('click', () => setWarranty(false));
+    btnWarnYes.addEventListener('click', () => setWarranty(true));
 
     recalc();
   </script>
