@@ -14,7 +14,7 @@
     "alternateName": "Innovative Auto Sourcing Incorporated",
     "description": "Closed dealer-lane vehicle sourcing agency serving the Greater Toronto Area. We proxy-bid client-specified work trucks, cargo vans, and executive vehicles inside licensed dealer-only auctions (OPENLANE, Manheim, EBlock) for a flat sourcing fee, with a fully itemized, open-book invoice.",
     "url": "https://innovativeautosourcing.ca",
-    "telephone": "+1-647-555-1234",
+    "telephone": "+1-416-938-1933",
     "email": "sourcing@innovativeautosourcing.ca",
     "address": {
       "@type": "PostalAddress",
@@ -24,17 +24,80 @@
     },
     "areaServed": ["Toronto", "Etobicoke", "Mississauga", "Brampton", "Vaughan", "Markham", "Oakville"],
     "priceRange": "$$",
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "opens": "09:00",
+      "closes": "18:00"
+    },
     "makesOffer": [
       {
         "@type": "Offer",
-        "name": "Vehicle Sourcing Service",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Core Passenger Sourcing",
+          "description": "Flat-fee proxy bidding inside closed dealer-only auctions for sedans, hatchbacks, and compact/mid-size SUVs. Client receives the raw auction invoice plus a fully itemized, open-book breakdown -- no dealer lot markup."
+        },
         "price": "1500.00",
-        "priceCurrency": "CAD",
-        "description": "Flat-fee, open-book closed-lane auction proxy sourcing. Client pays actual auction hammer price plus this flat fee -- no dealer lot markup."
+        "priceCurrency": "CAD"
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Commercial Van & Heavy-Duty Work Truck Sourcing",
+          "description": "Flat-fee proxy bidding for cargo vans (Ford Transit, Ram ProMaster) and heavy-duty pickups (F-250/F-350, Silverado 2500/3500HD, Ram 2500/3500) inside closed dealer-only auctions, with fleet-grade reconditioning audit."
+        },
+        "price": "2250.00",
+        "priceCurrency": "CAD"
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "White Glove Turnkey Handover",
+          "description": "Premium SUV and executive vehicle sourcing with 2-stage paint correction, a baseline 6-month warranty, and direct flatbed home delivery across the Greater Toronto Area."
+        },
+        "price": "2995.00",
+        "priceCurrency": "CAD"
       }
     ]
   }
   </script>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How much does wholesale proxy auto sourcing cost in Ontario?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Innovative Auto Sourcing charges a flat sourcing fee of $1,500 CAD for core passenger vehicles, $2,250 CAD for commercial vans and heavy-duty work trucks, or $2,995 CAD for a white-glove turnkey handover. You pay the exact raw auction hammer price shown on the invoice, plus tiered auction buy fees, a $160 DriveON safety inspection, a $175 post-sale inspection, and any reconditioning at cost -- with zero dealer lot markup."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do trade contractors save money buying work trucks through dealer auctions?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Traditional retail dealerships mark up used work trucks and cargo vans well above the wholesale auction price and add administration and etching fees on top. Open-book sourcing lets contractors buy directly from closed dealer-only auctions -- OPENLANE, Manheim, EBlock -- at the real wholesale price, which commonly saves several thousand dollars depending on the vehicle. The exact figure for any given vehicle can be checked live on the Savings Calculator at innovativeautosourcing.ca/savings-calculator.html."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are sourced auction vehicles certified and road-ready in Ontario?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Every vehicle undergoes a licensed Ontario DriveON digital safety inspection and a post-sale inspection (PSI). Any necessary repairs or reconditioning are completed at wholesale shop cost, with every receipt shared directly with the client, before commercial plates are transferred."
+        }
+      }
+    ]
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
@@ -266,9 +329,9 @@
         </nav>
 
         <div class="hidden lg:flex items-center gap-4">
-          <a href="tel:+16475551234" class="flex items-center gap-2 text-sm text-gray-300 hover:text-gold-light transition-colors">
+          <a href="tel:+14169381933" class="flex items-center gap-2 text-sm text-gray-300 hover:text-gold-light transition-colors">
             <i data-lucide="phone" class="w-4 h-4 text-gold"></i>
-            <span class="font-body">(647) 555-1234</span>
+            <span class="font-body">(416) 938-1933</span>
           </a>
           <a href="/request-sourcing.html" class="btn-gold px-5 py-2.5 rounded-lg text-sm font-display tracking-wide">Request Sourcing</a>
         </div>
@@ -290,8 +353,8 @@
           <a href="/request-sourcing.html" class="mobile-nav-link">Request Sourcing</a>
       </nav>
       <div class="p-4 border-t hairline flex flex-col gap-3">
-        <a href="tel:+16475551234" class="flex items-center gap-2 text-sm text-gray-300">
-          <i data-lucide="phone" class="w-4 h-4 text-gold"></i> (647) 555-1234
+        <a href="tel:+14169381933" class="flex items-center gap-2 text-sm text-gray-300">
+          <i data-lucide="phone" class="w-4 h-4 text-gold"></i> (416) 938-1933
         </a>
         <a href="/request-sourcing.html" class="btn-gold px-5 py-3 rounded-lg text-sm text-center font-display tracking-wide">Request Sourcing</a>
       </div>
@@ -332,7 +395,7 @@
               <h3 class="font-display font-bold text-xl chrome-text">Tell Us What You Need</h3>
               <span class="badge-gold rounded-full px-3 py-1 text-[11px] font-display tracking-widest">$500 DEPOSIT</span>
             </div>
-            <p class="text-sm text-gray-400 font-body leading-relaxed">Give us your make, model, budget, and mileage limit. A refundable $500 deposit locks in your order and goes straight toward your flat $1,500 sourcing fee.</p>
+            <p class="text-sm text-gray-400 font-body leading-relaxed">Give us your make, model, budget, and mileage limit. A refundable $500 deposit locks in your order and goes straight toward your sourcing fee ($1,500&ndash;$2,995, based on vehicle tier).</p>
           </div>
         </div>
     
@@ -362,7 +425,7 @@
           <div class="flex-1">
             <div class="flex flex-wrap items-center gap-3 mb-2">
               <h3 class="font-display font-bold text-xl chrome-text">Safety Inspection &amp; Repairs At Cost</h3>
-              <span class="badge-gold rounded-full px-3 py-1 text-[11px] font-display tracking-widest">$250 + $1,000–$1,500 AT COST</span>
+              <span class="badge-gold rounded-full px-3 py-1 text-[11px] font-display tracking-widest">$160 + AT-COST RECON</span>
             </div>
             <p class="text-sm text-gray-400 font-body leading-relaxed">Every vehicle passes a DriveON government safety inspection and gets any needed repairs &mdash; billed strictly at cost, with every receipt shared directly with you.</p>
           </div>
@@ -383,6 +446,19 @@
             <p class="text-sm text-gray-400 font-body leading-relaxed">We handle registration, plate transfer, and delivery &mdash; you get a road-ready vehicle with a fully itemized invoice, anywhere in the Greater Toronto Area.</p>
           </div>
         </div>
+  </section>
+
+  <!-- ================= DIRECT-ANSWER Q&A (SEO / AI OVERVIEWS) ================= -->
+  <section class="max-w-5xl mx-auto px-5 lg:px-8 pb-4">
+    <div class="panel rounded-2xl p-6 lg:p-10">
+      <h3 class="font-display font-bold text-xl text-gray-100 mb-3">How do we make sure your vehicle is safe and job-ready?</h3>
+      <p class="text-gray-400 font-body leading-relaxed">
+        Every vehicle goes to a licensed DriveON testing centre for an official Ontario government safety
+        inspection ($160), plus a post-sale inspection (PSI) to catch anything the auction listing missed.
+        If brakes, tires, or lights need work, we complete the repairs at wholesale shop cost &mdash; with
+        the receipt shared directly with you &mdash; before your commercial plates go on.
+      </p>
+    </div>
   </section>
 
   <!-- ================= FEE COMPARISON TABLE ================= -->
@@ -412,19 +488,19 @@
               <td class="py-4 text-right text-gray-300 font-semibold">Actual Cost</td>
             </tr>
             <tr>
-              <td class="py-4 pr-4 text-gray-200">Flat Sourcing Fee (deposit applied)</td>
+              <td class="py-4 pr-4 text-gray-200">Sourcing Fee by Tier (deposit applied)</td>
               <td class="py-4 pr-4 text-gray-500">Client &amp; IAS</td>
-              <td class="py-4 text-right text-gold-light font-semibold">$1,500 flat</td>
+              <td class="py-4 text-right text-gold-light font-semibold">$1,500&ndash;$2,995</td>
             </tr>
             <tr>
-              <td class="py-4 pr-4 text-gray-200">DriveON Safety Inspection</td>
+              <td class="py-4 pr-4 text-gray-200">DriveON Safety Inspection + PSI</td>
               <td class="py-4 pr-4 text-gray-500">Inspection certificate provided</td>
-              <td class="py-4 text-right text-cobalt-light font-semibold">$250</td>
+              <td class="py-4 text-right text-cobalt-light font-semibold">$335</td>
             </tr>
             <tr>
               <td class="py-4 pr-4 text-gray-200">Certified Reconditioning (at cost)</td>
               <td class="py-4 pr-4 text-gray-500">Itemized shop receipts shared</td>
-              <td class="py-4 text-right text-cobalt-light font-semibold">$1,000&ndash;$1,500</td>
+              <td class="py-4 text-right text-cobalt-light font-semibold">Actual Cost</td>
             </tr>
             <tr>
               <td class="py-4 pr-4 text-gray-200">Registration, Plates &amp; Delivery</td>
@@ -461,16 +537,16 @@
         
         <div class="rounded-xl border border-white/5 bg-obsidian-lighter/40 p-4">
           <div class="flex items-start justify-between gap-4 mb-1.5">
-            <span class="text-sm text-gray-200 font-body font-medium">Flat Sourcing Fee (deposit applied)</span>
-            <span class="font-display font-semibold text-gold-light text-right shrink-0">$1,500 flat</span>
+            <span class="text-sm text-gray-200 font-body font-medium">Sourcing Fee by Tier (deposit applied)</span>
+            <span class="font-display font-semibold text-gold-light text-right shrink-0">$1,500&ndash;$2,995</span>
           </div>
           <span class="text-xs text-gray-500 font-body">Client &amp; IAS</span>
         </div>
         
         <div class="rounded-xl border border-white/5 bg-obsidian-lighter/40 p-4">
           <div class="flex items-start justify-between gap-4 mb-1.5">
-            <span class="text-sm text-gray-200 font-body font-medium">DriveON Safety Inspection</span>
-            <span class="font-display font-semibold text-cobalt-light text-right shrink-0">$250</span>
+            <span class="text-sm text-gray-200 font-body font-medium">DriveON Safety Inspection + PSI</span>
+            <span class="font-display font-semibold text-cobalt-light text-right shrink-0">$335</span>
           </div>
           <span class="text-xs text-gray-500 font-body">Inspection certificate provided</span>
         </div>
@@ -478,7 +554,7 @@
         <div class="rounded-xl border border-white/5 bg-obsidian-lighter/40 p-4">
           <div class="flex items-start justify-between gap-4 mb-1.5">
             <span class="text-sm text-gray-200 font-body font-medium">Certified Reconditioning (at cost)</span>
-            <span class="font-display font-semibold text-cobalt-light text-right shrink-0">$1,000&ndash;$1,500</span>
+            <span class="font-display font-semibold text-cobalt-light text-right shrink-0">Actual Cost</span>
           </div>
           <span class="text-xs text-gray-500 font-body">Itemized shop receipts shared</span>
         </div>
@@ -550,7 +626,7 @@
           <h4 class="font-display font-bold text-sm tracking-wide text-gold-light mb-4">CONTACT</h4>
           <ul class="space-y-3 text-sm font-body text-gray-400">
             <li class="flex items-start gap-2.5"><i data-lucide="map-pin" class="w-4 h-4 text-cobalt-light mt-0.5 shrink-0"></i> Greater Toronto Area, Ontario, Canada</li>
-            <li class="flex items-start gap-2.5"><i data-lucide="phone" class="w-4 h-4 text-cobalt-light mt-0.5 shrink-0"></i> (647) 555-1234</li>
+            <li class="flex items-start gap-2.5"><i data-lucide="phone" class="w-4 h-4 text-cobalt-light mt-0.5 shrink-0"></i> (416) 938-1933</li>
             <li class="flex items-start gap-2.5"><i data-lucide="mail" class="w-4 h-4 text-cobalt-light mt-0.5 shrink-0"></i> sourcing@innovativeautosourcing.ca</li>
             <li class="flex items-start gap-2.5"><i data-lucide="clock" class="w-4 h-4 text-cobalt-light mt-0.5 shrink-0"></i> Mon&ndash;Fri 9:00&ndash;6:00 ET</li>
           </ul>

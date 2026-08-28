@@ -12,11 +12,13 @@ OMVIC General Dealer registration is in progress; the company does not sell reta
 
 ## Pricing Model
 
-- Refundable $500 intake deposit, fully applied toward the flat sourcing fee.
-- Flat $1,500 CAD sourcing fee (no dealer lot markup, no hidden fees).
-- $250 CAD DriveON digital safety inspection on every vehicle.
-- Reconditioning billed strictly at cost: ~$1,000 (cars/light SUVs), ~$1,500 (trucks/vans), ~$2,000 (luxury).
+- Refundable $500 intake deposit, fully applied toward the sourcing fee.
+- Tiered flat sourcing fee (no dealer lot markup, no hidden fees): $1,500 CAD (Core Passenger),
+  $2,250 CAD (Commercial Van / Heavy-Duty Work Truck), $2,995 CAD (White Glove Turnkey Handover).
+- $160 CAD DriveON digital safety inspection plus a $175 CAD post-sale inspection (PSI) on every vehicle.
+- Reconditioning and safety parts billed strictly at cost.
 - Client receives every auction invoice and repair receipt directly.
+- Live, itemized cost breakdowns are available at /savings-calculator.html and /request-sourcing.html.
 
 ## Vehicle Categories
 
@@ -32,7 +34,7 @@ Greater Toronto Area, including Toronto, Etobicoke, Mississauga, Brampton, Vaugh
 ## Contact
 
 - Website: https://innovativeautosourcing.ca
-- Phone: (647) 555-1234
+- Phone: (416) 938-1933
 - Email: sourcing@innovativeautosourcing.ca
 - Hours: Mon-Fri 9:00-6:00 ET
 

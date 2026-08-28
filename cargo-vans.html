@@ -14,7 +14,7 @@
     "alternateName": "Innovative Auto Sourcing Incorporated",
     "description": "Closed dealer-lane vehicle sourcing agency serving the Greater Toronto Area. We proxy-bid client-specified work trucks, cargo vans, and executive vehicles inside licensed dealer-only auctions (OPENLANE, Manheim, EBlock) for a flat sourcing fee, with a fully itemized, open-book invoice.",
     "url": "https://innovativeautosourcing.ca",
-    "telephone": "+1-647-555-1234",
+    "telephone": "+1-416-938-1933",
     "email": "sourcing@innovativeautosourcing.ca",
     "address": {
       "@type": "PostalAddress",
@@ -24,17 +24,47 @@
     },
     "areaServed": ["Toronto", "Etobicoke", "Mississauga", "Brampton", "Vaughan", "Markham", "Oakville"],
     "priceRange": "$$",
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "opens": "09:00",
+      "closes": "18:00"
+    },
     "makesOffer": [
       {
         "@type": "Offer",
-        "name": "Vehicle Sourcing Service",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Core Passenger Sourcing",
+          "description": "Flat-fee proxy bidding inside closed dealer-only auctions for sedans, hatchbacks, and compact/mid-size SUVs. Client receives the raw auction invoice plus a fully itemized, open-book breakdown -- no dealer lot markup."
+        },
         "price": "1500.00",
-        "priceCurrency": "CAD",
-        "description": "Flat-fee, open-book closed-lane auction proxy sourcing. Client pays actual auction hammer price plus this flat fee -- no dealer lot markup."
+        "priceCurrency": "CAD"
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Commercial Van & Heavy-Duty Work Truck Sourcing",
+          "description": "Flat-fee proxy bidding for cargo vans (Ford Transit, Ram ProMaster) and heavy-duty pickups (F-250/F-350, Silverado 2500/3500HD, Ram 2500/3500) inside closed dealer-only auctions, with fleet-grade reconditioning audit."
+        },
+        "price": "2250.00",
+        "priceCurrency": "CAD"
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "White Glove Turnkey Handover",
+          "description": "Premium SUV and executive vehicle sourcing with 2-stage paint correction, a baseline 6-month warranty, and direct flatbed home delivery across the Greater Toronto Area."
+        },
+        "price": "2995.00",
+        "priceCurrency": "CAD"
       }
     ]
   }
   </script>
+  
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
@@ -266,9 +296,9 @@
         </nav>
 
         <div class="hidden lg:flex items-center gap-4">
-          <a href="tel:+16475551234" class="flex items-center gap-2 text-sm text-gray-300 hover:text-gold-light transition-colors">
+          <a href="tel:+14169381933" class="flex items-center gap-2 text-sm text-gray-300 hover:text-gold-light transition-colors">
             <i data-lucide="phone" class="w-4 h-4 text-gold"></i>
-            <span class="font-body">(647) 555-1234</span>
+            <span class="font-body">(416) 938-1933</span>
           </a>
           <a href="/request-sourcing.html" class="btn-gold px-5 py-2.5 rounded-lg text-sm font-display tracking-wide">Request Sourcing</a>
         </div>
@@ -290,8 +320,8 @@
           <a href="/request-sourcing.html" class="mobile-nav-link">Request Sourcing</a>
       </nav>
       <div class="p-4 border-t hairline flex flex-col gap-3">
-        <a href="tel:+16475551234" class="flex items-center gap-2 text-sm text-gray-300">
-          <i data-lucide="phone" class="w-4 h-4 text-gold"></i> (647) 555-1234
+        <a href="tel:+14169381933" class="flex items-center gap-2 text-sm text-gray-300">
+          <i data-lucide="phone" class="w-4 h-4 text-gold"></i> (416) 938-1933
         </a>
         <a href="/request-sourcing.html" class="btn-gold px-5 py-3 rounded-lg text-sm text-center font-display tracking-wide">Request Sourcing</a>
       </div>
@@ -399,9 +429,22 @@
     </div>
     <p class="text-xs text-gray-500 font-body leading-relaxed max-w-3xl mx-auto text-center mt-8">
       Spreads shown are estimates based on recent closed-lane activity &mdash; the exact wholesale hammer
-      price is confirmed only once your unit clears auction. The flat $1,500 sourcing fee and $250 DriveON
-      digital safety inspection are itemized upfront on every quote, with no hidden dealer markup.
+      price is confirmed only once your unit clears auction. The $2,250 commercial/HD sourcing fee and $160
+      DriveON digital safety inspection are itemized upfront on every quote, with no hidden dealer markup.
     </p>
+  </section>
+
+  <!-- ================= DIRECT-ANSWER Q&A (SEO / AI OVERVIEWS) ================= -->
+  <section class="max-w-5xl mx-auto px-5 lg:px-8 pb-20">
+    <div class="panel rounded-2xl p-6 lg:p-10">
+      <h3 class="font-display font-bold text-xl text-gray-100 mb-3">Why buy a cargo van through a wholesale dealer auction instead of a retail lot?</h3>
+      <p class="text-gray-400 font-body leading-relaxed">
+        Closed dealer-only auctions like OPENLANE and Manheim carry a steady supply of fleet-maintained
+        Transit, ProMaster, and Express vans coming off lease. Sourcing directly gets you a clean-history,
+        work-ready van at the real wholesale price &mdash; instead of paying a retail lot's markup, admin
+        fee, and glass-etch charge on top.
+      </p>
+    </div>
   </section>
 
   <!-- ================= TRADE CHECKLIST ================= -->
@@ -524,7 +567,7 @@
           <h4 class="font-display font-bold text-sm tracking-wide text-gold-light mb-4">CONTACT</h4>
           <ul class="space-y-3 text-sm font-body text-gray-400">
             <li class="flex items-start gap-2.5"><i data-lucide="map-pin" class="w-4 h-4 text-cobalt-light mt-0.5 shrink-0"></i> Greater Toronto Area, Ontario, Canada</li>
-            <li class="flex items-start gap-2.5"><i data-lucide="phone" class="w-4 h-4 text-cobalt-light mt-0.5 shrink-0"></i> (647) 555-1234</li>
+            <li class="flex items-start gap-2.5"><i data-lucide="phone" class="w-4 h-4 text-cobalt-light mt-0.5 shrink-0"></i> (416) 938-1933</li>
             <li class="flex items-start gap-2.5"><i data-lucide="mail" class="w-4 h-4 text-cobalt-light mt-0.5 shrink-0"></i> sourcing@innovativeautosourcing.ca</li>
             <li class="flex items-start gap-2.5"><i data-lucide="clock" class="w-4 h-4 text-cobalt-light mt-0.5 shrink-0"></i> Mon&ndash;Fri 9:00&ndash;6:00 ET</li>
           </ul>

@@ -14,7 +14,7 @@
     "alternateName": "Innovative Auto Sourcing Incorporated",
     "description": "Closed dealer-lane vehicle sourcing agency serving the Greater Toronto Area. We proxy-bid client-specified work trucks, cargo vans, and executive vehicles inside licensed dealer-only auctions (OPENLANE, Manheim, EBlock) for a flat sourcing fee, with a fully itemized, open-book invoice.",
     "url": "https://innovativeautosourcing.ca",
-    "telephone": "+1-647-555-1234",
+    "telephone": "+1-416-938-1933",
     "email": "sourcing@innovativeautosourcing.ca",
     "address": {
       "@type": "PostalAddress",
@@ -24,17 +24,47 @@
     },
     "areaServed": ["Toronto", "Etobicoke", "Mississauga", "Brampton", "Vaughan", "Markham", "Oakville"],
     "priceRange": "$$",
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "opens": "09:00",
+      "closes": "18:00"
+    },
     "makesOffer": [
       {
         "@type": "Offer",
-        "name": "Vehicle Sourcing Service",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Core Passenger Sourcing",
+          "description": "Flat-fee proxy bidding inside closed dealer-only auctions for sedans, hatchbacks, and compact/mid-size SUVs. Client receives the raw auction invoice plus a fully itemized, open-book breakdown -- no dealer lot markup."
+        },
         "price": "1500.00",
-        "priceCurrency": "CAD",
-        "description": "Flat-fee, open-book closed-lane auction proxy sourcing. Client pays actual auction hammer price plus this flat fee -- no dealer lot markup."
+        "priceCurrency": "CAD"
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Commercial Van & Heavy-Duty Work Truck Sourcing",
+          "description": "Flat-fee proxy bidding for cargo vans (Ford Transit, Ram ProMaster) and heavy-duty pickups (F-250/F-350, Silverado 2500/3500HD, Ram 2500/3500) inside closed dealer-only auctions, with fleet-grade reconditioning audit."
+        },
+        "price": "2250.00",
+        "priceCurrency": "CAD"
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "White Glove Turnkey Handover",
+          "description": "Premium SUV and executive vehicle sourcing with 2-stage paint correction, a baseline 6-month warranty, and direct flatbed home delivery across the Greater Toronto Area."
+        },
+        "price": "2995.00",
+        "priceCurrency": "CAD"
       }
     ]
   }
   </script>
+  
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
@@ -266,9 +296,9 @@
         </nav>
 
         <div class="hidden lg:flex items-center gap-4">
-          <a href="tel:+16475551234" class="flex items-center gap-2 text-sm text-gray-300 hover:text-gold-light transition-colors">
+          <a href="tel:+14169381933" class="flex items-center gap-2 text-sm text-gray-300 hover:text-gold-light transition-colors">
             <i data-lucide="phone" class="w-4 h-4 text-gold"></i>
-            <span class="font-body">(647) 555-1234</span>
+            <span class="font-body">(416) 938-1933</span>
           </a>
           <a href="/request-sourcing.html" class="btn-gold px-5 py-2.5 rounded-lg text-sm font-display tracking-wide">Request Sourcing</a>
         </div>
@@ -290,8 +320,8 @@
           <a href="/request-sourcing.html" class="mobile-nav-link">Request Sourcing</a>
       </nav>
       <div class="p-4 border-t hairline flex flex-col gap-3">
-        <a href="tel:+16475551234" class="flex items-center gap-2 text-sm text-gray-300">
-          <i data-lucide="phone" class="w-4 h-4 text-gold"></i> (647) 555-1234
+        <a href="tel:+14169381933" class="flex items-center gap-2 text-sm text-gray-300">
+          <i data-lucide="phone" class="w-4 h-4 text-gold"></i> (416) 938-1933
         </a>
         <a href="/request-sourcing.html" class="btn-gold px-5 py-3 rounded-lg text-sm text-center font-display tracking-wide">Request Sourcing</a>
       </div>
@@ -409,6 +439,20 @@
     </div>
   </section>
 
+  <!-- ================= DIRECT-ANSWER Q&A (SEO / AI OVERVIEWS) ================= -->
+  <section class="max-w-5xl mx-auto px-5 lg:px-8 pb-24">
+    <div class="panel rounded-2xl p-6 lg:p-10">
+      <h3 class="font-display font-bold text-xl text-gray-100 mb-3">How does open-book auto sourcing work in Ontario?</h3>
+      <p class="text-gray-400 font-body leading-relaxed">
+        Open-book auto sourcing lets you buy work trucks and cargo vans straight from closed dealer-only
+        auctions at the real wholesale price. You pay the exact price on the auction invoice plus a flat
+        sourcing fee ($1,500&ndash;$2,995, depending on vehicle type) &mdash; no dealer lot markup. This
+        typically saves contractors several thousand dollars per vehicle; you can see the exact number for
+        your target vehicle on our <a href="/savings-calculator.html" class="text-cobalt-light hover:underline">Savings Calculator</a>.
+      </p>
+    </div>
+  </section>
+
   <!-- ================= PRICING PREVIEW ================= -->
   <section class="max-w-7xl mx-auto px-5 lg:px-8 pb-24">
     <div class="panel rounded-2xl p-8 lg:p-12 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
@@ -420,7 +464,7 @@
         <p class="text-gray-400 font-body leading-relaxed mb-6">
           Retail dealer lots price vehicles to cover overhead, sales commission, and lot-carrying costs
           &mdash; typically $6,500&ndash;$12,000 over true auction value. We remove that markup entirely
-          and pass the flat $1,500 sourcing fee instead.
+          and pass our flat sourcing fee instead, starting at $1,500.
         </p>
         <a href="/savings-calculator.html" class="btn-cobalt inline-flex items-center gap-2 px-6 py-3.5 rounded-lg font-display tracking-wide text-sm">
           Run the Savings Calculator <i data-lucide="calculator" class="w-4 h-4"></i>
@@ -455,7 +499,7 @@
       <div class="absolute inset-0 bg-gradient-to-br from-gold/10 via-transparent to-cobalt/10"></div>
       <div class="relative">
         <h2 class="font-display font-black text-3xl lg:text-4xl mb-4 metal-text">Ready to Source at Cost?</h2>
-        <p class="text-gray-300 font-body max-w-xl mx-auto mb-8">Tell us your target vehicle, budget, and timeline. A $500 deposit locks in your sourcing parameters &mdash; fully applied to the flat $1,500 fee.</p>
+        <p class="text-gray-300 font-body max-w-xl mx-auto mb-8">Tell us your target vehicle, budget, and timeline. A $500 deposit locks in your sourcing parameters &mdash; fully applied to your sourcing fee, starting at $1,500.</p>
         <a href="/request-sourcing.html" class="btn-gold inline-block px-10 py-4 rounded-lg font-display tracking-wide">Request Sourcing Now</a>
       </div>
     </div>
@@ -500,7 +544,7 @@
           <h4 class="font-display font-bold text-sm tracking-wide text-gold-light mb-4">CONTACT</h4>
           <ul class="space-y-3 text-sm font-body text-gray-400">
             <li class="flex items-start gap-2.5"><i data-lucide="map-pin" class="w-4 h-4 text-cobalt-light mt-0.5 shrink-0"></i> Greater Toronto Area, Ontario, Canada</li>
-            <li class="flex items-start gap-2.5"><i data-lucide="phone" class="w-4 h-4 text-cobalt-light mt-0.5 shrink-0"></i> (647) 555-1234</li>
+            <li class="flex items-start gap-2.5"><i data-lucide="phone" class="w-4 h-4 text-cobalt-light mt-0.5 shrink-0"></i> (416) 938-1933</li>
             <li class="flex items-start gap-2.5"><i data-lucide="mail" class="w-4 h-4 text-cobalt-light mt-0.5 shrink-0"></i> sourcing@innovativeautosourcing.ca</li>
             <li class="flex items-start gap-2.5"><i data-lucide="clock" class="w-4 h-4 text-cobalt-light mt-0.5 shrink-0"></i> Mon&ndash;Fri 9:00&ndash;6:00 ET</li>
           </ul>
