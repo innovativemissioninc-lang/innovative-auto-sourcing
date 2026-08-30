@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Loan Equity Simulator | See When You'd Be Upside-Down | Innovative Auto Sourcing</title>
+  <meta name="description" content="Interactive calculator: model your car loan's monthly payment, total interest, and the exact months you'd be underwater (negative equity) at different loan terms and rates." />
+  <link rel="icon" href="/assets/logo-favicon.png" type="image/png" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Innovative Auto Sourcing",
+    "alternateName": "Innovative Auto Sourcing Incorporated",
+    "description": "Ontario wholesale vehicle dealership serving the Greater Toronto Area. We acquire client-specified work trucks, cargo vans, and executive vehicles at closed dealer-only auctions (OPENLANE, Manheim, EBlock) into our own dealer inventory, then resell to the client in a separate, disclosed transaction at auction cost plus a flat sourcing fee, with a fully itemized, open-book invoice.",
+    "url": "https://innovativeautosourcing.ca",
+    "telephone": "+1-416-938-1933",
+    "email": "sourcing@innovativeautosourcing.ca",
+    "address": { "@type": "PostalAddress", "addressLocality": "Toronto", "addressRegion": "ON", "addressCountry": "CA" },
+    "areaServed": ["Toronto", "Etobicoke", "Mississauga", "Brampton", "Vaughan", "Markham", "Oakville"],
+    "priceRange": "$$"
+  }
+  </script>
+
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            obsidian: { DEFAULT: '#070A12', light: '#0D111C', lighter: '#141A28', panel: '#10141F' },
+            gold: { DEFAULT: '#D4AF37', light: '#E8CA6A', dark: '#A9862A' },
+            cobalt: { DEFAULT: '#1E88E5', light: '#4FA3EE', dark: '#155DA1' },
+          },
+          fontFamily: { display: ['Montserrat', 'sans-serif'], body: ['Inter', 'sans-serif'] },
+          boxShadow: {
+            gold: '0 0 0 1px rgba(212,175,55,0.35), 0 8px 30px -8px rgba(212,175,55,0.25)',
+            'gold-lg': '0 0 0 1px rgba(212,175,55,0.4), 0 20px 60px -12px rgba(212,175,55,0.35)',
+            cobalt: '0 0 0 1px rgba(30,136,229,0.5), 0 8px 24px -6px rgba(30,136,229,0.45)',
+            panel: 'inset 0 1px 0 0 rgba(255,255,255,0.04), 0 20px 50px -20px rgba(0,0,0,0.8)',
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: #070A12;
+      background-image:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(30,136,229,0.10), transparent),
+        radial-gradient(ellipse 60% 40% at 100% 0%, rgba(212,175,55,0.07), transparent);
+      font-family: 'Inter', sans-serif;
+      color: #E7E9EE;
+    }
+    h1, h2, h3, h4, .font-display { font-family: 'Montserrat', sans-serif; }
+    .panel {
+      background: linear-gradient(180deg, rgba(20,26,40,0.85) 0%, rgba(13,17,28,0.9) 100%);
+      border: 1px solid rgba(212,175,55,0.18);
+      border-radius: 1rem;
+      box-shadow: inset 0 1px 0 0 rgba(255,255,255,0.05), inset 0 0 0 1px rgba(0,0,0,0.4), 0 20px 50px -20px rgba(0,0,0,0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .panel-gold { border: 1px solid rgba(212,175,55,0.45); box-shadow: 0 0 0 1px rgba(212,175,55,0.18), inset 0 1px 0 0 rgba(255,255,255,0.06), 0 20px 50px -18px rgba(212,175,55,0.25); }
+    .panel-cobalt { border: 1px solid rgba(30,136,229,0.55); box-shadow: 0 0 0 1px rgba(30,136,229,0.25), inset 0 1px 0 0 rgba(255,255,255,0.06), 0 20px 50px -18px rgba(30,136,229,0.35); }
+    .gold-divider { background: linear-gradient(90deg, transparent, rgba(212,175,55,0.6), transparent); height: 1px; }
+    .btn-gold {
+      background: linear-gradient(180deg, #E8CA6A 0%, #D4AF37 45%, #A9862A 100%);
+      color: #0B0D14; border: 1px solid rgba(255,255,255,0.25);
+      box-shadow: 0 8px 24px -6px rgba(212,175,55,0.5), inset 0 1px 0 0 rgba(255,255,255,0.5);
+      font-weight: 700; transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+    }
+    .btn-gold:hover { filter: brightness(1.08); transform: translateY(-1px); box-shadow: 0 12px 30px -6px rgba(212,175,55,0.6), inset 0 1px 0 0 rgba(255,255,255,0.6); }
+    .btn-outline-gold { background: rgba(212,175,55,0.06); color: #E8CA6A; border: 1px solid rgba(212,175,55,0.55); transition: all 0.15s ease; }
+    .btn-outline-gold:hover { background: rgba(212,175,55,0.14); border-color: #E8CA6A; }
+    .btn-cobalt {
+      background: linear-gradient(180deg, #4FA3EE 0%, #1E88E5 60%, #155DA1 100%);
+      color: #fff; border: 1px solid rgba(255,255,255,0.2);
+      box-shadow: 0 8px 24px -6px rgba(30,136,229,0.55), inset 0 1px 0 0 rgba(255,255,255,0.35);
+      transition: transform 0.15s ease, filter 0.15s ease;
+    }
+    .btn-cobalt:hover { filter: brightness(1.08); transform: translateY(-1px); }
+    .nav-link { position: relative; color: #B7BDC9; font-weight: 500; font-size: 0.875rem; letter-spacing: 0.02em; padding: 0.4rem 0; transition: color 0.15s ease; }
+    .nav-link:hover { color: #E8CA6A; }
+    .nav-link-active { color: #4FA3EE; }
+    .nav-link-active::after { content: ''; position: absolute; left: 0; right: 0; bottom: -4px; height: 2px; background: #1E88E5; box-shadow: 0 0 8px rgba(30,136,229,0.8); border-radius: 2px; }
+    .mobile-nav-link { display: block; padding: 0.85rem 1.25rem; color: #C9CEDA; font-weight: 500; border-bottom: 1px solid rgba(212,175,55,0.1); }
+    .mobile-nav-link-active { color: #4FA3EE; background: rgba(30,136,229,0.08); }
+    .metal-text { background: linear-gradient(180deg, #F4E7BE 0%, #D4AF37 45%, #9C7A26 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .chrome-text { background: linear-gradient(180deg, #F3F5F9 0%, #B9C2D0 45%, #7C8698 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .badge-cobalt { background: rgba(30,136,229,0.12); border: 1px solid rgba(30,136,229,0.5); color: #7DB8F4; }
+    .badge-gold { background: rgba(212,175,55,0.1); border: 1px solid rgba(212,175,55,0.45); color: #E8CA6A; }
+    .hairline { border-color: rgba(212,175,55,0.15); }
+    ::selection { background: rgba(212,175,55,0.35); color: #fff; }
+    .glow-gold { filter: drop-shadow(0 0 18px rgba(212,175,55,0.35)); }
+    #mobile-menu { transition: max-height 0.3s ease, opacity 0.3s ease; }
+    .article-body p { margin-bottom: 1.25rem; line-height: 1.75; color: #C9CEDA; }
+    .article-body h2 { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.5rem; color: #F3F5F9; margin-top: 2.5rem; margin-bottom: 1rem; }
+    .article-body ul { margin: 0 0 1.25rem 1.25rem; list-style: disc; color: #C9CEDA; }
+    .article-body li { margin-bottom: 0.5rem; line-height: 1.6; }
+    .article-body strong { color: #F3F5F9; }
+    .cat-badge-finance { background: rgba(212,175,55,0.1); border: 1px solid rgba(212,175,55,0.45); color: #E8CA6A; }
+    .cat-badge-danger { background: rgba(244,63,94,0.1); border: 1px solid rgba(244,63,94,0.4); color: #FB7185; }
+    .cat-badge-market { background: rgba(30,136,229,0.12); border: 1px solid rgba(30,136,229,0.5); color: #7DB8F4; }
+    .cat-badge-deal { background: rgba(74,222,128,0.1); border: 1px solid rgba(74,222,128,0.4); color: #4ade80; }
+  </style>
+
+</head>
+<body class="antialiased">
+
+  <!-- ================= HEADER ================= -->
+  <header class="sticky top-0 z-50 border-b hairline bg-obsidian/85 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        <a href="/index.html" class="flex items-center gap-3 group">
+          <img src="/assets/logo-icon.png" alt="Innovative Auto Sourcing shield logo" class="h-12 w-auto object-contain glow-gold" />
+          <div class="leading-tight">
+            <div class="font-display font-extrabold tracking-wide text-sm lg:text-base">
+              <span class="chrome-text">INNOVATIVE</span> <span class="metal-text">AUTO SOURCING</span>
+            </div>
+            <div class="text-[10px] lg:text-xs tracking-[0.25em] text-cobalt-light/80 font-body">GREATER TORONTO AREA</div>
+          </div>
+        </a>
+
+        <nav class="hidden lg:flex items-center gap-8">
+        <a href="/index.html" class="nav-link">Home</a>
+        <a href="/work-trucks.html" class="nav-link">Work Trucks</a>
+        <a href="/cargo-vans.html" class="nav-link">Cargo Vans</a>
+        <a href="/how-it-works.html" class="nav-link">How It Works</a>
+        <a href="/learn.html" class="nav-link nav-link-active">Learn</a>
+        <a href="/savings-calculator.html" class="nav-link">Savings Calculator</a>
+        <a href="/extended-warranty.html" class="nav-link">Warranty</a>
+        </nav>
+
+        <div class="hidden lg:flex items-center gap-4">
+          <a href="tel:+14169381933" class="flex items-center gap-2 text-sm text-gray-300 hover:text-gold-light transition-colors">
+            <i data-lucide="phone" class="w-4 h-4 text-gold"></i>
+            <span class="font-body">(416) 938-1933</span>
+          </a>
+          <a href="/request-sourcing.html" class="btn-gold px-5 py-2.5 rounded-lg text-sm font-display tracking-wide">Request Sourcing</a>
+        </div>
+
+        <button id="mobile-menu-btn" class="lg:hidden p-2 text-gold" aria-label="Toggle menu">
+          <i data-lucide="menu" class="w-7 h-7"></i>
+        </button>
+      </div>
+    </div>
+
+    <div id="mobile-menu" class="lg:hidden overflow-hidden max-h-0 opacity-0 border-t hairline bg-obsidian-light/95">
+      <nav class="flex flex-col">
+          <a href="/index.html" class="mobile-nav-link">Home</a>
+          <a href="/work-trucks.html" class="mobile-nav-link">Work Trucks</a>
+          <a href="/cargo-vans.html" class="mobile-nav-link">Cargo Vans</a>
+          <a href="/how-it-works.html" class="mobile-nav-link">How It Works</a>
+          <a href="/learn.html" class="mobile-nav-link mobile-nav-link-active">Learn</a>
+          <a href="/savings-calculator.html" class="mobile-nav-link">Savings Calculator</a>
+          <a href="/extended-warranty.html" class="mobile-nav-link">Warranty</a>
+      </nav>
+      <div class="p-4 border-t hairline flex flex-col gap-3">
+        <a href="tel:+14169381933" class="flex items-center gap-2 text-sm text-gray-300">
+          <i data-lucide="phone" class="w-4 h-4 text-gold"></i> (416) 938-1933
+        </a>
+        <a href="/request-sourcing.html" class="btn-gold px-5 py-3 rounded-lg text-sm text-center font-display tracking-wide">Request Sourcing</a>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- ================= HERO ================= -->
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0">
+      <div class="absolute inset-0 bg-gradient-to-b from-obsidian/70 via-obsidian/90 to-obsidian"></div>
+    </div>
+    <div class="relative max-w-5xl mx-auto px-5 lg:px-8 pt-20 pb-8 lg:pt-28 text-center">
+      <a href="/learn.html" class="inline-flex items-center gap-1.5 text-xs text-gray-500 hover:text-gold-light font-body mb-6 transition-colors"><i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> Back to Learn Hub</a>
+      <div class="inline-flex items-center gap-2 badge-gold rounded-full px-4 py-1.5 text-xs font-display tracking-widest mb-6">
+        <i data-lucide="line-chart" class="w-3.5 h-3.5"></i> INTERACTIVE TOOL
+      </div>
+      <h1 class="font-display font-black text-3xl sm:text-4xl leading-[1.15] mb-4 metal-text max-w-3xl mx-auto">Loan Equity Simulator</h1>
+      <p class="text-lg text-gray-300 font-body leading-relaxed max-w-2xl mx-auto">
+        Model your own numbers and see, month by month, exactly when your loan balance would drop below the
+        vehicle's estimated value &mdash; and when it wouldn't.
+      </p>
+      <p class="text-xs text-gray-500 font-body max-w-2xl mx-auto mt-4">
+        Educational estimate only, not a loan offer. Innovative Auto Sourcing is not a lender; financing terms
+        shown here are illustrative and depend on your actual lender, credit profile, and loan agreement.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= SIMULATOR ================= -->
+  <section class="max-w-5xl mx-auto px-5 lg:px-8 pb-24" id="simulator">
+    <style>
+      .sim-card { background: #10141F; border: 1px solid rgba(212,175,55,0.18); border-radius: 1rem; padding: 1.5rem; }
+      @media (min-width: 1024px) { .sim-card { padding: 2rem; } }
+      .sim-label { font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 0.8125rem; letter-spacing: 0.02em; color: #D1D5DB; }
+      .sim-value { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.25rem; color: #E8CA6A; }
+      .sim-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.6rem; }
+      .sim-scale { display: flex; justify-content: space-between; font-size: 0.7rem; color: #6B7280; margin-top: 0.35rem; }
+      .preset-btn, .term-pill {
+        background: #070A12; border: 1px solid rgba(212,175,55,0.2); color: #9CA3AF;
+        padding: 0.5rem 0.7rem; font-family: 'Inter', sans-serif; font-size: 0.75rem; font-weight: 600;
+        border-radius: 0.5rem; cursor: pointer; transition: 0.15s ease; white-space: nowrap;
+      }
+      .preset-btn:hover, .term-pill:hover { border-color: rgba(212,175,55,0.5); color: #E8CA6A; }
+      .preset-btn.active, .term-pill.active {
+        background: rgba(30,136,229,0.18); border-color: #1E88E5; color: #fff;
+        box-shadow: 0 0 0 1px rgba(30,136,229,0.4);
+      }
+      .term-pill.recommended.active { background: rgba(74,222,128,0.16); border-color: #4ade80; color: #fff; box-shadow: 0 0 0 1px rgba(74,222,128,0.4); }
+      .toggle-track { width: 46px; height: 26px; background: #070A12; border: 1px solid rgba(212,175,55,0.3); border-radius: 999px; position: relative; cursor: pointer; transition: 0.2s ease; flex-shrink: 0; }
+      .toggle-track.on { background: rgba(74,222,128,0.25); border-color: #4ade80; }
+      .toggle-thumb { position: absolute; top: 2px; left: 2px; width: 20px; height: 20px; border-radius: 50%; background: #9CA3AF; transition: 0.2s ease; }
+      .toggle-track.on .toggle-thumb { transform: translateX(20px); background: #4ade80; }
+      .metric-card { background: #10141F; border: 1px solid rgba(212,175,55,0.18); border-radius: 0.85rem; padding: 1.1rem 1.25rem; }
+      .metric-label { font-size: 0.7rem; color: #6B7280; text-transform: uppercase; letter-spacing: 0.06em; font-family: 'Montserrat', sans-serif; font-weight: 700; margin-bottom: 0.35rem; }
+      .metric-value { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.4rem; color: #F3F5F9; }
+      .metric-sub { font-size: 0.7rem; color: #6B7280; margin-top: 0.25rem; }
+      #equityBadge { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0.9rem; border-radius: 999px; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.8125rem; }
+      #equityBadge.safe { background: rgba(74,222,128,0.12); border: 1px solid rgba(74,222,128,0.45); color: #4ade80; }
+      #equityBadge.warn { background: rgba(244,63,94,0.12); border: 1px solid rgba(244,63,94,0.45); color: #FB7185; }
+      .chart-wrap { position: relative; }
+      #chartTooltip {
+        position: absolute; pointer-events: none; background: #0B0D14; border: 1px solid rgba(212,175,55,0.4);
+        border-radius: 0.5rem; padding: 0.6rem 0.8rem; font-size: 0.75rem; color: #E7E9EE; font-family: 'Inter', sans-serif;
+        opacity: 0; transition: opacity 0.1s ease; z-index: 20; white-space: nowrap; box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+      }
+      .legend-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 6px; }
+      .comp-table td { padding: 0.55rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+      .comp-table td:last-child, .comp-table th:last-child { text-align: right; }
+    </style>
+
+    <!-- INPUTS -->
+    <div class="sim-card space-y-6">
+      <div>
+        <div class="sim-row"><label for="priceSlider" class="sim-label">Vehicle Purchase Price</label><span class="sim-value" id="priceVal">$25,000</span></div>
+        <input type="range" id="priceSlider" class="gold-slider w-full" min="5000" max="90000" step="500" value="25000">
+        <div class="sim-scale"><span>$5,000</span><span>$90,000</span></div>
+      </div>
+
+      <div>
+        <div class="sim-row"><label for="downSlider" class="sim-label">Down Payment</label><span class="sim-value" id="downVal">$5,000</span></div>
+        <input type="range" id="downSlider" class="gold-slider w-full" min="0" max="30000" step="250" value="5000">
+        <div class="sim-scale"><span>$0</span><span>$30,000</span></div>
+      </div>
+
+      <div>
+        <div class="sim-row"><label for="aprSlider" class="sim-label">Interest Rate (APR)</label><span class="sim-value" id="aprVal">7.99%</span></div>
+        <input type="range" id="aprSlider" class="gold-slider w-full" min="3.99" max="29.99" step="0.1" value="7.99">
+        <div class="sim-scale"><span>3.99%</span><span>29.99%</span></div>
+        <div class="flex flex-wrap gap-2 mt-3">
+          <button type="button" class="preset-btn active" data-apr="7.99">Prime (7.99%)</button>
+          <button type="button" class="preset-btn" data-apr="12.49">Near-Prime (12.49%)</button>
+          <button type="button" class="preset-btn" data-apr="21.99">Subprime (21.99%)</button>
+          <button type="button" class="preset-btn" data-apr="29.99">Deep Subprime (29.99%)</button>
+        </div>
+      </div>
+
+      <div>
+        <span class="sim-label block mb-2">Loan Term</span>
+        <div class="flex flex-wrap gap-2">
+          <button type="button" class="term-pill" data-term="24">24 Mo</button>
+          <button type="button" class="term-pill" data-term="36">36 Mo</button>
+          <button type="button" class="term-pill recommended active" data-term="48">48 Mo (Recommended)</button>
+          <button type="button" class="term-pill" data-term="60">60 Mo</button>
+          <button type="button" class="term-pill" data-term="72">72 Mo (Dealer Lot Standard)</button>
+          <button type="button" class="term-pill" data-term="84">84 Mo</button>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-3 pt-2 border-t hairline">
+        <div class="toggle-track on" id="earlyPayoffToggle"><div class="toggle-thumb"></div></div>
+        <div>
+          <p class="text-sm text-gray-200 font-body font-medium">Simulate 24-Month Lump-Sum Payoff</p>
+          <p class="text-xs text-gray-500 font-body mt-0.5">Open loan, no prepayment penalty &mdash; confirm this feature with your own lender before assuming it applies to your contract.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOP METRIC CARDS -->
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
+      <div class="metric-card">
+        <div class="metric-label">Monthly Payment</div>
+        <div class="metric-value" id="mMonthly">$0</div>
+        <div class="metric-sub" id="mBiweekly">$0 bi-weekly</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Total Lifetime Interest</div>
+        <div class="metric-value" id="mInterest">$0</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Total All-In Cost</div>
+        <div class="metric-value" id="mAllIn">$0</div>
+        <div class="metric-sub">Down payment + principal + interest</div>
+      </div>
+      <div class="metric-card flex flex-col justify-center">
+        <div class="metric-label">Equity Status</div>
+        <span id="equityBadge" class="safe">Calculating&hellip;</span>
+      </div>
+    </div>
+
+    <!-- CHART -->
+    <div class="sim-card mt-6">
+      <div class="flex items-center justify-between mb-4 flex-wrap gap-3">
+        <h3 class="font-display font-bold text-lg text-gray-100">Loan Balance vs. Estimated Vehicle Value</h3>
+        <div class="flex items-center gap-4 text-xs text-gray-400 font-body">
+          <span><span class="legend-dot" style="background:#E8CA6A"></span>Loan Balance</span>
+          <span><span class="legend-dot" style="background:#4ade80"></span>Vehicle Value</span>
+          <span><span class="legend-dot" style="background:rgba(244,63,94,0.5)"></span>Underwater Zone</span>
+        </div>
+      </div>
+      <div class="chart-wrap">
+        <svg id="equityChart" viewBox="0 0 800 320" class="w-full h-auto" style="display:block;"></svg>
+        <div id="chartTooltip"></div>
+      </div>
+      <p class="text-xs text-gray-500 font-body mt-3">Vehicle value modeled at 20% depreciation in year one, then 15% per year after &mdash; a standard estimate, not an appraisal of any specific vehicle.</p>
+    </div>
+
+    <!-- 24-MONTH EARLY PAYOFF -->
+    <div class="sim-card mt-6" id="earlyPayoffCard">
+      <h3 class="font-display font-bold text-lg text-gray-100 mb-4">24-Month Early Payoff Impact</h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div>
+          <div class="metric-label">Interest Paid Through Month 24</div>
+          <div class="metric-value text-cobalt-light" id="epInterestPaid">$0</div>
+        </div>
+        <div>
+          <div class="metric-label">Remaining Principal at Month 24</div>
+          <div class="metric-value" id="epRemainingPrincipal">$0</div>
+        </div>
+        <div>
+          <div class="metric-label">Future Interest Eliminated</div>
+          <div class="metric-value text-green-400" id="epInterestEliminated">$0</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMPARISON BOX -->
+    <div class="sim-card mt-6 panel-gold">
+      <h3 class="font-display font-bold text-lg text-gray-100 mb-1">Loan Structure Comparison: 48-Mo Open Term vs. 72-Mo Dealer-Lot Standard</h3>
+      <p class="text-xs text-gray-500 font-body mb-4">Same vehicle price, down payment, and rate &mdash; only the term changes. This compares loan structures in general; Innovative Auto Sourcing is not a lender and does not set these terms.</p>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm font-body comp-table">
+          <thead>
+            <tr class="text-left text-gray-500 text-xs tracking-widest border-b hairline">
+              <th class="py-2">METRIC</th>
+              <th>48-MO TERM</th>
+              <th>72-MO TERM</th>
+              <th>DIFFERENCE</th>
+            </tr>
+          </thead>
+          <tbody class="text-gray-200">
+            <tr><td>Monthly Payment</td><td id="cmp48Monthly">&mdash;</td><td id="cmp72Monthly">&mdash;</td><td class="text-gold-light" id="cmpMonthlyDiff">&mdash;</td></tr>
+            <tr><td>Total Interest Paid</td><td id="cmp48Interest">&mdash;</td><td id="cmp72Interest">&mdash;</td><td class="text-green-400" id="cmpInterestDiff">&mdash;</td></tr>
+            <tr><td>Loan Payoff Timeline</td><td>48 months</td><td>72 months</td><td class="text-cobalt-light">24 months earlier</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ONTARIO TAX CALLOUT -->
+    <div class="sim-card mt-6 panel-cobalt">
+      <div class="flex items-start gap-4">
+        <div class="w-10 h-10 rounded-lg bg-cobalt/10 border border-cobalt/40 flex items-center justify-center shrink-0">
+          <i data-lucide="receipt" class="w-5 h-5 text-cobalt-light"></i>
+        </div>
+        <div>
+          <h3 class="font-display font-bold text-base text-gray-100 mb-2">Ontario HST &amp; Open-Loan Notes</h3>
+          <p class="text-sm text-gray-400 font-body leading-relaxed">
+            GST/HST-registered businesses buying a vehicle for commercial use may be able to claim some or all
+            of the HST paid back as an Input Tax Credit, subject to CRA's business-use percentage rules and the
+            passenger-vehicle capital cost limits under CCA Class 10.1 &mdash; this is not automatic or unlimited,
+            and depends on your specific situation. Similarly, "open loan, no prepayment penalty" is a common
+            feature but not a universal one &mdash; confirm it's actually in your contract before counting on it.
+            We are not accountants, tax advisors, or lenders; confirm your specific numbers with your CPA and
+            financing provider.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="rounded-2xl panel panel-gold p-8 lg:p-10 text-center mt-10">
+      <h2 class="font-display font-black text-2xl mb-3 metal-text">See the Same Math Applied to a Real Vehicle</h2>
+      <p class="text-gray-300 font-body max-w-xl mx-auto mb-6 text-sm">Run your target vehicle through our live wholesale cost calculator, or talk to a sourcing coordinator directly.</p>
+      <div class="flex flex-wrap items-center justify-center gap-4">
+        <a href="/request-sourcing.html" class="btn-gold inline-block px-8 py-3.5 rounded-lg font-display tracking-wide text-sm">Start Open-Book Sourcing</a>
+        <a href="/savings-calculator.html" class="inline-flex items-center gap-2 text-gray-300 hover:text-gold-light transition-colors font-body text-sm">Try the Savings Calculator <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+  (function() {
+    'use strict';
+
+    var els = {
+      priceSlider: document.getElementById('priceSlider'),
+      downSlider: document.getElementById('downSlider'),
+      aprSlider: document.getElementById('aprSlider'),
+      priceVal: document.getElementById('priceVal'),
+      downVal: document.getElementById('downVal'),
+      aprVal: document.getElementById('aprVal'),
+      earlyPayoffToggle: document.getElementById('earlyPayoffToggle'),
+      earlyPayoffCard: document.getElementById('earlyPayoffCard'),
+    };
+
+    var state = { price: 25000, down: 5000, apr: 7.99, term: 48, earlyPayoff: true };
+
+    var fmt = function(n) {
+      n = Math.round(n);
+      return '$' + n.toLocaleString('en-CA');
+    };
+    var fmt2 = function(n) {
+      return '$' + n.toLocaleString('en-CA', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    };
+
+    function monthlyPayment(P, r, n) {
+      if (P <= 0) return 0;
+      if (r === 0) return P / n;
+      var f = Math.pow(1 + r, n);
+      return P * r * f / (f - 1);
+    }
+
+    // year-1 monthly depreciation factor derived from -20%/yr, then -15%/yr after
+    var DEP_Y1 = 1 - Math.pow(1 - 0.20, 1 / 12);
+    var DEP_AFTER = 1 - Math.pow(1 - 0.15, 1 / 12);
+
+    function buildSeries(price, down, aprPct, term) {
+      var P = Math.max(0, price - down);
+      var r = (aprPct / 100) / 12;
+      var M = monthlyPayment(P, r, term);
+      var balance = [P];
+      var value = [price];
+      for (var m = 1; m <= term; m++) {
+        var prevBal = balance[m - 1];
+        var interestPortion = prevBal * r;
+        var newBal = prevBal + interestPortion - M;
+        if (newBal < 0) newBal = 0;
+        balance.push(newBal);
+
+        var prevVal = value[m - 1];
+        var depRate = (m <= 12) ? DEP_Y1 : DEP_AFTER;
+        value.push(prevVal * (1 - depRate));
+      }
+      return { balance: balance, value: value, M: M, P: P, r: r };
+    }
+
+    function render() {
+      var price = state.price, down = state.down, apr = state.apr, term = state.term;
+      var series = buildSeries(price, down, apr, term);
+      var M = series.M, balance = series.balance, value = series.value, P = series.P, r = series.r;
+      var totalInterest = (M * term) - P;
+      var totalAllIn = price + totalInterest;
+      var biweekly = (M * 12) / 26;
+
+      document.getElementById('mMonthly').textContent = fmt(M);
+      document.getElementById('mBiweekly').textContent = fmt(biweekly) + ' bi-weekly';
+      document.getElementById('mInterest').textContent = fmt(totalInterest);
+      document.getElementById('mAllIn').textContent = fmt(totalAllIn);
+
+      // equity status
+      var underwaterMonths = [];
+      for (var m = 0; m <= term; m++) {
+        if (balance[m] > value[m]) underwaterMonths.push(m);
+      }
+      var badge = document.getElementById('equityBadge');
+      if (underwaterMonths.length === 0) {
+        badge.className = 'safe';
+        badge.innerHTML = '<i data-lucide="shield-check" class="w-4 h-4"></i> Safe: Positive Equity Throughout';
+      } else {
+        var lastUnderwater = underwaterMonths[underwaterMonths.length - 1];
+        badge.className = 'warn';
+        badge.innerHTML = '<i data-lucide="alert-triangle" class="w-4 h-4"></i> Warning: Underwater Until Month ' + lastUnderwater;
+      }
+
+      // 24-month early payoff panel
+      if (term > 24 && state.earlyPayoff) {
+        els.earlyPayoffCard.style.display = '';
+        var interestThrough24 = 0;
+        for (var i = 1; i <= 24; i++) {
+          interestThrough24 += balance[i - 1] * r;
+        }
+        var remainingAt24 = balance[24];
+        var interestEliminated = totalInterest - interestThrough24;
+        document.getElementById('epInterestPaid').textContent = fmt(interestThrough24);
+        document.getElementById('epRemainingPrincipal').textContent = fmt(remainingAt24);
+        document.getElementById('epInterestEliminated').textContent = fmt(Math.max(0, interestEliminated));
+      } else {
+        els.earlyPayoffCard.style.display = 'none';
+      }
+
+      // comparison box: fixed 48 vs 72, same price/down/apr
+      var s48 = buildSeries(price, down, apr, 48);
+      var s72 = buildSeries(price, down, apr, 72);
+      var int48 = (s48.M * 48) - s48.P;
+      var int72 = (s72.M * 72) - s72.P;
+      document.getElementById('cmp48Monthly').textContent = fmt(s48.M);
+      document.getElementById('cmp72Monthly').textContent = fmt(s72.M);
+      document.getElementById('cmpMonthlyDiff').textContent = '+' + fmt(s48.M - s72.M) + '/mo';
+      document.getElementById('cmp48Interest').textContent = fmt(int48);
+      document.getElementById('cmp72Interest').textContent = fmt(int72);
+      document.getElementById('cmpInterestDiff').textContent = fmt(int72 - int48) + ' saved';
+
+      drawChart(balance, value, term);
+      lucide.createIcons();
+    }
+
+    // ---- SVG chart ----
+    var svgNS = 'http://www.w3.org/2000/svg';
+    var chartEl = document.getElementById('equityChart');
+    var tooltipEl = document.getElementById('chartTooltip');
+    var chartPad = { l: 55, r: 15, t: 15, b: 30 };
+    var chartW = 800, chartH = 320;
+
+    function drawChart(balance, value, term) {
+      while (chartEl.firstChild) chartEl.removeChild(chartEl.firstChild);
+      var maxY = Math.max.apply(null, balance.concat(value));
+      maxY = Math.ceil(maxY / 5000) * 5000 || 5000;
+      var innerW = chartW - chartPad.l - chartPad.r;
+      var innerH = chartH - chartPad.t - chartPad.b;
+
+      function xAt(m) { return chartPad.l + (m / term) * innerW; }
+      function yAt(v) { return chartPad.t + innerH - (v / maxY) * innerH; }
+
+      // gridlines
+      for (var gy = 0; gy <= 4; gy++) {
+        var yy = chartPad.t + (innerH / 4) * gy;
+        var line = document.createElementNS(svgNS, 'line');
+        line.setAttribute('x1', chartPad.l); line.setAttribute('x2', chartW - chartPad.r);
+        line.setAttribute('y1', yy); line.setAttribute('y2', yy);
+        line.setAttribute('stroke', 'rgba(255,255,255,0.06)');
+        chartEl.appendChild(line);
+        var label = document.createElementNS(svgNS, 'text');
+        label.setAttribute('x', chartPad.l - 8); label.setAttribute('y', yy + 4);
+        label.setAttribute('text-anchor', 'end'); label.setAttribute('font-size', '10');
+        label.setAttribute('fill', '#6B7280');
+        var val = maxY - (maxY / 4) * gy;
+        label.textContent = '$' + Math.round(val / 1000) + 'k';
+        chartEl.appendChild(label);
+      }
+
+      // underwater shading, per-month rects
+      for (var m = 0; m < term; m++) {
+        if (balance[m] > value[m] || balance[m + 1] > value[m + 1]) {
+          var rect = document.createElementNS(svgNS, 'rect');
+          rect.setAttribute('x', xAt(m));
+          rect.setAttribute('width', Math.max(1, xAt(m + 1) - xAt(m)));
+          rect.setAttribute('y', chartPad.t);
+          rect.setAttribute('height', innerH);
+          rect.setAttribute('fill', 'rgba(244,63,94,0.10)');
+          chartEl.appendChild(rect);
+        }
+      }
+
+      function poly(series, color) {
+        var pts = [];
+        for (var m = 0; m <= term; m++) pts.push(xAt(m) + ',' + yAt(series[m]));
+        var pl = document.createElementNS(svgNS, 'polyline');
+        pl.setAttribute('points', pts.join(' '));
+        pl.setAttribute('fill', 'none');
+        pl.setAttribute('stroke', color);
+        pl.setAttribute('stroke-width', '2.5');
+        pl.setAttribute('stroke-linejoin', 'round');
+        chartEl.appendChild(pl);
+      }
+      poly(value, '#4ade80');
+      poly(balance, '#E8CA6A');
+
+      // x axis labels
+      var stepLabels = term <= 36 ? 6 : (term <= 60 ? 12 : 12);
+      for (var mx = 0; mx <= term; mx += stepLabels) {
+        var lx = document.createElementNS(svgNS, 'text');
+        lx.setAttribute('x', xAt(mx)); lx.setAttribute('y', chartH - 8);
+        lx.setAttribute('text-anchor', 'middle'); lx.setAttribute('font-size', '10');
+        lx.setAttribute('fill', '#6B7280');
+        lx.textContent = 'Mo ' + mx;
+        chartEl.appendChild(lx);
+      }
+
+      // hover capture
+      var hoverRect = document.createElementNS(svgNS, 'rect');
+      hoverRect.setAttribute('x', chartPad.l); hoverRect.setAttribute('y', chartPad.t);
+      hoverRect.setAttribute('width', innerW); hoverRect.setAttribute('height', innerH);
+      hoverRect.setAttribute('fill', 'transparent');
+      hoverRect.style.cursor = 'crosshair';
+      chartEl.appendChild(hoverRect);
+
+      var crosshair = document.createElementNS(svgNS, 'line');
+      crosshair.setAttribute('y1', chartPad.t); crosshair.setAttribute('y2', chartPad.t + innerH);
+      crosshair.setAttribute('stroke', 'rgba(255,255,255,0.25)'); crosshair.setAttribute('stroke-dasharray', '3,3');
+      crosshair.style.display = 'none';
+      chartEl.appendChild(crosshair);
+
+      hoverRect.addEventListener('mousemove', function(e) {
+        var rectBox = chartEl.getBoundingClientRect();
+        var scaleX = chartW / rectBox.width;
+        var mouseX = (e.clientX - rectBox.left) * scaleX;
+        var m = Math.round(((mouseX - chartPad.l) / innerW) * term);
+        m = Math.max(0, Math.min(term, m));
+        crosshair.style.display = '';
+        crosshair.setAttribute('x1', xAt(m)); crosshair.setAttribute('x2', xAt(m));
+        var eq = value[m] - balance[m];
+        tooltipEl.innerHTML = '<strong>Month ' + m + '</strong><br>Loan Balance: ' + fmt(balance[m]) +
+          '<br>Vehicle Value: ' + fmt(value[m]) +
+          '<br>Net Equity: <span style="color:' + (eq >= 0 ? '#4ade80' : '#FB7185') + '">' + (eq >= 0 ? '+' : '') + fmt(eq) + '</span>';
+        tooltipEl.style.opacity = '1';
+        var tipX = (xAt(m) / scaleX) + 14;
+        var tipY = (yAt(Math.max(balance[m], value[m])) / scaleX) - 10;
+        tooltipEl.style.left = tipX + 'px';
+        tooltipEl.style.top = tipY + 'px';
+      });
+      hoverRect.addEventListener('mouseleave', function() {
+        tooltipEl.style.opacity = '0';
+        crosshair.style.display = 'none';
+      });
+    }
+
+    // ---- wiring ----
+    els.priceSlider.addEventListener('input', function() {
+      state.price = parseFloat(this.value);
+      els.priceVal.textContent = fmt(state.price);
+      render();
+    });
+    els.downSlider.addEventListener('input', function() {
+      state.down = parseFloat(this.value);
+      els.downVal.textContent = fmt(state.down);
+      render();
+    });
+    els.aprSlider.addEventListener('input', function() {
+      state.apr = parseFloat(this.value);
+      els.aprVal.textContent = state.apr.toFixed(2) + '%';
+      document.querySelectorAll('.preset-btn').forEach(function(b) { b.classList.remove('active'); });
+      render();
+    });
+
+    document.querySelectorAll('.preset-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.preset-btn').forEach(function(b) { b.classList.remove('active'); });
+        this.classList.add('active');
+        state.apr = parseFloat(this.dataset.apr);
+        els.aprSlider.value = state.apr;
+        els.aprVal.textContent = state.apr.toFixed(2) + '%';
+        render();
+      });
+    });
+
+    document.querySelectorAll('.term-pill').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.term-pill').forEach(function(b) { b.classList.remove('active'); });
+        this.classList.add('active');
+        state.term = parseInt(this.dataset.term, 10);
+        render();
+      });
+    });
+
+    els.earlyPayoffToggle.addEventListener('click', function() {
+      state.earlyPayoff = !state.earlyPayoff;
+      this.classList.toggle('on', state.earlyPayoff);
+      render();
+    });
+
+    render();
+  })();
+  </script>
+
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="border-t hairline bg-obsidian-light mt-24">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8 py-16">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div>
+          <a href="/index.html" class="flex items-center gap-3 mb-4">
+            <img src="/assets/logo-icon.png" alt="IAS logo" class="h-10 w-auto object-contain" />
+            <span class="font-display font-bold text-sm chrome-text">INNOVATIVE AUTO SOURCING</span>
+          </a>
+          <p class="text-sm text-gray-400 leading-relaxed font-body">
+            A closed-lane wholesale vehicle sourcing partner for Ontario businesses and private clients.
+            100% open-book auction access, zero lot markup, turnkey commercial delivery across the
+            Greater Toronto Area.
+          </p>
+          <div class="flex gap-3 mt-5">
+            <a href="#" class="w-9 h-9 rounded-full border hairline flex items-center justify-center text-gold hover:border-gold hover:bg-gold/10 transition-colors" aria-label="Facebook"><i data-lucide="facebook" class="w-4 h-4"></i></a>
+            <a href="#" class="w-9 h-9 rounded-full border hairline flex items-center justify-center text-gold hover:border-gold hover:bg-gold/10 transition-colors" aria-label="Instagram"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+            <a href="#" class="w-9 h-9 rounded-full border hairline flex items-center justify-center text-gold hover:border-gold hover:bg-gold/10 transition-colors" aria-label="LinkedIn"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="font-display font-bold text-sm tracking-wide text-gold-light mb-4">QUICK LINKS</h4>
+          <ul class="space-y-2.5 text-sm font-body text-gray-400">
+            <li><a href="/index.html" class="hover:text-cobalt-light transition-colors">Home</a></li>
+            <li><a href="/work-trucks.html" class="hover:text-cobalt-light transition-colors">Work Trucks</a></li>
+            <li><a href="/cargo-vans.html" class="hover:text-cobalt-light transition-colors">Cargo Vans</a></li>
+            <li><a href="/how-it-works.html" class="hover:text-cobalt-light transition-colors">How It Works</a></li>
+            <li><a href="/learn.html" class="hover:text-cobalt-light transition-colors">Learn</a></li>
+            <li><a href="/loan-equity-simulator.html" class="hover:text-cobalt-light transition-colors">Loan Equity Simulator</a></li>
+            <li><a href="/faq.html" class="hover:text-cobalt-light transition-colors">FAQ</a></li>
+            <li><a href="/blog.html" class="hover:text-cobalt-light transition-colors">Blog</a></li>
+            <li><a href="/savings-calculator.html" class="hover:text-cobalt-light transition-colors">Savings Calculator</a></li>
+            <li><a href="/extended-warranty.html" class="hover:text-cobalt-light transition-colors">Extended Warranty</a></li>
+            <li><a href="/request-sourcing.html" class="hover:text-cobalt-light transition-colors">Request Sourcing</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-display font-bold text-sm tracking-wide text-gold-light mb-4">CONTACT</h4>
+          <ul class="space-y-3 text-sm font-body text-gray-400">
+            <li class="flex items-start gap-2.5"><i data-lucide="map-pin" class="w-4 h-4 text-cobalt-light mt-0.5 shrink-0"></i> Greater Toronto Area, Ontario, Canada</li>
+            <li class="flex items-start gap-2.5"><i data-lucide="phone" class="w-4 h-4 text-cobalt-light mt-0.5 shrink-0"></i> (416) 938-1933</li>
+            <li class="flex items-start gap-2.5"><i data-lucide="mail" class="w-4 h-4 text-cobalt-light mt-0.5 shrink-0"></i> sourcing@innovativeautosourcing.ca</li>
+            <li class="flex items-start gap-2.5"><i data-lucide="clock" class="w-4 h-4 text-cobalt-light mt-0.5 shrink-0"></i> Mon&ndash;Fri 9:00&ndash;6:00 ET</li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-display font-bold text-sm tracking-wide text-gold-light mb-4">REGULATORY</h4>
+          <p class="text-xs text-gray-500 leading-relaxed font-body">
+            Innovative Auto Sourcing is a registered trade name of Innovative Auto Sourcing
+            Incorporated. <span class="text-gray-400">OMVIC General Dealer registration in progress
+            &mdash; the company is not yet trading retail vehicles.</span> All wholesale acquisitions
+            are purchased into the dealership's own name through licensed dealer-only auction channels (OPENLANE, Manheim, EBlock) and resold to the client in a separate, disclosed transaction, in accordance with applicable
+            <span class="text-gray-400">Ontario Motor Vehicle Industry Council (OMVIC)</span> Code of
+            Ethics and Consumer Protection Ontario guidelines.
+          </p>
+        </div>
+      </div>
+
+      <div class="gold-divider my-10"></div>
+
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-gray-500 font-body">
+        <p>&copy; <span id="year"></span> Innovative Auto Sourcing. All rights reserved.</p>
+        <div class="flex gap-6">
+          <a href="#" class="hover:text-gold-light transition-colors">Privacy Policy</a>
+          <a href="#" class="hover:text-gold-light transition-colors">Terms of Service</a>
+          <a href="#" class="hover:text-gold-light transition-colors">OMVIC Disclosure</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    lucide.createIcons();
+
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    let menuOpen = false;
+    menuBtn.addEventListener('click', () => {
+      menuOpen = !menuOpen;
+      if (menuOpen) {
+        mobileMenu.style.maxHeight = mobileMenu.scrollHeight + 'px';
+        mobileMenu.style.opacity = '1';
+        menuBtn.innerHTML = '<i data-lucide="x" class="w-7 h-7"></i>';
+      } else {
+        mobileMenu.style.maxHeight = '0px';
+        mobileMenu.style.opacity = '0';
+        menuBtn.innerHTML = '<i data-lucide="menu" class="w-7 h-7"></i>';
+      }
+      lucide.createIcons();
+    });
+  </script>
+
+</body>
+</html>
