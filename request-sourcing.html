@@ -36,6 +36,953 @@
         "itemOffered": {
           "@type": "Service",
           "name": "Core Passenger Sourcing",
+          "description": "Flat-fee wholesale acquisition inside closed dealer-only auctions for sedans, hatchbacks, and compact/mid-size SUVs, purchased into our dealer inventory and resold to the client. Client receives the raw auction invoice plus a fully itemized, open-book breakdown -- no dealer lot markup."
+        },
+        "price": "1500.00",
+        "priceCurrency": "CAD"
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Commercial Van & Heavy-Duty Work Truck Sourcing",
+          "description": "Flat-fee wholesale acquisition for cargo vans (Ford Transit, Ram ProMaster) and heavy-duty pickups (F-250/F-350, Silverado 2500/3500HD, Ram 2500/3500) inside closed dealer-only auctions, purchased into our dealer inventory with fleet-grade reconditioning audit before resale."
+        },
+        "price": "2250.00",
+        "priceCurrency": "CAD"
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "White Glove Turnkey Handover",
+          "description": "Premium SUV and executive vehicle sourcing with 2-stage paint correction, a baseline 6-month warranty, and direct flatbed home delivery across the Greater Toronto Area."
+        },
+        "price": "2995.00",
+        "priceCurrency": "CAD"
+      }
+    ]
+  }
+  </script>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            obsidian: {
+              DEFAULT: '#070A12',
+              light: '#0D111C',
+              lighter: '#141A28',
+              panel: '#10141F',
+            },
+            gold: {
+              DEFAULT: '#D4AF37',
+              light: '#E8CA6A',
+              dark: '#A9862A',
+            },
+            cobalt: {
+              DEFAULT: '#1E88E5',
+              light: '#4FA3EE',
+              dark: '#155DA1',
+            },
+          },
+          fontFamily: {
+            display: ['Montserrat', 'sans-serif'],
+            body: ['Inter', 'sans-serif'],
+          },
+          boxShadow: {
+            gold: '0 0 0 1px rgba(212,175,55,0.35), 0 8px 30px -8px rgba(212,175,55,0.25)',
+            'gold-lg': '0 0 0 1px rgba(212,175,55,0.4), 0 20px 60px -12px rgba(212,175,55,0.35)',
+            cobalt: '0 0 0 1px rgba(30,136,229,0.5), 0 8px 24px -6px rgba(30,136,229,0.45)',
+            panel: 'inset 0 1px 0 0 rgba(255,255,255,0.04), 0 20px 50px -20px rgba(0,0,0,0.8)',
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: #070A12;
+      background-image:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(30,136,229,0.10), transparent),
+        radial-gradient(ellipse 60% 40% at 100% 0%, rgba(212,175,55,0.07), transparent);
+      font-family: 'Inter', sans-serif;
+      color: #E7E9EE;
+    }
+    h1, h2, h3, h4, .font-display { font-family: 'Montserrat', sans-serif; }
+
+    /* Glassmorphism beveled panels */
+    .panel {
+      background: linear-gradient(180deg, rgba(20,26,40,0.85) 0%, rgba(13,17,28,0.9) 100%);
+      border: 1px solid rgba(212,175,55,0.18);
+      border-radius: 1rem;
+      box-shadow: inset 0 1px 0 0 rgba(255,255,255,0.05), inset 0 0 0 1px rgba(0,0,0,0.4), 0 20px 50px -20px rgba(0,0,0,0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .panel-gold {
+      border: 1px solid rgba(212,175,55,0.45);
+      box-shadow: 0 0 0 1px rgba(212,175,55,0.18), inset 0 1px 0 0 rgba(255,255,255,0.06), 0 20px 50px -18px rgba(212,175,55,0.25);
+    }
+    .panel-cobalt {
+      border: 1px solid rgba(30,136,229,0.55);
+      box-shadow: 0 0 0 1px rgba(30,136,229,0.25), inset 0 1px 0 0 rgba(255,255,255,0.06), 0 20px 50px -18px rgba(30,136,229,0.35);
+    }
+
+    .gold-divider { background: linear-gradient(90deg, transparent, rgba(212,175,55,0.6), transparent); height: 1px; }
+
+    .btn-gold {
+      background: linear-gradient(180deg, #E8CA6A 0%, #D4AF37 45%, #A9862A 100%);
+      color: #0B0D14;
+      border: 1px solid rgba(255,255,255,0.25);
+      box-shadow: 0 8px 24px -6px rgba(212,175,55,0.5), inset 0 1px 0 0 rgba(255,255,255,0.5);
+      font-weight: 700;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+    }
+    .btn-gold:hover { filter: brightness(1.08); transform: translateY(-1px); box-shadow: 0 12px 30px -6px rgba(212,175,55,0.6), inset 0 1px 0 0 rgba(255,255,255,0.6); }
+
+    .btn-outline-gold {
+      background: rgba(212,175,55,0.06);
+      color: #E8CA6A;
+      border: 1px solid rgba(212,175,55,0.55);
+      transition: all 0.15s ease;
+    }
+    .btn-outline-gold:hover { background: rgba(212,175,55,0.14); border-color: #E8CA6A; }
+
+    .btn-cobalt {
+      background: linear-gradient(180deg, #4FA3EE 0%, #1E88E5 60%, #155DA1 100%);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.2);
+      box-shadow: 0 8px 24px -6px rgba(30,136,229,0.55), inset 0 1px 0 0 rgba(255,255,255,0.35);
+      transition: transform 0.15s ease, filter 0.15s ease;
+    }
+    .btn-cobalt:hover { filter: brightness(1.08); transform: translateY(-1px); }
+
+    .nav-link {
+      position: relative;
+      color: #B7BDC9;
+      font-weight: 500;
+      font-size: 0.875rem;
+      letter-spacing: 0.02em;
+      padding: 0.4rem 0;
+      transition: color 0.15s ease;
+    }
+    .nav-link:hover { color: #E8CA6A; }
+    .nav-link-active { color: #4FA3EE; }
+    .nav-link-active::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0; bottom: -4px;
+      height: 2px;
+      background: #1E88E5;
+      box-shadow: 0 0 8px rgba(30,136,229,0.8);
+      border-radius: 2px;
+    }
+
+    .mobile-nav-link {
+      display: block;
+      padding: 0.85rem 1.25rem;
+      color: #C9CEDA;
+      font-weight: 500;
+      border-bottom: 1px solid rgba(212,175,55,0.1);
+    }
+    .mobile-nav-link-active { color: #4FA3EE; background: rgba(30,136,229,0.08); }
+
+    .metal-text {
+      background: linear-gradient(180deg, #F4E7BE 0%, #D4AF37 45%, #9C7A26 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .chrome-text {
+      background: linear-gradient(180deg, #F3F5F9 0%, #B9C2D0 45%, #7C8698 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .badge-cobalt {
+      background: rgba(30,136,229,0.12);
+      border: 1px solid rgba(30,136,229,0.5);
+      color: #7DB8F4;
+    }
+    .badge-gold {
+      background: rgba(212,175,55,0.1);
+      border: 1px solid rgba(212,175,55,0.45);
+      color: #E8CA6A;
+    }
+
+    .hairline { border-color: rgba(212,175,55,0.15); }
+
+    ::selection { background: rgba(212,175,55,0.35); color: #fff; }
+
+    .glow-gold { filter: drop-shadow(0 0 18px rgba(212,175,55,0.35)); }
+
+    input[type=range].gold-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      height: 6px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #155DA1, #1E88E5 40%, #D4AF37 100%);
+      outline: none;
+    }
+    input[type=range].gold-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: linear-gradient(180deg,#E8CA6A,#A9862A);
+      border: 2px solid #0B0D14;
+      box-shadow: 0 0 0 4px rgba(212,175,55,0.25), 0 4px 10px rgba(0,0,0,0.5);
+      cursor: pointer;
+      margin-top: -8px;
+    }
+    input[type=range].gold-slider::-moz-range-thumb {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: linear-gradient(180deg,#E8CA6A,#A9862A);
+      border: 2px solid #0B0D14;
+      box-shadow: 0 0 0 4px rgba(212,175,55,0.25), 0 4px 10px rgba(0,0,0,0.5);
+      cursor: pointer;
+    }
+
+    .toggle-chip {
+      transition: all 0.15s ease;
+    }
+    .toggle-chip.active {
+      background: rgba(30,136,229,0.18);
+      border-color: #1E88E5;
+      color: #fff;
+      box-shadow: 0 0 0 1px rgba(30,136,229,0.4), 0 6px 18px -4px rgba(30,136,229,0.5);
+    }
+
+    .fade-up { animation: fadeUp 0.7s ease both; }
+    @keyframes fadeUp { from { opacity:0; transform: translateY(14px); } to { opacity:1; transform: translateY(0); } }
+
+    #mobile-menu { transition: max-height 0.3s ease, opacity 0.3s ease; }
+  </style>
+</head>
+<body class="antialiased">
+
+  <!-- ================= HEADER ================= -->
+  <header class="sticky top-0 z-50 border-b hairline bg-obsidian/85 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        <a href="/index.html" class="flex items-center gap-3 group">
+          <img src="/assets/logo-icon.png" alt="Innovative Auto Sourcing shield logo" class="h-12 w-auto object-contain glow-gold" />
+          <div class="leading-tight">
+            <div class="font-display font-extrabold tracking-wide text-sm lg:text-base">
+              <span class="chrome-text">INNOVATIVE</span> <span class="metal-text">AUTO SOURCING</span>
+            </div>
+            <div class="text-[10px] lg:text-xs tracking-[0.25em] text-cobalt-light/80 font-body">GREATER TORONTO AREA</div>
+          </div>
+        </a>
+
+        <nav class="hidden lg:flex items-center gap-8">
+        <a href="/index.html" class="nav-link">Home</a>
+        <a href="/work-trucks.html" class="nav-link">Work Trucks</a>
+        <a href="/cargo-vans.html" class="nav-link">Cargo Vans</a>
+        <a href="/how-it-works.html" class="nav-link">How It Works</a>
+        <a href="/learn.html" class="nav-link">Learn</a>
+        <a href="/savings-calculator.html" class="nav-link">Savings Calculator</a>
+        <a href="/extended-warranty.html" class="nav-link">Warranty</a>
+        </nav>
+
+        <div class="hidden lg:flex items-center gap-4">
+          <a href="tel:+14169381933" class="flex items-center gap-2 text-sm text-gray-300 hover:text-gold-light transition-colors">
+            <i data-lucide="phone" class="w-4 h-4 text-gold"></i>
+            <span class="font-body">(416) 938-1933</span>
+          </a>
+          <a href="/request-sourcing.html" class="btn-gold px-5 py-2.5 rounded-lg text-sm font-display tracking-wide">Request Sourcing</a>
+        </div>
+
+        <button id="mobile-menu-btn" class="lg:hidden p-2 text-gold" aria-label="Toggle menu">
+          <i data-lucide="menu" class="w-7 h-7"></i>
+        </button>
+      </div>
+    </div>
+
+    <div id="mobile-menu" class="lg:hidden overflow-hidden max-h-0 opacity-0 border-t hairline bg-obsidian-light/95">
+      <nav class="flex flex-col">
+        <a href="/index.html" class="mobile-nav-link">Home</a>
+          <a href="/work-trucks.html" class="mobile-nav-link">Work Trucks</a>
+          <a href="/cargo-vans.html" class="mobile-nav-link">Cargo Vans</a>
+          <a href="/how-it-works.html" class="mobile-nav-link">How It Works</a>
+          <a href="/learn.html" class="mobile-nav-link">Learn</a>
+          <a href="/savings-calculator.html" class="mobile-nav-link">Savings Calculator</a>
+          <a href="/extended-warranty.html" class="mobile-nav-link">Warranty</a>
+          <a href="/request-sourcing.html" class="mobile-nav-link mobile-nav-link-active">Request Sourcing</a>
+      </nav>
+      <div class="p-4 border-t hairline flex flex-col gap-3">
+        <a href="tel:+14169381933" class="flex items-center gap-2 text-sm text-gray-300">
+          <i data-lucide="phone" class="w-4 h-4 text-gold"></i> (416) 938-1933
+        </a>
+        <a href="/request-sourcing.html" class="btn-gold px-5 py-3 rounded-lg text-sm text-center font-display tracking-wide">Request Sourcing</a>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- ================= HERO ================= -->
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0">
+      <img src="/assets/sourcing-keys.jpg" alt="Vehicle key handover, Toronto Elite Sourcing" class="w-full h-full object-cover opacity-45" />
+      <div class="absolute inset-0 bg-gradient-to-b from-obsidian/70 via-obsidian/90 to-obsidian"></div>
+    </div>
+    <div class="relative max-w-7xl mx-auto px-5 lg:px-8 pt-20 pb-16 lg:pt-28 text-center">
+      <div class="inline-flex items-center gap-2 badge-gold rounded-full px-4 py-1.5 text-xs font-display tracking-widest mb-6">
+        <i data-lucide="clipboard-list" class="w-3.5 h-3.5"></i> COMMERCIAL INTAKE MODULE
+      </div>
+      <h1 class="font-display font-black text-4xl sm:text-5xl leading-[1.05] mb-6 metal-text max-w-3xl mx-auto">Request Sourcing.</h1>
+      <p class="text-lg text-gray-300 font-body leading-relaxed max-w-2xl mx-auto">
+        Configure your target vehicle and watch your live, open-book estimate build in real time.
+        A $500 deposit locks in your intake &mdash; fully applied to your flat sourcing fee.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= FORM + LIVE ESTIMATE ================= -->
+  <section class="max-w-7xl mx-auto px-5 lg:px-8 pb-28" id="sourcing-request">
+    <style>
+      .sourcing-card { background: #10141F; border: 1px solid rgba(212,175,55,0.18); border-radius: 1rem; padding: 1.5rem; margin-bottom: 1.5rem; }
+      @media (min-width: 1024px) { .sourcing-card { padding: 1.85rem; } }
+      .card-step-title { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 1rem; margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.65rem; color: #F3F4F6; }
+      .step-num-badge { background: linear-gradient(180deg,#4FA3EE,#155DA1); color: #fff; width: 26px; height: 26px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800; font-family: 'Montserrat', sans-serif; flex-shrink: 0; }
+      .field-label { display: block; font-family: 'Montserrat', sans-serif; font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.06em; color: #9CA3AF; margin-bottom: 0.4rem; }
+      .field-input { width: 100%; background: #070A12; border: 1px solid rgba(212,175,55,0.18); border-radius: 0.5rem; padding: 0.7rem 0.9rem; font-size: 0.875rem; color: #E7E9EE; font-family: 'Inter', sans-serif; outline: none; transition: border-color 0.15s ease, box-shadow 0.15s ease; }
+      .field-input:focus { border-color: #1E88E5; box-shadow: 0 0 0 1px rgba(30,136,229,0.4); }
+      .field-input::placeholder { color: #4B5563; }
+      .field-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+      @media (max-width: 640px) { .field-grid-2 { grid-template-columns: 1fr; } }
+
+      .tier-card { display: flex; gap: 0.9rem; background: #070A12; border: 1px solid rgba(212,175,55,0.15); border-radius: 0.75rem; padding: 1rem; cursor: pointer; transition: 0.15s ease; margin-bottom: 0.75rem; }
+      .tier-card:hover { border-color: rgba(212,175,55,0.4); }
+      .tier-card.active { border-color: #1E88E5; box-shadow: 0 0 0 1px rgba(30,136,229,0.4); background: rgba(30,136,229,0.06); }
+      .tier-card input { margin-top: 0.3rem; accent-color: #1E88E5; flex-shrink: 0; }
+      .tier-title-row { display: flex; justify-content: space-between; align-items: baseline; gap: 0.75rem; margin-bottom: 0.3rem; flex-wrap: wrap; }
+      .tier-title-row strong { font-family: 'Montserrat', sans-serif; font-size: 0.875rem; color: #F3F4F6; }
+      .tier-fee-badge { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 0.8125rem; color: #E8CA6A; white-space: nowrap; }
+      .tier-desc { font-size: 0.75rem; color: #9CA3AF; margin: 0; font-family: 'Inter', sans-serif; }
+
+      .toggle-row { display: flex; flex-wrap: wrap; gap: 1.25rem; margin-bottom: 1.5rem; }
+      .toggle-group { flex: 1; min-width: 230px; }
+      .toggle-label { display: block; font-family: 'Montserrat', sans-serif; font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.08em; color: #9CA3AF; margin-bottom: 0.5rem; }
+      .btn-toggle-group { display: flex; background: #070A12; border-radius: 0.6rem; padding: 4px; }
+      .toggle-btn { flex: 1; background: transparent; border: none; color: #9CA3AF; padding: 0.55rem 0.75rem; font-family: 'Inter', sans-serif; font-size: 0.8125rem; font-weight: 600; border-radius: 0.4rem; cursor: pointer; transition: 0.15s ease; }
+      .toggle-btn.active { background: rgba(30,136,229,0.18); color: #fff; box-shadow: 0 0 0 1px rgba(30,136,229,0.4); }
+
+      .addon-item { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; background: #070A12; border: 1px solid rgba(212,175,55,0.15); border-radius: 0.6rem; padding: 0.85rem 1rem; cursor: pointer; margin-bottom: 0.6rem; }
+      .addon-item input { margin-top: 0.2rem; accent-color: #D4AF37; flex-shrink: 0; }
+      .addon-text { flex: 1; }
+      .addon-text strong { font-size: 0.8125rem; color: #F3F4F6; font-family: 'Inter', sans-serif; }
+      .addon-text small { display: block; color: #6B7280; font-size: 0.6875rem; margin-top: 0.15rem; }
+      .addon-price-tag { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.8125rem; color: #4FA3EE; white-space: nowrap; }
+
+      .btn-submit-order { width: 100%; margin-top: 0.5rem; }
+      .form-regulatory-note { font-size: 0.6875rem; color: #6B7280; text-align: center; margin-top: 0.9rem; font-family: 'Inter', sans-serif; line-height: 1.5; }
+
+      .receipt-sticky { position: sticky; top: 6.5rem; }
+      .receipt-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+      .receipt-header-row h3 { font-family: 'Montserrat', sans-serif; font-size: 1.05rem; font-weight: 800; color: #F3F4F6; margin: 0; }
+      .pulse-live-tag { background: rgba(74,222,128,0.12); border: 1px solid rgba(74,222,128,0.4); color: #4ade80; font-size: 0.625rem; font-weight: 800; letter-spacing: 0.05em; padding: 0.25rem 0.55rem; border-radius: 0.3rem; white-space: nowrap; }
+      .receipt-line-items { padding: 0.75rem 0; border-top: 1px solid rgba(212,175,55,0.15); border-bottom: 1px solid rgba(212,175,55,0.15); }
+      .receipt-line-row { display: flex; justify-content: space-between; gap: 0.75rem; font-size: 0.8125rem; color: #9CA3AF; padding: 0.4rem 0; font-family: 'Inter', sans-serif; }
+      .receipt-line-row .val { color: #E7E9EE; font-weight: 600; }
+      .receipt-line-row.highlight-sourcing .val, .receipt-line-row.highlight-sourcing span:first-child { color: #4FA3EE; font-weight: 700; }
+      .receipt-line-row small { display: block; color: #6B7280; font-size: 0.6875rem; margin-top: 1px; }
+      .receipt-total-box { text-align: center; padding: 1.1rem 0 0.4rem; }
+      .receipt-total-box .total-caption { font-family: 'Montserrat', sans-serif; font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.06em; color: #9CA3AF; }
+      .receipt-total-box h2 { font-family: 'Montserrat', sans-serif; font-size: 1.7rem; font-weight: 800; color: #fff; margin: 0.3rem 0 0; }
+      .receipt-total-box .monthly-caption { font-size: 0.75rem; color: #6B7280; margin-top: 0.2rem; font-family: 'Inter', sans-serif; }
+      .receipt-savings-callout { background: linear-gradient(135deg, rgba(212,175,55,0.12), rgba(30,136,229,0.08)); border: 1px solid rgba(212,175,55,0.4); border-radius: 0.75rem; padding: 1rem; margin-top: 1.1rem; text-align: center; }
+      .receipt-savings-callout .savings-tag { font-family: 'Montserrat', sans-serif; font-size: 0.625rem; font-weight: 800; letter-spacing: 0.05em; color: #E8CA6A; }
+      .receipt-savings-callout h3 { font-family: 'Montserrat', sans-serif; color: #facc15; font-size: 1.5rem; margin: 0.25rem 0; font-weight: 800; }
+      .receipt-savings-callout p { font-size: 0.6875rem; color: #9CA3AF; margin: 0; font-family: 'Inter', sans-serif; }
+    </style>
+
+    <!-- FORM + RECEIPT CARD (visible by default) -->
+    <div id="formCard">
+      <form id="sourcingForm" onsubmit="return handleFormSubmit(event)">
+        <div class="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-8 items-start">
+
+          <!-- LEFT COLUMN: INPUTS & SELECTIONS -->
+          <div>
+
+            <!-- 1. Target Vehicle & Budget -->
+            <div class="sourcing-card">
+              <h4 class="card-step-title"><span class="step-num-badge">1</span> Target Vehicle &amp; Budget</h4>
+              <div class="field-grid-2">
+                <div>
+                  <label for="vehicleCategory" class="field-label">VEHICLE CATEGORY <span class="text-gold-light">*</span></label>
+                  <select required id="vehicleCategory" name="vehicleCategory" class="field-input">
+                    <option value="">Select a category&hellip;</option>
+                    <option value="Work Truck">Work Truck (Super Duty / Heavy-Duty)</option>
+                    <option value="Cargo Van">Cargo Van (High-Roof / Fleet)</option>
+                    <option value="Executive Vehicle">Executive / Luxury Vehicle</option>
+                    <option value="Passenger Vehicle">Passenger Sedan / SUV</option>
+                    <option value="Other">Other / Multiple Units</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="makeModel" class="field-label">MAKE, MODEL &amp; TRIM</label>
+                  <input type="text" id="makeModel" name="makeModel" placeholder="e.g. Ford Transit High Roof / Ram 2500" class="field-input" />
+                </div>
+              </div>
+              <div class="field-grid-2">
+                <div>
+                  <label for="vehicleYearRange" class="field-label">YEAR RANGE</label>
+                  <input type="text" id="vehicleYearRange" name="vehicleYearRange" placeholder="e.g. 2021 - 2024" class="field-input" />
+                </div>
+                <div>
+                  <label for="mileage" class="field-label">MAXIMUM MILEAGE (KM)</label>
+                  <input type="number" min="0" step="1000" id="mileage" name="mileage" placeholder="120000" class="field-input" />
+                </div>
+              </div>
+              <div>
+                <label for="formHammerInput" class="field-label">WHOLESALE HAMMER TARGET ($ CAD) <span class="text-gold-light">*</span></label>
+                <input required type="number" id="formHammerInput" name="formHammerInput" value="18000" min="5000" max="150000" step="500" class="field-input" oninput="updateLiveEstimate()" />
+              </div>
+            </div>
+
+            <!-- 2. Sourcing Tier -->
+            <div class="sourcing-card">
+              <h4 class="card-step-title"><span class="step-num-badge">2</span> Choose Sourcing Tier</h4>
+
+              <label class="tier-card active" data-tier="core">
+                <input type="radio" name="sourcingTier" value="core" checked />
+                <div>
+                  <div class="tier-title-row">
+                    <strong>Core Passenger Sourcing</strong>
+                    <span class="tier-fee-badge">$1,500 CAD</span>
+                  </div>
+                  <p class="tier-desc">Sedans, hatchbacks, compact/mid-size SUVs ($10k&ndash;$35k). Closed dealer wholesale acquisition into our inventory, PSI warranty audit, safety &amp; handover.</p>
+                </div>
+              </label>
+
+              <label class="tier-card" data-tier="commercial">
+                <input type="radio" name="sourcingTier" value="commercial" />
+                <div>
+                  <div class="tier-title-row">
+                    <strong>Commercial Van &amp; HD Work Truck Sourcing</strong>
+                    <span class="tier-fee-badge">$2,250 CAD</span>
+                  </div>
+                  <p class="tier-desc">Cargo vans (Transit/ProMaster), 2500/3500 HD diesel/gas pickups. Suspension checks &amp; fleet-grade reconditioning audit.</p>
+                </div>
+              </label>
+
+              <label class="tier-card" data-tier="white_glove">
+                <input type="radio" name="sourcingTier" value="white_glove" />
+                <div>
+                  <div class="tier-title-row">
+                    <strong>White Glove Turnkey Handover</strong>
+                    <span class="tier-fee-badge">$2,995 CAD</span>
+                  </div>
+                  <p class="tier-desc">Premium SUVs &amp; executive sourcing. Includes 2-stage paint correction, baseline 6-mo warranty, and direct flatbed home delivery.</p>
+                </div>
+              </label>
+            </div>
+
+            <!-- 3. Payment Structure & Add-Ons -->
+            <div class="sourcing-card">
+              <h4 class="card-step-title"><span class="step-num-badge">3</span> Payment Structure &amp; Add-Ons</h4>
+
+              <div class="toggle-row" style="margin-bottom: 1.25rem;">
+                <div class="toggle-group">
+                  <span class="toggle-label">PAYMENT METHOD</span>
+                  <div class="btn-toggle-group">
+                    <button type="button" class="toggle-btn active" id="btnPayCash" data-method="cash">Cash / Bank Draft</button>
+                    <button type="button" class="toggle-btn" id="btnPayFinance" data-method="finance">Prime Finance (60 Mo)</button>
+                  </div>
+                </div>
+              </div>
+
+              <label class="addon-item">
+                <input type="checkbox" id="addonWarranty" onchange="updateLiveEstimate()" />
+                <div class="addon-text">
+                  <strong>2-Year Extended Comprehensive Warranty</strong>
+                  <small>Direct wholesale rate (retail equivalent $2,850+) &bull; zero dealer markup</small>
+                </div>
+                <span class="addon-price-tag">+$1,250</span>
+              </label>
+
+              <label class="addon-item">
+                <input type="checkbox" id="addonDelivery" onchange="updateLiveEstimate()" />
+                <div class="addon-text">
+                  <strong>Driveway Flatbed Delivery (GTA)</strong>
+                  <small>Transported directly from the DriveON hub to your address</small>
+                </div>
+                <span class="addon-price-tag">+$350</span>
+              </label>
+
+              <label class="addon-item">
+                <input type="checkbox" id="addonDetailing" onchange="updateLiveEstimate()" />
+                <div class="addon-text">
+                  <strong>Interior/Exterior Detail &amp; Ceramic Sealant</strong>
+                  <small>Wholesale shop-rate reconditioning package</small>
+                </div>
+                <span class="addon-price-tag">+$350</span>
+              </label>
+            </div>
+
+            <!-- 4. Contact & Confirmation -->
+            <div class="sourcing-card">
+              <h4 class="card-step-title"><span class="step-num-badge">4</span> Contact &amp; Sourcing Confirmation</h4>
+              <div class="field-grid-2">
+                <div>
+                  <label for="clientName" class="field-label">FULL LEGAL NAME <span class="text-gold-light">*</span></label>
+                  <input required type="text" id="clientName" name="clientName" placeholder="First and Last Name" class="field-input" />
+                </div>
+                <div>
+                  <label for="clientPhone" class="field-label">PHONE / WHATSAPP <span class="text-gold-light">*</span></label>
+                  <input required type="tel" id="clientPhone" name="clientPhone" placeholder="(416) 000-0000" class="field-input" />
+                </div>
+              </div>
+              <div class="field-grid-2">
+                <div>
+                  <label for="clientEmail" class="field-label">EMAIL ADDRESS <span class="text-gold-light">*</span></label>
+                  <input required type="email" id="clientEmail" name="clientEmail" placeholder="yourname@domain.com" class="field-input" />
+                </div>
+                <div>
+                  <label for="clientCity" class="field-label">CITY / MUNICIPALITY <span class="text-gold-light">*</span></label>
+                  <input required type="text" id="clientCity" name="clientCity" placeholder="e.g. Mississauga / Etobicoke" class="field-input" />
+                </div>
+              </div>
+              <div>
+                <label for="notes" class="field-label">ADDITIONAL PARAMETERS</label>
+                <textarea id="notes" name="notes" rows="3" placeholder="Trim level, upfit requirements, timeline, number of units, etc." class="field-input" style="resize: none;"></textarea>
+              </div>
+
+              <button type="submit" class="btn-gold btn-submit-order px-5 py-4 rounded-lg font-display tracking-wide text-sm">SUBMIT WHOLESALE SOURCING REQUEST</button>
+              <p class="form-regulatory-note">OMVIC General Dealer Registration in progress &mdash; not yet trading. No deposit is charged until you approve a specific verified auction run.</p>
+            </div>
+
+          </div>
+
+          <!-- RIGHT COLUMN: STICKY LIVE ESTIMATE RECEIPT -->
+          <div>
+            <div class="receipt-sticky panel panel-gold rounded-2xl p-6">
+              <div class="receipt-header-row">
+                <h3>Live Open-Book Estimate</h3>
+                <span class="pulse-live-tag">LIVE ESTIMATE</span>
+              </div>
+
+              <div class="receipt-line-items">
+                <div class="receipt-line-row">
+                  <span>Target Hammer Bid</span>
+                  <strong class="val" id="recHammer">$18,000.00</strong>
+                </div>
+                <div class="receipt-line-row">
+                  <span>Auction Buyer &amp; Platform Fee</span>
+                  <span class="val" id="recAuctionFee">+$485.00</span>
+                </div>
+                <div class="receipt-line-row"><span>Post-Sale Inspection (PSI)</span><span class="val">+$175.00</span></div>
+                <div class="receipt-line-row"><span>Transport to Dedicated Hub</span><span class="val">+$350.00</span></div>
+                <div class="receipt-line-row"><span>DriveON Safety Inspection</span><span class="val">+$160.00</span></div>
+                <div class="receipt-line-row"><span>Safety Parts (Avg. Estimate)</span><span class="val">+$500.00</span></div>
+                <div class="receipt-line-row"><span>OMVIC Regulatory Fee</span><span class="val">+$22.00</span></div>
+                <div class="receipt-line-row highlight-sourcing">
+                  <span id="recSourcingTierLabel">Our Sourcing Fee (Core)</span>
+                  <strong class="val" id="recSourcingFee">+$1,500.00</strong>
+                </div>
+                <div class="receipt-line-row" id="recWarrantyLine" style="display:none;"><span>2-Yr Wholesale Warranty</span><span class="val">+$1,250.00</span></div>
+                <div class="receipt-line-row" id="recDeliveryLine" style="display:none;"><span>Driveway Flatbed Delivery</span><span class="val">+$350.00</span></div>
+                <div class="receipt-line-row" id="recDetailLine" style="display:none;"><span>Detailing &amp; Ceramic Seal</span><span class="val">+$350.00</span></div>
+                <div class="receipt-line-row" id="recFinanceLine" style="display:none;">
+                  <span>Financing Interest<small>60 mo @ 4.45% prime rate</small></span>
+                  <span class="val" id="recFinanceInterest">+$0.00</span>
+                </div>
+                <div class="receipt-line-row"><span>Ontario HST (13%)</span><span class="val" id="recHST">$2,754.96</span></div>
+                <div class="receipt-line-row"><span>ServiceOntario Licensing</span><span class="val">+$59.00</span></div>
+              </div>
+
+              <div class="receipt-total-box">
+                <span class="total-caption" id="recGrandTotalLabel">TOTAL ALL-IN DRIVE-AWAY</span>
+                <h2 id="recGrandTotal">$25,361.96 CAD</h2>
+                <div class="monthly-caption" id="recMonthlyCaption" style="display:none;"></div>
+              </div>
+
+              <div class="receipt-savings-callout">
+                <span class="savings-tag">ESTIMATED SAVINGS VS RETAIL DEALER</span>
+                <h3 id="recSavings">$6,988.67 CAD</h3>
+                <p>Direct dealer charges. Zero safety markups. Wholesale pass-through warranty.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </form>
+    </div>
+
+    <!-- CONFIRMATION CARD (hidden by default) -->
+    <div id="confirmCard" class="hidden panel panel-cobalt rounded-2xl p-10 lg:p-14 text-center max-w-3xl mx-auto">
+      <div class="w-16 h-16 rounded-full bg-cobalt/15 border border-cobalt/50 flex items-center justify-center mx-auto mb-6">
+        <i data-lucide="check-circle-2" class="w-9 h-9 text-cobalt-light"></i>
+      </div>
+      <h2 class="font-display font-black text-3xl chrome-text mb-4">Request Received.</h2>
+      <p class="text-gray-300 font-body max-w-lg mx-auto mb-8">
+        Thank you, <span id="confirmName" class="text-gold-light font-semibold"></span>. Our sourcing
+        team will contact you within one business day at <span id="confirmContact" class="text-cobalt-light font-semibold"></span>
+        to confirm your parameters for a <span id="confirmVehicle" class="text-gold-light font-semibold"></span>
+        and process your $500 deposit.
+      </p>
+      <div class="panel rounded-xl p-6 max-w-md mx-auto text-left mb-8">
+        <p class="text-xs font-display tracking-widest text-gray-500 mb-3">SUBMITTED PARAMETERS</p>
+        <dl id="confirmSummary" class="space-y-2 text-sm font-body"></dl>
+      </div>
+      <a href="/index.html" class="btn-outline-gold inline-block px-8 py-3.5 rounded-lg font-display tracking-wide text-sm">Return to Home</a>
+    </div>
+
+  </section>
+
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="border-t hairline bg-obsidian-light mt-24">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8 py-16">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div>
+          <a href="/index.html" class="flex items-center gap-3 mb-4">
+            <img src="/assets/logo-icon.png" alt="IAS logo" class="h-10 w-auto object-contain" />
+            <span class="font-display font-bold text-sm chrome-text">INNOVATIVE AUTO SOURCING</span>
+          </a>
+          <p class="text-sm text-gray-400 leading-relaxed font-body">
+            A closed-lane wholesale vehicle sourcing partner for Ontario businesses and private clients.
+            100% open-book auction access, zero lot markup, turnkey commercial delivery across the
+            Greater Toronto Area.
+          </p>
+          <div class="flex gap-3 mt-5">
+            <a href="#" class="w-9 h-9 rounded-full border hairline flex items-center justify-center text-gold hover:border-gold hover:bg-gold/10 transition-colors" aria-label="Facebook"><i data-lucide="facebook" class="w-4 h-4"></i></a>
+            <a href="#" class="w-9 h-9 rounded-full border hairline flex items-center justify-center text-gold hover:border-gold hover:bg-gold/10 transition-colors" aria-label="Instagram"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+            <a href="#" class="w-9 h-9 rounded-full border hairline flex items-center justify-center text-gold hover:border-gold hover:bg-gold/10 transition-colors" aria-label="LinkedIn"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="font-display font-bold text-sm tracking-wide text-gold-light mb-4">QUICK LINKS</h4>
+          <ul class="space-y-2.5 text-sm font-body text-gray-400">
+            <li><a href="/index.html" class="hover:text-cobalt-light transition-colors">Home</a></li>
+            <li><a href="/work-trucks.html" class="hover:text-cobalt-light transition-colors">Work Trucks</a></li>
+            <li><a href="/cargo-vans.html" class="hover:text-cobalt-light transition-colors">Cargo Vans</a></li>
+            <li><a href="/how-it-works.html" class="hover:text-cobalt-light transition-colors">How It Works</a></li>
+            <li><a href="/learn.html" class="hover:text-cobalt-light transition-colors">Learn</a></li>
+            <li><a href="/loan-equity-simulator.html" class="hover:text-cobalt-light transition-colors">Loan Equity Simulator</a></li>
+            <li><a href="/savings-calculator.html" class="hover:text-cobalt-light transition-colors">Savings Calculator</a></li>
+            <li><a href="/extended-warranty.html" class="hover:text-cobalt-light transition-colors">Extended Warranty</a></li>
+            <li><a href="/request-sourcing.html" class="hover:text-cobalt-light transition-colors">Request Sourcing</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-display font-bold text-sm tracking-wide text-gold-light mb-4">CONTACT</h4>
+          <ul class="space-y-3 text-sm font-body text-gray-400">
+            <li class="flex items-start gap-2.5"><i data-lucide="map-pin" class="w-4 h-4 text-cobalt-light mt-0.5 shrink-0"></i> Greater Toronto Area, Ontario, Canada</li>
+            <li class="flex items-start gap-2.5"><i data-lucide="phone" class="w-4 h-4 text-cobalt-light mt-0.5 shrink-0"></i> (416) 938-1933</li>
+            <li class="flex items-start gap-2.5"><i data-lucide="mail" class="w-4 h-4 text-cobalt-light mt-0.5 shrink-0"></i> sourcing@innovativeautosourcing.ca</li>
+            <li class="flex items-start gap-2.5"><i data-lucide="clock" class="w-4 h-4 text-cobalt-light mt-0.5 shrink-0"></i> Mon&ndash;Fri 9:00&ndash;6:00 ET</li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-display font-bold text-sm tracking-wide text-gold-light mb-4">REGULATORY</h4>
+          <p class="text-xs text-gray-500 leading-relaxed font-body">
+            Innovative Auto Sourcing is a registered trade name of Innovative Auto Sourcing
+            Incorporated. <span class="text-gray-400">OMVIC General Dealer registration in progress
+            &mdash; the company is not yet trading retail vehicles.</span> All wholesale acquisitions
+            are purchased into the dealership's own name through licensed dealer-only auction channels
+            (OPENLANE, Manheim, EBlock) and resold to the client in a separate, disclosed transaction,
+            in accordance with applicable
+            <span class="text-gray-400">Ontario Motor Vehicle Industry Council (OMVIC)</span> Code of
+            Ethics and Consumer Protection Ontario guidelines.
+          </p>
+        </div>
+      </div>
+
+      <div class="gold-divider my-10"></div>
+
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-gray-500 font-body">
+        <p>&copy; <span id="year"></span> Innovative Auto Sourcing. All rights reserved.</p>
+        <div class="flex gap-6">
+          <a href="#" class="hover:text-gold-light transition-colors">Privacy Policy</a>
+          <a href="#" class="hover:text-gold-light transition-colors">Terms of Service</a>
+          <a href="#" class="hover:text-gold-light transition-colors">OMVIC Disclosure</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    lucide.createIcons();
+
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    let menuOpen = false;
+    menuBtn.addEventListener('click', () => {
+      menuOpen = !menuOpen;
+      if (menuOpen) {
+        mobileMenu.style.maxHeight = mobileMenu.scrollHeight + 'px';
+        mobileMenu.style.opacity = '1';
+        menuBtn.innerHTML = '<i data-lucide="x" class="w-7 h-7"></i>';
+      } else {
+        mobileMenu.style.maxHeight = '0px';
+        mobileMenu.style.opacity = '0';
+        menuBtn.innerHTML = '<i data-lucide="menu" class="w-7 h-7"></i>';
+      }
+      lucide.createIcons();
+    });
+  </script>
+
+
+  <script>
+    // ==========================================================
+    // SOURCING INTAKE & LIVE OPEN-BOOK ESTIMATE ENGINE
+    // ==========================================================
+
+    const TIER_FEES = {
+      core: { fee: 1500, label: 'Our Sourcing Fee (Core)' },
+      commercial: { fee: 2250, label: 'Our Sourcing Fee (Commercial / HD)' },
+      white_glove: { fee: 2995, label: 'Our Sourcing Fee (White Glove)' },
+    };
+
+    // Same 60-month amortized financing model used on the Savings Calculator page,
+    // at the real Bank of Canada-anchored prime rate (kept consistent across the site).
+    const FINANCE_APR = 0.0445;
+    const FINANCE_MONTHS = 60;
+
+    const formState = { tier: 'core', paymentMethod: 'cash' };
+
+    const hammerInput = document.getElementById('formHammerInput');
+    const btnPayCash = document.getElementById('btnPayCash');
+    const btnPayFinance = document.getElementById('btnPayFinance');
+    const tierCards = Array.from(document.querySelectorAll('.tier-card'));
+
+    const fmtCAD = (n) => '$' + n.toLocaleString('en-CA', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+    // Mirrors the auction buy-fee brackets used on the Savings Calculator, so both
+    // pages always quote the same tiered pass-through fee for a given hammer price.
+    function auctionBuyFee(hammer) {
+      if (hammer < 15000) return 435;
+      if (hammer < 25000) return 485;
+      if (hammer < 40000) return 650;
+      if (hammer < 55000) return 750;
+      return 900;
+    }
+
+    function monthlyPayment(principal, apr, months) {
+      const r = apr / 12;
+      return principal * r * Math.pow(1 + r, months) / (Math.pow(1 + r, months) - 1);
+    }
+
+    function setFormTier(tierType) {
+      formState.tier = tierType;
+      tierCards.forEach((card) => card.classList.toggle('active', card.dataset.tier === tierType));
+      updateLiveEstimate();
+    }
+
+    function setPaymentMethod(method) {
+      formState.paymentMethod = method;
+      btnPayCash.classList.toggle('active', method === 'cash');
+      btnPayFinance.classList.toggle('active', method === 'finance');
+      updateLiveEstimate();
+    }
+
+    function updateLiveEstimate() {
+      const hammer = Math.max(0, parseFloat(hammerInput.value) || 0);
+
+      const auctionFee = auctionBuyFee(hammer);
+      const psiFee = 175, transportFee = 350, driveOnSafety = 160, safetyParts = 500;
+      const omvicFee = 22, licensingFee = 59;
+      const tier = TIER_FEES[formState.tier];
+
+      const addWarranty = document.getElementById('addonWarranty').checked;
+      const addDelivery = document.getElementById('addonDelivery').checked;
+      const addDetailing = document.getElementById('addonDetailing').checked;
+
+      const warrantyCost = addWarranty ? 1250 : 0;
+      const deliveryCost = addDelivery ? 350 : 0;
+      const detailingCost = addDetailing ? 350 : 0;
+
+      document.getElementById('recWarrantyLine').style.display = addWarranty ? 'flex' : 'none';
+      document.getElementById('recDeliveryLine').style.display = addDelivery ? 'flex' : 'none';
+      document.getElementById('recDetailLine').style.display = addDetailing ? 'flex' : 'none';
+
+      const cashTaxable = hammer + auctionFee + psiFee + transportFee + driveOnSafety + safetyParts + omvicFee + tier.fee + warrantyCost + deliveryCost + detailingCost;
+      const hst = cashTaxable * 0.13;
+      const cashTotal = cashTaxable + hst + licensingFee;
+
+      // Traditional retail baseline (for the savings comparison only) â same 1.257x
+      // hammer-to-curb-price multiplier and fee set as the Savings Calculator page.
+      const retailBase = hammer * 1.257;
+      const retailSafetyDoc = 595, retailAdminDoc = 799, retailEtchFee = 499;
+      const retailWarranty = addWarranty ? 2850 : 0;
+      const retailTaxable = retailBase + retailSafetyDoc + retailAdminDoc + retailEtchFee + omvicFee + retailWarranty;
+      const retailHST = retailTaxable * 0.13;
+      const retailCashTotal = retailTaxable + retailHST + licensingFee;
+
+      const isFinanced = formState.paymentMethod === 'finance';
+      const financeInterest = isFinanced ? (monthlyPayment(cashTotal, FINANCE_APR, FINANCE_MONTHS) * FINANCE_MONTHS - cashTotal) : 0;
+      const retailFinanceInterest = isFinanced ? (monthlyPayment(retailCashTotal, FINANCE_APR, FINANCE_MONTHS) * FINANCE_MONTHS - retailCashTotal) : 0;
+
+      const grandTotal = cashTotal + financeInterest;
+      const retailGrandTotal = retailCashTotal + retailFinanceInterest;
+      const netSavings = retailGrandTotal - grandTotal;
+
+      document.getElementById('recFinanceLine').style.display = isFinanced ? 'flex' : 'none';
+      document.getElementById('recFinanceInterest').textContent = '+' + fmtCAD(financeInterest);
+
+      document.getElementById('recHammer').textContent = fmtCAD(hammer);
+      document.getElementById('recAuctionFee').textContent = '+' + fmtCAD(auctionFee);
+      document.getElementById('recSourcingTierLabel').textContent = tier.label;
+      document.getElementById('recSourcingFee').textContent = '+' + fmtCAD(tier.fee);
+      document.getElementById('recHST').textContent = fmtCAD(hst);
+
+      document.getElementById('recGrandTotalLabel').textContent = isFinanced ? 'TOTAL COST, FINANCED (60 MO)' : 'TOTAL ALL-IN DRIVE-AWAY';
+      document.getElementById('recGrandTotal').textContent = fmtCAD(grandTotal) + ' CAD';
+
+      const monthlyCaption = document.getElementById('recMonthlyCaption');
+      if (isFinanced) {
+        monthlyCaption.style.display = 'block';
+        monthlyCaption.textContent = fmtCAD(monthlyPayment(cashTotal, FINANCE_APR, FINANCE_MONTHS)) + '/mo';
+      } else {
+        monthlyCaption.style.display = 'none';
+      }
+
+      document.getElementById('recSavings').textContent = fmtCAD(netSavings) + ' CAD';
+    }
+
+    // Auto-select vehicle category / prefill fields from URL query parameters
+    // (used by the Work Trucks, Cargo Vans, and Savings Calculator "Source This" links).
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+
+      const vehicleParam = params.get('vehicle') || params.get('type') || params.get('category');
+      const select = document.getElementById('vehicleCategory');
+      if (vehicleParam && select) {
+        const match = Array.from(select.options).find((o) => o.value.toLowerCase() === vehicleParam.toLowerCase());
+        if (match) select.value = match.value;
+      }
+
+      const specParam = params.get('spec') || params.get('model');
+      if (specParam) {
+        const makeModelInput = document.getElementById('makeModel');
+        if (makeModelInput) makeModelInput.value = decodeURIComponent(specParam.replace(/\+/g, ' '));
+      }
+
+      // The Savings Calculator's "Start Sourcing Order" button passes hammer/payment/warranty
+      // (older links from the budget field pass "budget" instead â both are honored here).
+      const hammerParam = params.get('hammer') || params.get('budget');
+      if (hammerParam) {
+        const val = Math.round(Number(hammerParam));
+        if (!isNaN(val) && val > 0) hammerInput.value = val;
+      }
+      if (params.get('payment') === 'finance') {
+        formState.paymentMethod = 'finance';
+      }
+      if (params.get('warranty') === '1') {
+        const warrantyBox = document.getElementById('addonWarranty');
+        if (warrantyBox) warrantyBox.checked = true;
+      }
+    })();
+
+    tierCards.forEach((card) => {
+      card.addEventListener('click', () => setFormTier(card.dataset.tier));
+    });
+    btnPayCash.addEventListener('click', () => setPaymentMethod('cash'));
+    btnPayFinance.addEventListener('click', () => setPaymentMethod('finance'));
+    hammerInput.addEventListener('input', updateLiveEstimate);
+
+    // Reflect any URL-driven payment method in the toggle UI before the first calc.
+    if (formState.paymentMethod === 'finance') {
+      btnPayCash.classList.remove('active');
+      btnPayFinance.classList.add('active');
+    }
+    updateLiveEstimate();
+
+    const form = document.getElementById('sourcingForm');
+    const formCard = document.getElementById('formCard');
+    const confirmCard = document.getElementById('confirmCard');
+
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      const data = new FormData(form);
+
+      document.getElementById('confirmName').textContent = data.get('clientName') || 'there';
+      document.getElementById('confirmContact').textContent = data.get('clientEmail') || data.get('clientPhone') || '';
+      document.getElementById('confirmVehicle').textContent = data.get('vehicleCategory') || 'your target vehicle';
+
+      const summary = document.getElementById('confirmSummary');
+      summary.innerHTML = '';
+      const rows = [
+        ['Vehicle Category', data.get('vehicleCategory') || '\u2014'],
+        ['Make / Model', data.get('makeModel') || '\u2014'],
+        ['Sourcing Tier', TIER_FEES[formState.tier].label.replace('Our Sourcing Fee ', '')],
+        ['Wholesale Hammer Target', fmtCAD(Math.max(0, parseFloat(hammerInput.value) || 0))],
+        ['Live Estimated Total', document.getElementById('recGrandTotal').textContent],
+        ['Estimated Savings vs. Retail', document.getElementById('recSavings').textContent],
+      ];
+      rows.forEach(([label, value]) => {
+        const row = document.createElement('div');
+        row.className = 'flex justify-between gap-4 border-b hairline pb-2';
+        row.innerHTML = '<dt class="text-gray-500">' + label + '</dt><dd class="text-gray-200 font-medium text-right">' + value + '</dd>';
+        summary.appendChild(row);
+      });
+
+      formCard.classList.add('hidden');
+      confirmCard.classList.remove('hidden');
+      lucide.createIcons();
+      confirmCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return false;
+    }
+  </script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Request Sourcing | Live Estimate | Innovative Auto Sourcing</title>
+  <meta name="description" content="Configure your target vehicle, sourcing tier, and payment method to see a live, itemized open-book estimate before you submit your sourcing request." />
+  <link rel="icon" href="/assets/logo-favicon.png" type="image/png" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Innovative Auto Sourcing",
+    "alternateName": "Innovative Auto Sourcing Incorporated",
+    "description": "Ontario wholesale vehicle dealership serving the Greater Toronto Area. We acquire client-specified work trucks, cargo vans, and executive vehicles at closed dealer-only auctions (OPENLANE, Manheim, EBlock) into our own dealer inventory, then resell to the client in a separate, disclosed transaction at auction cost plus a flat sourcing fee, with a fully itemized, open-book invoice.",
+    "url": "https://innovativeautosourcing.ca",
+    "telephone": "+1-416-938-1933",
+    "email": "sourcing@innovativeautosourcing.ca",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Toronto",
+      "addressRegion": "ON",
+      "addressCountry": "CA"
+    },
+    "areaServed": ["Toronto", "Etobicoke", "Mississauga", "Brampton", "Vaughan", "Markham", "Oakville"],
+    "priceRange": "$$",
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "opens": "09:00",
+      "closes": "18:00"
+    },
+    "makesOffer": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Core Passenger Sourcing",
           "description": "Sedans, hatchbacks, and compact/mid-size SUVs acquired at closed dealer-only auctions into our own inventory and resold to the client with a fully itemized, open-book invoice -- no dealer lot markup."
         },
         "price": "1500.00",
