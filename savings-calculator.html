@@ -12,7 +12,7 @@
     "@type": "ProfessionalService",
     "name": "Innovative Auto Sourcing",
     "alternateName": "Innovative Auto Sourcing Incorporated",
-    "description": "Ontario wholesale vehicle dealership serving the Greater Toronto Area. We acquire client-specified work trucks, cargo vans, and executive vehicles at closed dealer-only auctions (OPENLANE, Manheim, EBlock) into our own dealer inventory, then resell to the client in a separate, disclosed transaction at auction cost plus a flat sourcing fee, with a fully itemized, open-book invoice.",
+    "description": "Closed dealer-lane vehicle sourcing agency serving the Greater Toronto Area. We proxy-bid client-specified work trucks, cargo vans, and executive vehicles inside licensed dealer-only auctions (OPENLANE, Manheim, EBlock) for a flat sourcing fee, with a fully itemized, open-book invoice.",
     "url": "https://innovativeautosourcing.ca",
     "telephone": "+1-416-938-1933",
     "email": "sourcing@innovativeautosourcing.ca",
@@ -36,7 +36,7 @@
         "itemOffered": {
           "@type": "Service",
           "name": "Core Passenger Sourcing",
-          "description": "Flat-fee wholesale acquisition inside closed dealer-only auctions for sedans, hatchbacks, and compact/mid-size SUVs, purchased into our dealer inventory and resold to the client. Client receives the raw auction invoice plus a fully itemized, open-book breakdown -- no dealer lot markup."
+          "description": "Flat-fee proxy bidding inside closed dealer-only auctions for sedans, hatchbacks, and compact/mid-size SUVs. Client receives the raw auction invoice plus a fully itemized, open-book breakdown -- no dealer lot markup."
         },
         "price": "1500.00",
         "priceCurrency": "CAD"
@@ -46,7 +46,7 @@
         "itemOffered": {
           "@type": "Service",
           "name": "Commercial Van & Heavy-Duty Work Truck Sourcing",
-          "description": "Flat-fee wholesale acquisition for cargo vans (Ford Transit, Ram ProMaster) and heavy-duty pickups (F-250/F-350, Silverado 2500/3500HD, Ram 2500/3500) inside closed dealer-only auctions, purchased into our dealer inventory with fleet-grade reconditioning audit before resale."
+          "description": "Flat-fee proxy bidding for cargo vans (Ford Transit, Ram ProMaster) and heavy-duty pickups (F-250/F-350, Silverado 2500/3500HD, Ram 2500/3500) inside closed dealer-only auctions, with fleet-grade reconditioning audit."
         },
         "price": "2250.00",
         "priceCurrency": "CAD"
@@ -64,7 +64,7 @@
     ]
   }
   </script>
-
+  
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
@@ -291,7 +291,6 @@
         <a href="/work-trucks.html" class="nav-link">Work Trucks</a>
         <a href="/cargo-vans.html" class="nav-link">Cargo Vans</a>
         <a href="/how-it-works.html" class="nav-link">How It Works</a>
-        <a href="/learn.html" class="nav-link">Learn</a>
         <a href="/savings-calculator.html" class="nav-link nav-link-active">Savings Calculator</a>
         <a href="/extended-warranty.html" class="nav-link">Warranty</a>
         </nav>
@@ -316,7 +315,6 @@
           <a href="/work-trucks.html" class="mobile-nav-link">Work Trucks</a>
           <a href="/cargo-vans.html" class="mobile-nav-link">Cargo Vans</a>
           <a href="/how-it-works.html" class="mobile-nav-link">How It Works</a>
-          <a href="/learn.html" class="mobile-nav-link">Learn</a>
           <a href="/savings-calculator.html" class="mobile-nav-link mobile-nav-link-active">Savings Calculator</a>
           <a href="/extended-warranty.html" class="mobile-nav-link">Warranty</a>
           <a href="/request-sourcing.html" class="mobile-nav-link">Request Sourcing</a>
@@ -383,7 +381,44 @@
       .summary-text h3 { font-family: 'Montserrat', sans-serif; font-size: 2rem; color: #E8CA6A; margin: 0.25rem 0; font-weight: 800; }
       .summary-text p { color: #9CA3AF; font-size: 0.8125rem; margin: 0; font-family: 'Inter', sans-serif; }
       @media (max-width: 768px) { .calc-summary-banner { flex-direction: column; text-align: center; } }
+
+      /* Top-pinned live savings banner -- shown before any inputs so mobile visitors
+         see the payoff number immediately, without scrolling past sliders first. */
+      .calc-top-banner { background: linear-gradient(135deg, rgba(212,175,55,0.16), rgba(30,136,229,0.12)); border: 2px solid rgba(212,175,55,0.5); border-radius: 1.25rem; padding: 1.5rem; text-align: center; margin-bottom: 1.5rem; box-shadow: 0 20px 50px -20px rgba(212,175,55,0.35); }
+      @media (min-width: 1024px) { .calc-top-banner { padding: 2rem 2rem 1.75rem; } }
+      .calc-top-banner .eyebrow { font-family: 'Montserrat', sans-serif; font-size: 0.75rem; font-weight: 800; letter-spacing: 0.08em; color: #4FA3EE; }
+      .calc-top-banner .big-savings { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 2.5rem; color: #E8CA6A; margin: 0.35rem 0 0.15rem; line-height: 1.05; }
+      @media (min-width: 640px) { .calc-top-banner .big-savings { font-size: 3rem; } }
+      .calc-top-banner .caption { color: #9CA3AF; font-size: 0.8125rem; font-family: 'Inter', sans-serif; margin: 0; }
+      .calc-top-secondary { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid rgba(212,175,55,0.25); text-align: left; }
+      .calc-top-secondary .stat-label { font-size: 0.6875rem; color: #9CA3AF; text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 2px; font-family: 'Montserrat', sans-serif; }
+      .calc-top-secondary .stat-val { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.9375rem; }
+      .calc-top-secondary .stat-val.retail { color: #F87171; }
+      .calc-top-secondary .stat-val.wholesale { color: #4FA3EE; }
+      .calc-top-cta { display: block; margin-top: 1.5rem; }
+      .calc-section-divider { display: flex; align-items: center; gap: 0.75rem; margin: 2rem 0 1.25rem; font-family: 'Montserrat', sans-serif; font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.08em; color: #6B7280; text-transform: uppercase; }
+      .calc-section-divider::before, .calc-section-divider::after { content: ''; flex: 1; height: 1px; background: rgba(212,175,55,0.2); }
     </style>
+
+    <!-- TOP-PINNED LIVE SAVINGS RESULT (mobile: visible before any scrolling/input) -->
+    <div class="calc-top-banner">
+      <span class="eyebrow">⚡ YOUR ESTIMATED WHOLESALE SAVINGS</span>
+      <div class="big-savings" id="displayNetSavingsTop">$4,292.87 CAD</div>
+      <p class="caption">vs. buying the same vehicle at a traditional retail dealer lot</p>
+      <div class="calc-top-secondary">
+        <div>
+          <span class="stat-label">IAS Wholesale Total</span>
+          <span class="stat-val wholesale" id="topWholesaleTotal">$23,949.46</span>
+        </div>
+        <div style="text-align: right;">
+          <span class="stat-label">Retail Dealer Total</span>
+          <span class="stat-val retail" id="topRetailTotal">$28,242.33</span>
+        </div>
+      </div>
+      <a href="/request-sourcing.html" id="lockInBtnTop" class="btn-gold calc-top-cta px-8 py-4 rounded-lg font-display tracking-wide text-center">Start Sourcing Order &rarr;</a>
+    </div>
+
+    <div class="calc-section-divider">Adjust Your Target Parameters</div>
 
     <div class="calc-controls-card">
       <div class="slider-header">
@@ -520,9 +555,8 @@
 
     <div class="calc-summary-banner">
       <div class="summary-text">
-        <span class="sub-title">TOTAL ESTIMATED SAVINGS</span>
-        <h3 id="displayNetSavings">$4,292.87 CAD</h3>
-        <p>Direct out-of-pocket cash saved by eliminating retail dealership markups.</p>
+        <span class="sub-title">LIKE WHAT YOU SEE?</span>
+        <p>Direct out-of-pocket cash saved by eliminating retail dealership markups &mdash; see the full number above.</p>
       </div>
       <a href="/request-sourcing.html" id="lockInBtn" class="btn-gold inline-block px-8 py-4 rounded-lg font-display tracking-wide whitespace-nowrap">Start Sourcing Order &rarr;</a>
     </div>
@@ -563,8 +597,6 @@
             <li><a href="/work-trucks.html" class="hover:text-cobalt-light transition-colors">Work Trucks</a></li>
             <li><a href="/cargo-vans.html" class="hover:text-cobalt-light transition-colors">Cargo Vans</a></li>
             <li><a href="/how-it-works.html" class="hover:text-cobalt-light transition-colors">How It Works</a></li>
-            <li><a href="/learn.html" class="hover:text-cobalt-light transition-colors">Learn</a></li>
-            <li><a href="/loan-equity-simulator.html" class="hover:text-cobalt-light transition-colors">Loan Equity Simulator</a></li>
             <li><a href="/savings-calculator.html" class="hover:text-cobalt-light transition-colors">Savings Calculator</a></li>
             <li><a href="/extended-warranty.html" class="hover:text-cobalt-light transition-colors">Extended Warranty</a></li>
             <li><a href="/request-sourcing.html" class="hover:text-cobalt-light transition-colors">Request Sourcing</a></li>
@@ -587,9 +619,8 @@
             Innovative Auto Sourcing is a registered trade name of Innovative Auto Sourcing
             Incorporated. <span class="text-gray-400">OMVIC General Dealer registration in progress
             &mdash; the company is not yet trading retail vehicles.</span> All wholesale acquisitions
-            are purchased into the dealership's own name through licensed dealer-only auction channels
-            (OPENLANE, Manheim, EBlock) and resold to the client in a separate, disclosed transaction,
-            in accordance with applicable
+            are conducted through licensed dealer-only auction channels (OPENLANE, Manheim, EBlock) on
+            behalf of the client as sourcing agent, in accordance with applicable
             <span class="text-gray-400">Ontario Motor Vehicle Industry Council (OMVIC)</span> Code of
             Ethics and Consumer Protection Ontario guidelines.
           </p>
@@ -647,6 +678,7 @@
     const btnWarnNo = document.getElementById('btnWarnNo');
     const btnWarnYes = document.getElementById('btnWarnYes');
     const lockInBtn = document.getElementById('lockInBtn');
+    const lockInBtnTop = document.getElementById('lockInBtnTop');
 
     const fmtMoney = (n) => '$' + n.toLocaleString('en-CA', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
@@ -738,10 +770,14 @@
       document.getElementById('retailFinanceInterest').textContent = '+' + fmtMoney(retailFinanceInterest);
       document.getElementById('retailMonthlyPayment').textContent = fmtMoney(retailMonthly) + '/mo';
 
-      document.getElementById('displayNetSavings').textContent = fmtMoney(netSavings) + ' CAD';
+      document.getElementById('displayNetSavingsTop').textContent = fmtMoney(netSavings) + ' CAD';
+      document.getElementById('topWholesaleTotal').textContent = fmtMoney(wholesaleTotal);
+      document.getElementById('topRetailTotal').textContent = fmtMoney(retailTotal);
 
       const params = new URLSearchParams({ hammer: Math.round(hammer), payment: state.paymentMethod, warranty: state.hasWarranty ? 1 : 0, savings: Math.round(netSavings) });
-      lockInBtn.href = '/request-sourcing.html?' + params.toString();
+      const lockInHref = '/request-sourcing.html?' + params.toString();
+      lockInBtn.href = lockInHref;
+      lockInBtnTop.href = lockInHref;
     }
 
     hammerSlider.addEventListener('input', recalc);
