@@ -236,6 +236,29 @@
       .comp-table td:last-child, .comp-table th:last-child { text-align: right; }
     </style>
 
+    <!-- YOUR RESULTS (pinned to top) -->
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+      <div class="metric-card">
+        <div class="metric-label">Monthly Payment</div>
+        <div class="metric-value" id="mMonthly">$0</div>
+        <div class="metric-sub" id="mBiweekly">$0 bi-weekly</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Total Lifetime Interest</div>
+        <div class="metric-value" id="mInterest">$0</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Total All-In Cost</div>
+        <div class="metric-value" id="mAllIn">$0</div>
+        <div class="metric-sub">Down payment + principal + interest</div>
+      </div>
+      <div class="metric-card flex flex-col justify-center">
+        <div class="metric-label">Equity Status</div>
+        <span id="equityBadge" class="safe">Calculating&hellip;</span>
+      </div>
+    </div>
+    <p class="text-xs text-gray-500 font-body -mt-3 mb-6">Adjust the sliders below and these numbers update instantly.</p>
+
     <!-- INPUTS -->
     <div class="sim-card space-y-6">
       <div>
@@ -255,7 +278,7 @@
         <input type="range" id="aprSlider" class="gold-slider w-full" min="3.99" max="29.99" step="0.1" value="7.99">
         <div class="sim-scale"><span>3.99%</span><span>29.99%</span></div>
         <div class="flex flex-wrap gap-2 mt-3">
-          <button type="button" class="preset-btn active" data-apr="7.99">Prime (7.99%)</button>
+          <button type="button" class="preset-btn active" data-apr="7.99">Excellent Credit (7.99%)</button>
           <button type="button" class="preset-btn" data-apr="12.49">Near-Prime (12.49%)</button>
           <button type="button" class="preset-btn" data-apr="21.99">Subprime (21.99%)</button>
           <button type="button" class="preset-btn" data-apr="29.99">Deep Subprime (29.99%)</button>
@@ -280,28 +303,6 @@
           <p class="text-sm text-gray-200 font-body font-medium">Simulate 24-Month Lump-Sum Payoff</p>
           <p class="text-xs text-gray-500 font-body mt-0.5">Open loan, no prepayment penalty &mdash; confirm this feature with your own lender before assuming it applies to your contract.</p>
         </div>
-      </div>
-    </div>
-
-    <!-- TOP METRIC CARDS -->
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
-      <div class="metric-card">
-        <div class="metric-label">Monthly Payment</div>
-        <div class="metric-value" id="mMonthly">$0</div>
-        <div class="metric-sub" id="mBiweekly">$0 bi-weekly</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-label">Total Lifetime Interest</div>
-        <div class="metric-value" id="mInterest">$0</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-label">Total All-In Cost</div>
-        <div class="metric-value" id="mAllIn">$0</div>
-        <div class="metric-sub">Down payment + principal + interest</div>
-      </div>
-      <div class="metric-card flex flex-col justify-center">
-        <div class="metric-label">Equity Status</div>
-        <span id="equityBadge" class="safe">Calculating&hellip;</span>
       </div>
     </div>
 
