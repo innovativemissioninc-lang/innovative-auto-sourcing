@@ -261,6 +261,29 @@
     </div>
     <p class="text-xs text-gray-500 font-body -mt-3 mb-6">Adjust the sliders below and these numbers update instantly.</p>
 
+    <!-- COMPARISON BOX -->
+    <div class="sim-card mb-6 panel-gold">
+      <h3 class="font-display font-bold text-lg text-gray-100 mb-1">Loan Structure Comparison: 48-Mo Open Term vs. 72-Mo Dealer-Lot Standard</h3>
+      <p class="text-xs text-gray-500 font-body mb-4">Same vehicle price, down payment, and rate &mdash; only the term changes. This compares loan structures in general; Innovative Auto Sourcing is not a lender and does not set these terms.</p>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm font-body comp-table">
+          <thead>
+            <tr class="text-left text-gray-500 text-xs tracking-widest border-b hairline">
+              <th class="py-2">METRIC</th>
+              <th>48-MO TERM</th>
+              <th>72-MO TERM</th>
+              <th>DIFFERENCE</th>
+            </tr>
+          </thead>
+          <tbody class="text-gray-200">
+            <tr><td>Monthly Payment</td><td id="cmp48Monthly">&mdash;</td><td id="cmp72Monthly">&mdash;</td><td class="text-gold-light" id="cmpMonthlyDiff">&mdash;</td></tr>
+            <tr><td>Total Interest Paid</td><td id="cmp48Interest">&mdash;</td><td id="cmp72Interest">&mdash;</td><td class="text-green-400" id="cmpInterestDiff">&mdash;</td></tr>
+            <tr><td>Loan Payoff Timeline</td><td>48 months</td><td>72 months</td><td class="text-cobalt-light">24 months earlier</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
     <!-- INPUTS -->
     <div class="sim-card space-y-6">
       <div>
@@ -341,29 +364,6 @@
           <div class="metric-label">Future Interest Eliminated</div>
           <div class="metric-value text-green-400" id="epInterestEliminated">$0</div>
         </div>
-      </div>
-    </div>
-
-    <!-- COMPARISON BOX -->
-    <div class="sim-card mt-6 panel-gold">
-      <h3 class="font-display font-bold text-lg text-gray-100 mb-1">Loan Structure Comparison: 48-Mo Open Term vs. 72-Mo Dealer-Lot Standard</h3>
-      <p class="text-xs text-gray-500 font-body mb-4">Same vehicle price, down payment, and rate &mdash; only the term changes. This compares loan structures in general; Innovative Auto Sourcing is not a lender and does not set these terms.</p>
-      <div class="overflow-x-auto">
-        <table class="w-full text-sm font-body comp-table">
-          <thead>
-            <tr class="text-left text-gray-500 text-xs tracking-widest border-b hairline">
-              <th class="py-2">METRIC</th>
-              <th>48-MO TERM</th>
-              <th>72-MO TERM</th>
-              <th>DIFFERENCE</th>
-            </tr>
-          </thead>
-          <tbody class="text-gray-200">
-            <tr><td>Monthly Payment</td><td id="cmp48Monthly">&mdash;</td><td id="cmp72Monthly">&mdash;</td><td class="text-gold-light" id="cmpMonthlyDiff">&mdash;</td></tr>
-            <tr><td>Total Interest Paid</td><td id="cmp48Interest">&mdash;</td><td id="cmp72Interest">&mdash;</td><td class="text-green-400" id="cmpInterestDiff">&mdash;</td></tr>
-            <tr><td>Loan Payoff Timeline</td><td>48 months</td><td>72 months</td><td class="text-cobalt-light">24 months earlier</td></tr>
-          </tbody>
-        </table>
       </div>
     </div>
 
