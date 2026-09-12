@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The GTA Car Buyer's Defense Hub | Fee Auditor, Equity Simulator &amp; Theft Risk Lookup | Innovative Auto Sourcing</title>
+  <meta name="description" content="Three free interactive tools for GTA car buyers: an OMVIC all-in pricing fee auditor, a negative equity breakeven simulator, and a high-theft insurance risk lookup." />
+  <link rel="icon" href="/assets/logo-favicon.png" type="image/png" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Innovative Auto Sourcing",
+    "alternateName": "Innovative Auto Sourcing Incorporated",
+    "description": "Ontario wholesale vehicle dealership serving the Greater Toronto Area. We acquire client-specified work trucks, cargo vans, and executive vehicles at closed dealer-only auctions (OPENLANE, Manheim, EBlock) into our own dealer inventory, then resell to the client in a separate, disclosed transaction at auction cost plus a flat sourcing fee, with a fully itemized, open-book invoice.",
+    "url": "https://innovativeautosourcing.ca",
+    "telephone": "+1-416-938-1933",
+    "email": "sourcing@innovativeautosourcing.ca",
+    "address": { "@type": "PostalAddress", "addressLocality": "Toronto", "addressRegion": "ON", "addressCountry": "CA" },
+    "areaServed": ["Toronto", "Etobicoke", "Mississauga", "Brampton", "Vaughan", "Markham", "Oakville"],
+    "priceRange": "$$"
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            obsidian: { DEFAULT: '#070A12', light: '#0D111C', lighter: '#141A28', panel: '#10141F' },
+            gold: { DEFAULT: '#D4AF37', light: '#E8CA6A', dark: '#A9862A' },
+            cobalt: { DEFAULT: '#1E88E5', light: '#4FA3EE', dark: '#155DA1' },
+          },
+          fontFamily: { display: ['Montserrat', 'sans-serif'], body: ['Inter', 'sans-serif'] },
+          boxShadow: {
+            gold: '0 0 0 1px rgba(212,175,55,0.35), 0 8px 30px -8px rgba(212,175,55,0.25)',
+            'gold-lg': '0 0 0 1px rgba(212,175,55,0.4), 0 20px 60px -12px rgba(212,175,55,0.35)',
+            cobalt: '0 0 0 1px rgba(30,136,229,0.5), 0 8px 24px -6px rgba(30,136,229,0.45)',
+            panel: 'inset 0 1px 0 0 rgba(255,255,255,0.04), 0 20px 50px -20px rgba(0,0,0,0.8)',
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: #070A12;
+      background-image:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(30,136,229,0.10), transparent),
+        radial-gradient(ellipse 60% 40% at 100% 0%, rgba(212,175,55,0.07), transparent);
+      font-family: 'Inter', sans-serif;
+      color: #E7E9EE;
+    }
+    h1, h2, h3, h4, .font-display { font-family: 'Montserrat', sans-serif; }
+    .panel {
+      background: linear-gradient(180deg, rgba(20,26,40,0.85) 0%, rgba(13,17,28,0.9) 100%);
+      border: 1px solid rgba(212,175,55,0.18);
+      border-radius: 1rem;
+      box-shadow: inset 0 1px 0 0 rgba(255,255,255,0.05), inset 0 0 0 1px rgba(0,0,0,0.4), 0 20px 50px -20px rgba(0,0,0,0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .panel-gold { border: 1px solid rgba(212,175,55,0.45); box-shadow: 0 0 0 1px rgba(212,175,55,0.18), inset 0 1px 0 0 rgba(255,255,255,0.06), 0 20px 50px -18px rgba(212,175,55,0.25); }
+    .panel-cobalt { border: 1px solid rgba(30,136,229,0.55); box-shadow: 0 0 0 1px rgba(30,136,229,0.25), inset 0 1px 0 0 rgba(255,255,255,0.06), 0 20px 50px -18px rgba(30,136,229,0.35); }
+    .gold-divider { background: linear-gradient(90deg, transparent, rgba(212,175,55,0.6), transparent); height: 1px; }
+    .btn-gold {
+      background: linear-gradient(180deg, #E8CA6A 0%, #D4AF37 45%, #A9862A 100%);
+      color: #0B0D14; border: 1px solid rgba(255,255,255,0.25);
+      box-shadow: 0 8px 24px -6px rgba(212,175,55,0.5), inset 0 1px 0 0 rgba(255,255,255,0.5);
+      font-weight: 700; transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+    }
+    .btn-gold:hover { filter: brightness(1.08); transform: translateY(-1px); box-shadow: 0 12px 30px -6px rgba(212,175,55,0.6), inset 0 1px 0 0 rgba(255,255,255,0.6); }
+    .btn-outline-gold { background: rgba(212,175,55,0.06); color: #E8CA6A; border: 1px solid rgba(212,175,55,0.55); transition: all 0.15s ease; }
+    .btn-outline-gold:hover { background: rgba(212,175,55,0.14); border-color: #E8CA6A; }
+    .btn-cobalt {
+      background: linear-gradient(180deg, #4FA3EE 0%, #1E88E5 60%, #155DA1 100%);
+      color: #fff; border: 1px solid rgba(255,255,255,0.2);
+      box-shadow: 0 8px 24px -6px rgba(30,136,229,0.55), inset 0 1px 0 0 rgba(255,255,255,0.35);
+      transition: transform 0.15s ease, filter 0.15s ease;
+    }
+    .btn-cobalt:hover { filter: brightness(1.08); transform: translateY(-1px); }
+    .nav-link { position: relative; color: #B7BDC9; font-weight: 500; font-size: 0.875rem; letter-spacing: 0.02em; padding: 0.4rem 0; transition: color 0.15s ease; }
+    .nav-link:hover { color: #E8CA6A; }
+    .nav-link-active { color: #4FA3EE; }
+    .nav-link-active::after { content: ''; position: absolute; left: 0; right: 0; bottom: -4px; height: 2px; background: #1E88E5; box-shadow: 0 0 8px rgba(30,136,229,0.8); border-radius: 2px; }
+    .mobile-nav-link { display: block; padding: 0.85rem 1.25rem; color: #C9CEDA; font-weight: 500; border-bottom: 1px solid rgba(212,175,55,0.1); }
+    .mobile-nav-link-active { color: #4FA3EE; background: rgba(30,136,229,0.08); }
+    .metal-text { background: linear-gradient(180deg, #F4E7BE 0%, #D4AF37 45%, #9C7A26 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .chrome-text { background: linear-gradient(180deg, #F3F5F9 0%, #B9C2D0 45%, #7C8698 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .badge-cobalt { background: rgba(30,136,229,0.12); border: 1px solid rgba(30,136,229,0.5); color: #7DB8F4; }
+    .badge-gold { background: rgba(212,175,55,0.1); border: 1px solid rgba(212,175,55,0.45); color: #E8CA6A; }
+    .badge-green { background: rgba(74,222,128,0.1); border: 1px solid rgba(74,222,128,0.4); color: #4ade80; }
+    .badge-yellow { background: rgba(234,179,8,0.12); border: 1px solid rgba(234,179,8,0.45); color: #FACC15; }
+    .badge-red { background: rgba(244,63,94,0.12); border: 1px solid rgba(244,63,94,0.5); color: #FB7185; }
+    .hairline { border-color: rgba(212,175,55,0.15); }
+    ::selection { background: rgba(212,175,55,0.35); color: #fff; }
+    .glow-gold { filter: drop-shadow(0 0 18px rgba(212,175,55,0.35)); }
+    #mobile-menu { transition: max-height 0.3s ease, opacity 0.3s ease; }
+    .cat-badge-finance { background: rgba(212,175,55,0.1); border: 1px solid rgba(212,175,55,0.45); color: #E8CA6A; }
+    .cat-badge-danger { background: rgba(244,63,94,0.1); border: 1px solid rgba(244,63,94,0.4); color: #FB7185; }
+    .cat-badge-market { background: rgba(30,136,229,0.12); border: 1px solid rgba(30,136,229,0.5); color: #7DB8F4; }
+    .cat-badge-deal { background: rgba(74,222,128,0.1); border: 1px solid rgba(74,222,128,0.4); color: #4ade80; }
+
+    input[type=range].gold-slider {
+      -webkit-appearance: none; appearance: none; height: 6px; border-radius: 999px;
+      background: linear-gradient(90deg, #155DA1, #1E88E5 40%, #D4AF37 100%); outline: none;
+    }
+    input[type=range].gold-slider::-webkit-slider-thumb {
+      -webkit-appearance: none; appearance: none; width: 22px; height: 22px; border-radius: 50%;
+      background: linear-gradient(180deg,#E8CA6A,#A9862A); border: 2px solid #0B0D14;
+      box-shadow: 0 0 0 4px rgba(212,175,55,0.25), 0 4px 10px rgba(0,0,0,0.5); cursor: pointer; margin-top: -8px;
+    }
+    input[type=range].gold-slider::-moz-range-thumb {
+      width: 22px; height: 22px; border-radius: 50%;
+      background: linear-gradient(180deg,#E8CA6A,#A9862A); border: 2px solid #0B0D14;
+      box-shadow: 0 0 0 4px rgba(212,175,55,0.25), 0 4px 10px rgba(0,0,0,0.5); cursor: pointer;
+    }
+
+    .tool-nav-card { transition: transform 0.15s ease, border-color 0.15s ease; }
+    .tool-nav-card:hover { transform: translateY(-2px); }
+    .field-label { display:block; font-size: 0.7rem; letter-spacing: 0.08em; color: #9AA2B3; font-weight: 600; margin-bottom: 0.4rem; text-transform: uppercase; }
+    .field-input {
+      width: 100%; background: rgba(7,10,18,0.6); border: 1px solid rgba(212,175,55,0.25); border-radius: 0.6rem;
+      padding: 0.65rem 0.85rem; color: #E7E9EE; font-family: 'Inter', sans-serif; font-size: 0.9rem;
+    }
+    .field-input:focus { outline: none; border-color: rgba(79,163,238,0.7); box-shadow: 0 0 0 3px rgba(30,136,229,0.2); }
+    .fee-row { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 0.6rem 0; border-bottom: 1px solid rgba(212,175,55,0.08); }
+    .fee-row:last-child { border-bottom: none; }
+    .fee-check { width: 18px; height: 18px; accent-color: #D4AF37; cursor: pointer; }
+    .fee-amt { width: 100px; background: rgba(7,10,18,0.6); border: 1px solid rgba(212,175,55,0.25); border-radius: 0.5rem; padding: 0.35rem 0.5rem; color: #E7E9EE; font-size: 0.85rem; text-align: right; }
+    .result-line { display:flex; align-items:center; justify-content:space-between; gap: 0.75rem; padding: 0.55rem 0; border-bottom: 1px dashed rgba(255,255,255,0.08); font-size: 0.85rem; }
+    .result-line:last-child { border-bottom: none; }
+    .status-dot { display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:6px; }
+    .toggle-switch { position: relative; width: 46px; height: 26px; border-radius: 999px; background: rgba(255,255,255,0.12); border: 1px solid rgba(212,175,55,0.3); cursor: pointer; transition: background 0.2s ease; flex-shrink: 0; }
+    .toggle-switch.on { background: rgba(30,136,229,0.55); }
+    .toggle-knob { position:absolute; top:2px; left:2px; width:20px; height:20px; border-radius:50%; background:#E8CA6A; transition: left 0.2s ease; }
+    .toggle-switch.on .toggle-knob { left: 22px; }
+    .dropzone { border: 2px dashed rgba(212,175,55,0.35); border-radius: 0.75rem; padding: 1.75rem 1rem; text-align:center; cursor:pointer; transition: border-color .15s ease, background .15s ease; }
+    .dropzone:hover, .dropzone.drag { border-color: rgba(79,163,238,0.7); background: rgba(30,136,229,0.05); }
+  </style>
+</head>
+<body class="antialiased">
+
+  <!-- ================= HEADER ================= -->
+  <header class="sticky top-0 z-50 border-b hairline bg-obsidian/85 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        <a href="/index.html" class="flex items-center gap-3 group">
+          <img src="/assets/logo-icon.png" alt="Innovative Auto Sourcing shield logo" class="h-12 w-auto object-contain glow-gold" />
+          <div class="leading-tight">
+            <div class="font-display font-extrabold tracking-wide text-sm lg:text-base">
+              <span class="chrome-text">INNOVATIVE</span> <span class="metal-text">AUTO SOURCING</span>
+            </div>
+            <div class="text-[10px] lg:text-xs tracking-[0.25em] text-cobalt-light/80 font-body">GREATER TORONTO AREA</div>
+          </div>
+        </a>
+
+        <nav class="hidden lg:flex items-center gap-8">
+        <a href="/index.html" class="nav-link">Home</a>
+        <a href="/work-trucks.html" class="nav-link">Work Trucks</a>
+        <a href="/cargo-vans.html" class="nav-link">Cargo Vans</a>
+        <a href="/how-it-works.html" class="nav-link">How It Works</a>
+        <a href="/learn.html" class="nav-link nav-link-active">Learn</a>
+        <a href="/faq.html" class="nav-link">FAQ</a>
+        <a href="/savings-calculator.html" class="nav-link">Savings Calculator</a>
+        <a href="/extended-warranty.html" class="nav-link">Warranty</a>
+        </nav>
+
+        <div class="hidden lg:flex items-center gap-4">
+          <a href="tel:+14169381933" class="flex items-center gap-2 text-sm text-gray-300 hover:text-gold-light transition-colors">
+            <i data-lucide="phone" class="w-4 h-4 text-gold"></i>
+            <span class="font-body">(416) 938-1933</span>
+          </a>
+          <a href="https://wa.me/14169381933" target="_blank" rel="noopener" aria-label="Chat on WhatsApp" class="flex items-center justify-center w-9 h-9 rounded-lg text-green-400 hover:text-green-300 hover:bg-green-400/10 transition-colors">
+            <svg viewBox="0 0 24 24" class="w-4 h-4" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"></path><path d="M12.004 2c-5.522 0-10 4.478-10 10 0 1.765.464 3.489 1.345 5.003L2 22l5.13-1.346A9.947 9.947 0 0 0 12.004 22c5.523 0 10-4.478 10-10s-4.477-10-10-10zm0 18.164a8.13 8.13 0 0 1-4.146-1.135l-.297-.176-3.048.8.813-2.97-.193-.306a8.128 8.128 0 0 1-1.245-4.377c0-4.495 3.658-8.153 8.153-8.153 4.494 0 8.152 3.658 8.152 8.153 0 4.494-3.658 8.164-8.152 8.164z"></path></svg>
+          </a>
+          <a href="/request-sourcing.html" class="btn-gold px-5 py-2.5 rounded-lg text-sm font-display tracking-wide">Request Sourcing</a>
+        </div>
+
+        <button id="mobile-menu-btn" class="lg:hidden p-2 text-gold" aria-label="Toggle menu">
+          <i data-lucide="menu" class="w-7 h-7"></i>
+        </button>
+      </div>
+    </div>
+
+    <div id="mobile-menu" class="lg:hidden overflow-hidden max-h-0 opacity-0 border-t hairline bg-obsidian-light/95">
+      <nav class="flex flex-col">
+          <a href="/index.html" class="mobile-nav-link">Home</a>
+          <a href="/work-trucks.html" class="mobile-nav-link">Work Trucks</a>
+          <a href="/cargo-vans.html" class="mobile-nav-link">Cargo Vans</a>
+          <a href="/how-it-works.html" class="mobile-nav-link">How It Works</a>
+          <a href="/learn.html" class="mobile-nav-link mobile-nav-link-active">Learn</a>
+          <a href="/faq.html" class="mobile-nav-link">FAQ</a>
+          <a href="/savings-calculator.html" class="mobile-nav-link">Savings Calculator</a>
+          <a href="/extended-warranty.html" class="mobile-nav-link">Warranty</a>
+      </nav>
+      <div class="p-4 border-t hairline flex flex-col gap-3">
+        <a href="tel:+14169381933" class="flex items-center gap-2 text-sm text-gray-300">
+          <i data-lucide="phone" class="w-4 h-4 text-gold"></i> (416) 938-1933
+        </a>
+        <a href="https://wa.me/14169381933" target="_blank" rel="noopener" class="flex items-center gap-2 text-sm text-gray-300">
+          <svg viewBox="0 0 24 24" class="w-4 h-4" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"></path><path d="M12.004 2c-5.522 0-10 4.478-10 10 0 1.765.464 3.489 1.345 5.003L2 22l5.13-1.346A9.947 9.947 0 0 0 12.004 22c5.523 0 10-4.478 10-10s-4.477-10-10-10zm0 18.164a8.13 8.13 0 0 1-4.146-1.135l-.297-.176-3.048.8.813-2.97-.193-.306a8.128 8.128 0 0 1-1.245-4.377c0-4.495 3.658-8.153 8.153-8.153 4.494 0 8.152 3.658 8.152 8.153 0 4.494-3.658 8.164-8.152 8.164z"></path></svg> WhatsApp Us
+        </a>
+        <a href="/request-sourcing.html" class="btn-gold px-5 py-3 rounded-lg text-sm text-center font-display tracking-wide">Request Sourcing</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= HERO ================= -->
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0">
+      <div class="absolute inset-0 bg-gradient-to-b from-obsidian/70 via-obsidian/90 to-obsidian"></div>
+    </div>
+    <div class="relative max-w-4xl mx-auto px-5 lg:px-8 pt-16 pb-10 lg:pt-24 lg:pb-14 text-center">
+      <div class="inline-flex items-center gap-2 badge-gold rounded-full px-4 py-1.5 text-xs font-display tracking-widest mb-6">
+        <i data-lucide="shield-check" class="w-3.5 h-3.5"></i> FREE INTERACTIVE TOOLKIT
+      </div>
+      <h1 class="font-display font-black text-4xl sm:text-5xl leading-[1.05] mb-6 metal-text">The GTA Car Buyer's Defense Hub</h1>
+      <p class="text-lg text-gray-300 font-body leading-relaxed max-w-2xl mx-auto">
+        Three free tools to check a quote against Ontario law, see exactly when a loan turns from a debt
+        into an asset, and understand how your model choice affects your insurance bill &mdash; before you sign
+        anything, whether or not you ever buy through us.
+      </p>
+    </div>
+
+    <!-- Quick-jump tool cards -->
+    <div class="relative max-w-6xl mx-auto px-5 lg:px-8 pb-16">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <a href="#fee-auditor" class="tool-nav-card panel panel-gold rounded-xl p-6 flex flex-col">
+          <span class="badge-gold inline-flex items-center justify-center w-10 h-10 rounded-lg mb-4"><i data-lucide="receipt" class="w-5 h-5"></i></span>
+          <h3 class="font-display font-bold text-base text-gray-100 mb-2">Tool 1: Fee &amp; OMVIC Compliance Auditor</h3>
+          <p class="text-xs text-gray-500 font-body leading-relaxed flex-1">Paste a dealer's quote and see, line by line, which fees are legal add-ons and which have to already be in the advertised price.</p>
+          <span class="inline-flex items-center gap-1.5 text-gold-light text-xs font-display mt-4">Audit a Quote <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></span>
+        </a>
+        <a href="#equity-simulator" class="tool-nav-card panel panel-cobalt rounded-xl p-6 flex flex-col">
+          <span class="badge-cobalt inline-flex items-center justify-center w-10 h-10 rounded-lg mb-4"><i data-lucide="trending-down" class="w-5 h-5"></i></span>
+          <h3 class="font-display font-bold text-base text-gray-100 mb-2">Tool 2: Negative Equity &amp; Breakeven Simulator</h3>
+          <p class="text-xs text-gray-500 font-body leading-relaxed flex-1">Model your loan against real depreciation and find the exact month you stop owing more than the vehicle is worth.</p>
+          <span class="inline-flex items-center gap-1.5 text-cobalt-light text-xs font-display mt-4">Run the Simulation <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></span>
+        </a>
+        <a href="#theft-risk" class="tool-nav-card panel rounded-xl p-6 flex flex-col">
+          <span class="cat-badge-danger inline-flex items-center justify-center w-10 h-10 rounded-lg mb-4"><i data-lucide="shield-alert" class="w-5 h-5"></i></span>
+          <h3 class="font-display font-bold text-base text-gray-100 mb-2">Tool 3: High-Theft &amp; Insurance Risk Lookup</h3>
+          <p class="text-xs text-gray-500 font-body leading-relaxed flex-1">Check whether the segment you're shopping in tends to carry a higher theft-risk insurance surcharge in the GTA.</p>
+          <span class="inline-flex items-center gap-1.5 text-gray-300 text-xs font-display mt-4">Check Risk Tier <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TOOL 1: FEE AUDITOR ================= -->
+  <section id="fee-auditor" class="max-w-5xl mx-auto px-5 lg:px-8 pb-20 scroll-mt-24">
+    <div class="mb-8">
+      <div class="inline-flex items-center gap-2 badge-gold rounded-full px-3 py-1 text-[10px] font-display tracking-widest mb-3"><i data-lucide="receipt" class="w-3 h-3"></i>TOOL 1 &middot; OMVIC COMPLIANCE</div>
+      <h2 class="font-display font-extrabold text-2xl md:text-3xl chrome-text mb-2">GTA Dealership Quote &amp; Fee Auditor</h2>
+      <p class="text-gray-400 font-body text-sm max-w-2xl">
+        Under Ontario's Motor Vehicle Dealers Act, a registered dealer's advertised price already has to
+        include freight/PDI, admin and documentation fees, the OMVIC transaction fee, and any pre-installed
+        product the dealer requires. The <strong class="text-gray-300">only</strong> things legally added on
+        top are HST and government licensing costs tied to your specific transaction. Enter what a dealer
+        quoted you below to see exactly where it stands.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-6 items-start">
+      <!-- Inputs -->
+      <div class="panel rounded-xl p-6">
+        <div class="mb-5">
+          <label class="field-label" for="faPrice">Advertised / Sticker Price</label>
+          <input type="number" id="faPrice" class="field-input" value="28995" min="0" step="1" />
+        </div>
+
+        <p class="text-xs text-gray-500 font-body mb-3">Now check off any fee the dealer is charging <strong class="text-gray-400">on top of</strong> that advertised price:</p>
+
+        <div id="faFeeList" class="mb-2"></div>
+
+        <div class="gold-divider my-5"></div>
+
+        <p class="text-xs text-gray-500 font-body mb-3">These two are the only charges a dealer may legitimately add on top of the advertised price:</p>
+        <div class="fee-row">
+          <div class="flex items-center gap-3">
+            <i data-lucide="landmark" class="w-4 h-4 text-cobalt-light"></i>
+            <span class="text-sm text-gray-200">HST (13%)</span>
+          </div>
+          <span class="text-sm text-gray-400 font-body" id="faHstPreview">$0</span>
+        </div>
+        <div class="fee-row">
+          <div class="flex items-center gap-3">
+            <i data-lucide="id-card" class="w-4 h-4 text-cobalt-light"></i>
+            <span class="text-sm text-gray-200">Licensing / Plate Transfer</span>
+          </div>
+          <input type="number" id="faLicensing" class="fee-amt" value="59" min="0" step="1" />
+        </div>
+      </div>
+
+      <!-- Results -->
+      <div class="panel panel-gold rounded-xl p-6 lg:sticky lg:top-28">
+        <h3 class="font-display font-bold text-sm text-gray-200 mb-4 tracking-wide">AUDIT RESULT</h3>
+        <div id="faRedBanner" class="hidden rounded-lg badge-red px-4 py-3 text-sm font-display font-bold mb-4 flex items-start gap-2">
+          <i data-lucide="alert-triangle" class="w-4 h-4 mt-0.5 shrink-0"></i>
+          <span>Non-Compliant with OMVIC All-In Pricing &mdash; this dealer is adding fees on top of the advertised price that Ontario law says must already be included.</span>
+        </div>
+        <div id="faResultLines" class="mb-4"></div>
+        <div class="gold-divider my-4"></div>
+        <div class="flex items-center justify-between mb-1">
+          <span class="text-sm text-gray-400 font-body">You're being asked to pay</span>
+          <span class="text-xl font-display font-black metal-text" id="faTotal">$0</span>
+        </div>
+        <div class="flex items-center justify-between mb-5">
+          <span class="text-xs text-gray-500 font-body">of which likely illegal add-ons</span>
+          <span class="text-sm font-display font-bold text-red-400" id="faIllegal">$0</span>
+        </div>
+        <button id="faScriptBtn" class="btn-outline-gold w-full rounded-lg py-3 text-sm font-display tracking-wide flex items-center justify-center gap-2">
+          <i data-lucide="mail" class="w-4 h-4"></i> Generate Pushback Script
+        </button>
+        <div id="faScriptBox" class="hidden mt-4">
+          <textarea id="faScriptText" readonly class="field-input text-xs h-56 leading-relaxed"></textarea>
+          <button id="faCopyBtn" class="btn-cobalt w-full rounded-lg py-2.5 text-xs font-display tracking-wide mt-3 flex items-center justify-center gap-2">
+            <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy to Clipboard
+          </button>
+        </div>
+        <p class="text-[11px] text-gray-500 font-body leading-relaxed mt-4">Educational estimate based on OMVIC's published all-in pricing rules, not legal advice. Confirm specifics with OMVIC directly for your situation.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TOOL 2: EQUITY SIMULATOR ================= -->
+  <section id="equity-simulator" class="max-w-5xl mx-auto px-5 lg:px-8 pb-20 scroll-mt-24">
+    <div class="mb-8">
+      <div class="inline-flex items-center gap-2 badge-cobalt rounded-full px-3 py-1 text-[10px] font-display tracking-widest mb-3"><i data-lucide="trending-down" class="w-3 h-3"></i>TOOL 2 &middot; BREAKEVEN SIMULATOR</div>
+      <h2 class="font-display font-extrabold text-2xl md:text-3xl chrome-text mb-2">Negative Equity &amp; Breakeven Simulator</h2>
+      <p class="text-gray-400 font-body text-sm max-w-2xl">
+        Every vehicle depreciates fast in year one, then settles into a slower curve. Every loan pays mostly
+        interest at the start. The "Danger Zone" is every month your loan balance sits above what the
+        vehicle is actually worth &mdash; here's exactly how long that lasts for your numbers.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-[1fr_1.1fr] gap-6 items-start">
+      <!-- Inputs -->
+      <div class="panel rounded-xl p-6">
+        <div class="mb-5">
+          <div class="flex justify-between mb-1"><label class="field-label mb-0" for="esPrice">Vehicle Price</label><span class="text-gold-light font-display font-bold text-sm" id="esPriceVal">$28,995</span></div>
+          <input type="range" id="esPrice" class="gold-slider w-full" min="8000" max="90000" step="500" value="28995">
+        </div>
+        <div class="mb-5">
+          <div class="flex justify-between mb-1"><label class="field-label mb-0" for="esDown">Down Payment</label><span class="text-gold-light font-display font-bold text-sm" id="esDownVal">$0</span></div>
+          <input type="range" id="esDown" class="gold-slider w-full" min="0" max="30000" step="250" value="0">
+        </div>
+        <div class="mb-5">
+          <div class="flex justify-between mb-1"><label class="field-label mb-0" for="esApr">Interest Rate (APR)</label><span class="text-gold-light font-display font-bold text-sm" id="esAprVal">9.99%</span></div>
+          <input type="range" id="esApr" class="gold-slider w-full" min="3.99" max="29.99" step="0.1" value="9.99">
+        </div>
+        <div class="mb-2">
+          <label class="field-label">Loan Term</label>
+          <div class="grid grid-cols-3 gap-2" id="esTermButtons">
+            <button data-term="36" class="es-term-btn btn-outline-gold rounded-lg py-2 text-xs font-display">36 mo</button>
+            <button data-term="48" class="es-term-btn btn-outline-gold rounded-lg py-2 text-xs font-display">48 mo</button>
+            <button data-term="60" class="es-term-btn btn-outline-gold rounded-lg py-2 text-xs font-display">60 mo</button>
+            <button data-term="72" class="es-term-btn btn-outline-gold rounded-lg py-2 text-xs font-display">72 mo</button>
+            <button data-term="84" class="es-term-btn btn-outline-gold rounded-lg py-2 text-xs font-display">84 mo</button>
+            <button data-term="96" class="es-term-btn btn-outline-gold rounded-lg py-2 text-xs font-display">96 mo</button>
+          </div>
+        </div>
+        <p class="text-[11px] text-gray-500 font-body leading-relaxed mt-4">
+          Depreciation modeled at roughly 20% in year one and 15%/year after &mdash; the same assumption used
+          in our <a href="/loan-equity-simulator.html" class="text-cobalt-light hover:underline">standalone Equity Simulator</a>.
+          High annual mileage accelerates real-world depreciation beyond this baseline; treat this as a
+          conservative starting estimate, not a guarantee.
+        </p>
+      </div>
+
+      <!-- Chart + results -->
+      <div class="panel panel-cobalt rounded-xl p-6">
+        <canvas id="esChart" width="600" height="240" class="w-full h-auto mb-4"></canvas>
+        <div class="flex items-center gap-4 text-xs text-gray-400 font-body mb-5">
+          <span class="flex items-center gap-1.5"><span class="w-3 h-0.5 bg-[#FB7185] inline-block"></span> Loan Balance Owed</span>
+          <span class="flex items-center gap-1.5"><span class="w-3 h-0.5 bg-[#4FA3EE] inline-block"></span> Vehicle Value</span>
+        </div>
+
+        <div class="rounded-lg badge-red px-4 py-3 text-sm font-display mb-4" id="esDangerBanner">
+          <span class="font-bold" id="esDangerHeadline">Calculating&hellip;</span>
+        </div>
+
+        <div class="result-line"><span class="text-gray-400">Monthly Payment</span><span class="font-display font-bold text-gray-100" id="esMonthly">&mdash;</span></div>
+        <div class="result-line"><span class="text-gray-400">Total Interest Paid</span><span class="font-display font-bold text-gray-100" id="esInterest">&mdash;</span></div>
+
+        <div class="gold-divider my-4"></div>
+
+        <div class="flex items-center justify-between gap-3 mb-1">
+          <div>
+            <div class="text-sm text-gray-200 font-display font-bold">Compare With Wholesale Sourcing</div>
+            <div class="text-[11px] text-gray-500 font-body">Strips out our published typical retail dealer front-end markup ($6,500&ndash;$12,000) before modeling the loan.</div>
+          </div>
+          <div id="esToggle" class="toggle-switch shrink-0"><div class="toggle-knob"></div></div>
+        </div>
+        <div id="esWholesaleResult" class="hidden mt-3 rounded-lg panel-gold panel px-4 py-3 text-sm font-body">
+          <span id="esWholesaleText" class="text-gray-300"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TOOL 3: THEFT RISK LOOKUP ================= -->
+  <section id="theft-risk" class="max-w-5xl mx-auto px-5 lg:px-8 pb-20 scroll-mt-24">
+    <div class="mb-8">
+      <div class="inline-flex items-center gap-2 cat-badge-danger rounded-full px-3 py-1 text-[10px] font-display tracking-widest mb-3"><i data-lucide="shield-alert" class="w-3 h-3"></i>TOOL 3 &middot; INSURANCE RISK</div>
+      <h2 class="font-display font-extrabold text-2xl md:text-3xl chrome-text mb-2">GTA High-Theft &amp; Insurance Risk Lookup</h2>
+      <p class="text-gray-400 font-body text-sm max-w-2xl">
+        The GTA has one of the highest vehicle theft rates in Canada, and insurers price that risk into your
+        premium based on the exact segment and trim you drive. This is a directional guide, not a quote &mdash;
+        theft-risk ratings are model- and trim-specific and shift year to year, so always confirm the real
+        number with your own insurer before you buy.
+      </p>
+    </div>
+
+    <div class="panel rounded-xl p-6 lg:p-8">
+      <label class="field-label" for="trSelect">Select the vehicle segment you're shopping in</label>
+      <select id="trSelect" class="field-input mb-6">
+        <option value="">Choose a segment&hellip;</option>
+      </select>
+
+      <div id="trResult" class="hidden">
+        <div class="flex items-center gap-3 mb-3">
+          <span id="trBadge" class="badge-red inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-display tracking-widest"></span>
+        </div>
+        <p id="trNote" class="text-sm text-gray-300 font-body leading-relaxed mb-4"></p>
+        <div class="rounded-lg panel-cobalt panel px-4 py-3 text-xs text-gray-400 font-body">
+          Source: Équité Association's 2024 national theft data (the most recent full report available at
+          time of writing) and general industry reporting on keyless-entry relay-theft trends in Ontario and
+          Quebec. Figures are not GTA-specific and this tool does not quote exact dollar surcharges or
+          municipal tracking requirements &mdash; read the full picture in
+          <a href="/learn-auto-theft-insurance-surcharges.html" class="text-cobalt-light hover:underline">our theft &amp; insurance guide</a>,
+          then get a real quote from your insurer for your exact make, model, and trim.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= KNOWLEDGE BASE ================= -->
+  <section id="knowledge-base" class="max-w-6xl mx-auto px-5 lg:px-8 pb-20 scroll-mt-24">
+    <div class="mb-8 text-center">
+      <div class="inline-flex items-center gap-2 badge-gold rounded-full px-4 py-1.5 text-xs font-display tracking-widest mb-4"><i data-lucide="library" class="w-3.5 h-3.5"></i> THE FULL LEARN LIBRARY</div>
+      <h2 class="font-display font-extrabold text-2xl md:text-3xl chrome-text mb-3">Go Deeper on Any of These</h2>
+      <p class="text-gray-400 font-body text-sm max-w-2xl mx-auto">19 free guides on financing, avoiding bad loans, market conditions, and deal-hunting.</p>
+    </div>
+    <div class="text-center">
+      <a href="/learn.html" class="btn-outline-gold inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-display tracking-wide">
+        Browse the Full Learn Hub <i data-lucide="arrow-right" class="w-4 h-4"></i>
+      </a>
+    </div>
+  </section>
+
+  <!-- ================= DEAL AUDIT INTAKE ================= -->
+  <section id="deal-audit" class="max-w-4xl mx-auto px-5 lg:px-8 pb-20 scroll-mt-24">
+    <div class="mb-8">
+      <div class="inline-flex items-center gap-2 badge-cobalt rounded-full px-3 py-1 text-[10px] font-display tracking-widest mb-3"><i data-lucide="file-search" class="w-3 h-3"></i>FREE REVIEW</div>
+      <h2 class="font-display font-extrabold text-2xl md:text-3xl chrome-text mb-2">Get a Second Set of Eyes on a Real Quote</h2>
+      <p class="text-gray-400 font-body text-sm max-w-2xl">
+        Send over a dealer worksheet, Carfax, or bill of sale and a sourcing coordinator will look it over.
+        No obligation, and this review has no affiliation with the dealership that issued the quote &mdash;
+        we're on your side of the table, not theirs.
+      </p>
+    </div>
+
+    <div class="panel panel-gold rounded-xl p-6 lg:p-8">
+      <form id="daForm">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+          <div>
+            <label class="field-label" for="daName">Full Name <span class="text-gold-light">*</span></label>
+            <input required type="text" id="daName" class="field-input" placeholder="Your name" />
+          </div>
+          <div>
+            <label class="field-label" for="daEmail">Email <span class="text-gold-light">*</span></label>
+            <input required type="email" id="daEmail" class="field-input" placeholder="you@email.com" />
+          </div>
+          <div>
+            <label class="field-label" for="daPhone">Phone</label>
+            <input type="tel" id="daPhone" class="field-input" placeholder="(416) 000-0000" />
+          </div>
+          <div>
+            <label class="field-label" for="daWhatsapp">WhatsApp Number (optional)</label>
+            <input type="tel" id="daWhatsapp" class="field-input" placeholder="Same as phone, or different" />
+          </div>
+          <div>
+            <label class="field-label" for="daVehicle">Vehicle (Year / Make / Model)</label>
+            <input type="text" id="daVehicle" class="field-input" placeholder="e.g. 2023 Toyota Highlander" />
+          </div>
+          <div>
+            <label class="field-label" for="daMileage">Mileage on the Quote</label>
+            <input type="text" id="daMileage" class="field-input" placeholder="e.g. 42,000 km" />
+          </div>
+        </div>
+        <div class="mb-5">
+          <label class="field-label" for="daNotes">Notes / What the Dealer Quoted You</label>
+          <textarea id="daNotes" class="field-input h-24" placeholder="Paste the numbers, or describe what felt off"></textarea>
+        </div>
+        <div class="mb-6">
+          <label class="field-label">Dealer Worksheet, Bill of Sale, or Carfax</label>
+          <div id="daDropzone" class="dropzone">
+            <i data-lucide="upload-cloud" class="w-6 h-6 text-gold-light mx-auto mb-2"></i>
+            <p class="text-sm text-gray-300 font-body" id="daFileLabel">Click to choose a file, or drag one here</p>
+            <p class="text-[11px] text-gray-500 font-body mt-1">Photos, PDFs, or screenshots all work.</p>
+          </div>
+          <input type="file" id="daFileInput" class="hidden" accept="image/*,.pdf" />
+        </div>
+        <p class="text-[11px] text-gray-500 font-body leading-relaxed mb-5">
+          Your information stays confidential and is used only to review your quote &mdash; it is never shared
+          with the dealership involved. Because attachments can't be uploaded directly on this page yet, submitting
+          below opens a pre-filled email in your mail app; attach your file there before sending, or send it
+          straight to us on WhatsApp instead.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <button type="submit" class="btn-gold px-6 py-3 rounded-lg text-sm font-display tracking-wide flex items-center gap-2">
+            <i data-lucide="mail" class="w-4 h-4"></i> Email My Quote for Review
+          </button>
+          <a href="https://wa.me/14169381933?text=Hi%2C%20I%27d%20like%20a%20second%20opinion%20on%20a%20dealer%20quote." target="_blank" rel="noopener" class="btn-outline-gold px-6 py-3 rounded-lg text-sm font-display tracking-wide flex items-center gap-2">
+            <i data-lucide="message-circle" class="w-4 h-4"></i> Send via WhatsApp Instead
+          </a>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ================= MONETIZATION BRIDGE ================= -->
+  <section class="max-w-4xl mx-auto px-5 lg:px-8 pb-24">
+    <div class="rounded-2xl panel panel-gold p-8 lg:p-10">
+      <div class="text-center mb-6">
+        <div class="inline-flex items-center gap-2 badge-gold rounded-full px-4 py-1.5 text-xs font-display tracking-widest mb-4"><i data-lucide="scale" class="w-3.5 h-3.5"></i> THE ALTERNATIVE</div>
+        <h2 class="font-display font-black text-2xl md:text-3xl mb-3 metal-text">Or Skip the Retail Lot Markup Entirely</h2>
+        <p class="text-gray-300 font-body max-w-xl mx-auto text-sm leading-relaxed">
+          Every tool above helps you catch a bad deal after it's already priced at retail. There's a
+          different starting point: we acquire your target vehicle at closed, dealer-only wholesale auctions
+          (OPENLANE, Manheim, EBlock) into our own dealership inventory, then resell it to you in a separate,
+          disclosed transaction &mdash; a flat, transparent sourcing fee on top of true auction cost, with a
+          fully itemized, open-book invoice and pre-purchase condition information where the auction platform
+          provides it. No dealer-lot front-end markup added on top.
+        </p>
+      </div>
+      <div class="flex flex-wrap items-center justify-center gap-4">
+        <a href="/savings-calculator.html" class="btn-gold inline-block px-8 py-3.5 rounded-lg font-display tracking-wide text-sm">See the Savings Calculator</a>
+        <a href="/request-sourcing.html" class="inline-flex items-center gap-2 text-gray-300 hover:text-gold-light transition-colors font-body text-sm">Request Sourcing <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="border-t hairline bg-obsidian-light mt-24">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8 py-16">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div>
+          <a href="/index.html" class="flex items-center gap-3 mb-4">
+            <img src="/assets/logo-icon.png" alt="IAS logo" class="h-10 w-auto object-contain" />
+            <span class="font-display font-bold text-sm chrome-text">INNOVATIVE AUTO SOURCING</span>
+          </a>
+          <p class="text-sm text-gray-400 leading-relaxed font-body">
+            A closed-lane wholesale vehicle sourcing partner for Ontario businesses and private clients.
+            100% open-book auction access, zero lot markup, turnkey commercial delivery across the
+            Greater Toronto Area.
+          </p>
+          <div class="flex gap-3 mt-5">
+            <a href="#" class="w-9 h-9 rounded-full border hairline flex items-center justify-center text-gold hover:border-gold hover:bg-gold/10 transition-colors" aria-label="Facebook"><i data-lucide="facebook" class="w-4 h-4"></i></a>
+            <a href="#" class="w-9 h-9 rounded-full border hairline flex items-center justify-center text-gold hover:border-gold hover:bg-gold/10 transition-colors" aria-label="Instagram"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+            <a href="#" class="w-9 h-9 rounded-full border hairline flex items-center justify-center text-gold hover:border-gold hover:bg-gold/10 transition-colors" aria-label="LinkedIn"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="font-display font-bold text-sm tracking-wide text-gold-light mb-4">QUICK LINKS</h4>
+          <ul class="space-y-2.5 text-sm font-body text-gray-400">
+            <li><a href="/index.html" class="hover:text-cobalt-light transition-colors">Home</a></li>
+            <li><a href="/work-trucks.html" class="hover:text-cobalt-light transition-colors">Work Trucks</a></li>
+            <li><a href="/cargo-vans.html" class="hover:text-cobalt-light transition-colors">Cargo Vans</a></li>
+            <li><a href="/how-it-works.html" class="hover:text-cobalt-light transition-colors">How It Works</a></li>
+            <li><a href="/learn.html" class="hover:text-cobalt-light transition-colors">Learn</a></li>
+            <li><a href="/defense-hub.html" class="hover:text-cobalt-light transition-colors">Buyer's Defense Hub</a></li>
+            <li><a href="/loan-equity-simulator.html" class="hover:text-cobalt-light transition-colors">Loan Equity Simulator</a></li>
+            <li><a href="/faq.html" class="hover:text-cobalt-light transition-colors">FAQ</a></li>
+            <li><a href="/savings-calculator.html" class="hover:text-cobalt-light transition-colors">Savings Calculator</a></li>
+            <li><a href="/request-sourcing.html" class="hover:text-cobalt-light transition-colors">Request Sourcing</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-display font-bold text-sm tracking-wide text-gold-light mb-4">CONTACT</h4>
+          <ul class="space-y-3 text-sm font-body text-gray-400">
+            <li class="flex items-start gap-2.5"><i data-lucide="map-pin" class="w-4 h-4 text-cobalt-light mt-0.5 shrink-0"></i> Greater Toronto Area, Ontario, Canada</li>
+            <li class="flex items-start gap-2.5"><i data-lucide="phone" class="w-4 h-4 text-cobalt-light mt-0.5 shrink-0"></i> (416) 938-1933</li>
+            <li class="flex items-start gap-2.5"><span class="w-4 h-4 text-cobalt-light mt-0.5 shrink-0"><svg viewBox="0 0 24 24" class="w-4 h-4" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"></path><path d="M12.004 2c-5.522 0-10 4.478-10 10 0 1.765.464 3.489 1.345 5.003L2 22l5.13-1.346A9.947 9.947 0 0 0 12.004 22c5.523 0 10-4.478 10-10s-4.477-10-10-10zm0 18.164a8.13 8.13 0 0 1-4.146-1.135l-.297-.176-3.048.8.813-2.97-.193-.306a8.128 8.128 0 0 1-1.245-4.377c0-4.495 3.658-8.153 8.153-8.153 4.494 0 8.152 3.658 8.152 8.153 0 4.494-3.658 8.164-8.152 8.164z"></path></svg></span> <a href="https://wa.me/14169381933" target="_blank" rel="noopener" class="hover:text-cobalt-light transition-colors">WhatsApp Us</a></li>
+            <li class="flex items-start gap-2.5"><i data-lucide="mail" class="w-4 h-4 text-cobalt-light mt-0.5 shrink-0"></i> sourcing@innovativeautosourcing.ca</li>
+            <li class="flex items-start gap-2.5"><i data-lucide="clock" class="w-4 h-4 text-cobalt-light mt-0.5 shrink-0"></i> Mon&ndash;Fri 9:00&ndash;6:00 ET</li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-display font-bold text-sm tracking-wide text-gold-light mb-4">REGULATORY</h4>
+          <p class="text-xs text-gray-500 leading-relaxed font-body">
+            Innovative Auto Sourcing is a registered trade name of Innovative Auto Sourcing
+            Incorporated. <span class="text-gray-400">OMVIC General Dealer registration in progress
+            &mdash; the company is not yet trading retail vehicles.</span> All wholesale acquisitions
+            are purchased into the dealership's own name through licensed dealer-only auction channels (OPENLANE, Manheim, EBlock) and resold to the client in a separate, disclosed transaction, in accordance with applicable
+            <span class="text-gray-400">Ontario Motor Vehicle Industry Council (OMVIC)</span> Code of
+            Ethics and Consumer Protection Ontario guidelines. Tools on this page are educational estimates
+            only, not legal, financial, or insurance advice.
+          </p>
+        </div>
+      </div>
+
+      <div class="gold-divider my-10"></div>
+
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-gray-500 font-body">
+        <p>&copy; <span id="year"></span> Innovative Auto Sourcing. All rights reserved.</p>
+        <div class="flex gap-6">
+          <a href="#" class="hover:text-gold-light transition-colors">Privacy Policy</a>
+          <a href="#" class="hover:text-gold-light transition-colors">Terms of Service</a>
+          <a href="#" class="hover:text-gold-light transition-colors">OMVIC Disclosure</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    var menuBtn = document.getElementById('mobile-menu-btn');
+    var mobileMenu = document.getElementById('mobile-menu');
+    var menuOpen = false;
+    menuBtn.addEventListener('click', function () {
+      menuOpen = !menuOpen;
+      if (menuOpen) {
+        mobileMenu.style.maxHeight = mobileMenu.scrollHeight + 'px';
+        mobileMenu.style.opacity = '1';
+        menuBtn.innerHTML = '<i data-lucide="x" class="w-7 h-7"></i>';
+      } else {
+        mobileMenu.style.maxHeight = '0px';
+        mobileMenu.style.opacity = '0';
+        menuBtn.innerHTML = '<i data-lucide="menu" class="w-7 h-7"></i>';
+      }
+      lucide.createIcons();
+    });
+
+    // ============================================================
+    // SHARED HELPERS
+    // ============================================================
+    var fmt = function (n) { return '$' + Math.round(n).toLocaleString('en-CA'); };
+
+    // ============================================================
+    // TOOL 1: FEE & OMVIC COMPLIANCE AUDITOR
+    // ============================================================
+    var FA_FEES = [
+      { id: 'admin', label: 'Dealer Admin Fee', amt: 799 },
+      { id: 'doc', label: 'Documentation Fee', amt: 399 },
+      { id: 'etch', label: 'Window Etching / Security Package', amt: 499 },
+      { id: 'nitrogen', label: 'Nitrogen Tire Fill', amt: 129 },
+      { id: 'freight', label: 'Freight &amp; PDI (Used Vehicle)', amt: 995 },
+      { id: 'pdi', label: 'Pre-Delivery Inspection (PDI)', amt: 299 },
+      { id: 'warranty', label: 'Mandatory Extended Warranty', amt: 1995 },
+      { id: 'omvic', label: 'OMVIC Transaction Fee (billed separately)', amt: 22 },
+    ];
+
+    var faFeeList = document.getElementById('faFeeList');
+    FA_FEES.forEach(function (f) {
+      var row = document.createElement('div');
+      row.className = 'fee-row';
+      row.innerHTML =
+        '<div class="flex items-center gap-3">' +
+          '<input type="checkbox" class="fee-check" data-fee="' + f.id + '" id="fa_' + f.id + '">' +
+          '<label for="fa_' + f.id + '" class="text-sm text-gray-200 cursor-pointer">' + f.label + '</label>' +
+        '</div>' +
+        '<input type="number" class="fee-amt" data-amt="' + f.id + '" value="' + f.amt + '" min="0" step="1">';
+      faFeeList.appendChild(row);
+    });
+
+    var faPrice = document.getElementById('faPrice');
+    var faLicensing = document.getElementById('faLicensing');
+    var faHstPreview = document.getElementById('faHstPreview');
+    var faRedBanner = document.getElementById('faRedBanner');
+    var faResultLines = document.getElementById('faResultLines');
+    var faTotal = document.getElementById('faTotal');
+    var faIllegal = document.getElementById('faIllegal');
+    var faScriptBtn = document.getElementById('faScriptBtn');
+    var faScriptBox = document.getElementById('faScriptBox');
+    var faScriptText = document.getElementById('faScriptText');
+    var faCopyBtn = document.getElementById('faCopyBtn');
+
+    function faOmvicNoteHtml() {
+      return '<div class="result-line"><span class="text-gray-300"><span class="status-dot" style="background:#4ade80"></span>OMVIC Transaction Fee ($22.00)</span><span class="badge-green rounded px-2 py-0.5 text-[10px] font-display">ALREADY INCLUDED</span></div>';
+    }
+
+    function faRender() {
+      var price = Math.max(0, parseFloat(faPrice.value) || 0);
+      var illegalTotal = 0;
+      var linesHtml = '';
+      var anyChecked = false;
+
+      FA_FEES.forEach(function (f) {
+        if (f.id === 'omvic') return; // handled separately below, never an addable checkbox
+        var checkbox = document.querySelector('[data-fee="' + f.id + '"]');
+        var amtInput = document.querySelector('[data-amt="' + f.id + '"]');
+        var amt = Math.max(0, parseFloat(amtInput.value) || 0);
+        if (checkbox.checked) {
+          anyChecked = true;
+          illegalTotal += amt;
+          linesHtml += '<div class="result-line"><span class="text-gray-300"><span class="status-dot" style="background:#FB7185"></span>' + f.label + '</span><span class="badge-red rounded px-2 py-0.5 text-[10px] font-display">NON-COMPLIANT</span></div>';
+        }
+      });
+
+      linesHtml += faOmvicNoteHtml();
+
+      var hst = price * 0.13;
+      faHstPreview.textContent = fmt(hst);
+      var licensing = Math.max(0, parseFloat(faLicensing.value) || 0);
+      linesHtml += '<div class="result-line"><span class="text-gray-300"><span class="status-dot" style="background:#4FA3EE"></span>HST (13%)</span><span class="badge-cobalt rounded px-2 py-0.5 text-[10px] font-display">GOVERNMENT</span></div>';
+      linesHtml += '<div class="result-line"><span class="text-gray-300"><span class="status-dot" style="background:#4FA3EE"></span>Licensing / Plates</span><span class="badge-cobalt rounded px-2 py-0.5 text-[10px] font-display">GOVERNMENT</span></div>';
+
+      faResultLines.innerHTML = linesHtml;
+      faRedBanner.classList.toggle('hidden', !anyChecked);
+
+      var grandTotal = price + illegalTotal + hst + licensing;
+      faTotal.textContent = fmt(grandTotal);
+      faIllegal.textContent = fmt(illegalTotal);
+
+      return { price: price, illegalTotal: illegalTotal, hst: hst, licensing: licensing, grandTotal: grandTotal, anyChecked: anyChecked };
+    }
+
+    document.addEventListener('input', function (e) {
+      if (e.target.closest('#fee-auditor')) faRender();
+    });
+    document.addEventListener('change', function (e) {
+      if (e.target.closest('#fee-auditor')) faRender();
+    });
+
+    faScriptBtn.addEventListener('click', function () {
+      var r = faRender();
+      var flaggedNames = [];
+      FA_FEES.forEach(function (f) {
+        if (f.id === 'omvic') return;
+        var checkbox = document.querySelector('[data-fee="' + f.id + '"]');
+        var amtInput = document.querySelector('[data-amt="' + f.id + '"]');
+        if (checkbox.checked) flaggedNames.push(f.label.replace(/&amp;/g, '&') + ' (' + fmt(parseFloat(amtInput.value) || 0) + ')');
+      });
+
+      var script;
+      if (r.anyChecked) {
+        script =
+          'Subject: Advertised Price Does Not Match Quote — OMVIC All-In Pricing\n\n' +
+          'Hi,\n\n' +
+          'Your advertised price for this vehicle was ' + fmt(r.price) + '. The quote I received adds the ' +
+          'following on top of that price:\n\n' +
+          flaggedNames.map(function (n) { return '- ' + n; }).join('\n') + '\n\n' +
+          'Under Ontario’s Motor Vehicle Dealers Act, OMVIC requires registered dealers to advertise all-in ' +
+          'pricing: the price you show has to already include freight/PDI, admin and documentation fees, the ' +
+          'OMVIC transaction fee, and any pre-installed product. The only charges that may legally be added on ' +
+          'top are HST and government licensing costs.\n\n' +
+          'Please requote this vehicle at ' + fmt(r.price) + ' plus HST and licensing only, or itemize in ' +
+          'writing why you believe these charges fall outside OMVIC’s all-in pricing rule. If this can’t be ' +
+          'resolved, I’ll be filing a complaint with OMVIC and sourcing the vehicle elsewhere.\n\n' +
+          'Thank you,\n';
+      } else {
+        script =
+          'Subject: Confirming All-In Price Before I Sign\n\n' +
+          'Hi,\n\n' +
+          'Before I sign, can you confirm in writing that ' + fmt(r.price) + ' is the full all-in price for ' +
+          'this vehicle, with only HST and licensing to be added, per OMVIC’s all-in pricing rule? Please send ' +
+          'an itemized bill of sale showing everything included.\n\n' +
+          'Thank you,\n';
+      }
+      faScriptText.value = script;
+      faScriptBox.classList.remove('hidden');
+      lucide.createIcons();
+    });
+
+    faCopyBtn.addEventListener('click', function () {
+      faScriptText.select();
+      document.execCommand('copy');
+      faCopyBtn.innerHTML = '<i data-lucide="check" class="w-3.5 h-3.5"></i> Copied';
+      lucide.createIcons();
+      setTimeout(function () {
+        faCopyBtn.innerHTML = '<i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy to Clipboard';
+        lucide.createIcons();
+      }, 1800);
+    });
+
+    faRender();
+
+    // ============================================================
+    // TOOL 2: NEGATIVE EQUITY & BREAKEVEN SIMULATOR
+    // ============================================================
+    function monthlyPayment(P, r, n) {
+      if (P <= 0) return 0;
+      if (r === 0) return P / n;
+      var f = Math.pow(1 + r, n);
+      return P * r * f / (f - 1);
+    }
+    var DEP_Y1 = 1 - Math.pow(1 - 0.20, 1 / 12);
+    var DEP_AFTER = 1 - Math.pow(1 - 0.15, 1 / 12);
+
+    function buildSeries(price, down, aprPct, term) {
+      var P = Math.max(0, price - down);
+      var r = (aprPct / 100) / 12;
+      var M = monthlyPayment(P, r, term);
+      var balance = [P];
+      var value = [price];
+      for (var m = 1; m <= term; m++) {
+        var prevBal = balance[m - 1];
+        var interestPortion = prevBal * r;
+        var newBal = prevBal + interestPortion - M;
+        if (newBal < 0) newBal = 0;
+        balance.push(newBal);
+        var prevVal = value[m - 1];
+        var depRate = (m <= 12) ? DEP_Y1 : DEP_AFTER;
+        value.push(prevVal * (1 - depRate));
+      }
+      return { balance: balance, value: value, M: M, P: P };
+    }
+
+    function breakevenMonth(series, term) {
+      for (var m = 0; m <= term; m++) {
+        if (series.value[m] >= series.balance[m]) return m;
+      }
+      return null; // never reaches positive equity within the term
+    }
+
+    var esPrice = document.getElementById('esPrice');
+    var esDown = document.getElementById('esDown');
+    var esApr = document.getElementById('esApr');
+    var esPriceVal = document.getElementById('esPriceVal');
+    var esDownVal = document.getElementById('esDownVal');
+    var esAprVal = document.getElementById('esAprVal');
+    var esTermButtons = document.querySelectorAll('.es-term-btn');
+    var esChart = document.getElementById('esChart');
+    var esCtx = esChart.getContext('2d');
+    var esDangerHeadline = document.getElementById('esDangerHeadline');
+    var esMonthly = document.getElementById('esMonthly');
+    var esInterest = document.getElementById('esInterest');
+    var esToggleEl = document.getElementById('esToggle');
+    var esWholesaleResult = document.getElementById('esWholesaleResult');
+    var esWholesaleText = document.getElementById('esWholesaleText');
+
+    var esState = { term: 60, wholesale: false };
+
+    function esSetTermButtons() {
+      esTermButtons.forEach(function (b) {
+        var active = parseInt(b.getAttribute('data-term'), 10) === esState.term;
+        b.className = active
+          ? 'es-term-btn btn-cobalt rounded-lg py-2 text-xs font-display'
+          : 'es-term-btn btn-outline-gold rounded-lg py-2 text-xs font-display';
+      });
+    }
+    esTermButtons.forEach(function (b) {
+      b.addEventListener('click', function () {
+        esState.term = parseInt(b.getAttribute('data-term'), 10);
+        esSetTermButtons();
+        esRender();
+      });
+    });
+    esSetTermButtons();
+
+    esToggleEl.addEventListener('click', function () {
+      esState.wholesale = !esState.wholesale;
+      esToggleEl.classList.toggle('on', esState.wholesale);
+      esRender();
+    });
+
+    var RETAIL_MARKUP_LOW = 6500;
+    var RETAIL_MARKUP_HIGH = 12000;
+    var RETAIL_MARKUP_MID = (RETAIL_MARKUP_LOW + RETAIL_MARKUP_HIGH) / 2;
+
+    function esDrawChart(series, term) {
+      var w = esChart.width, h = esChart.height;
+      esCtx.clearRect(0, 0, w, h);
+      var maxVal = Math.max.apply(null, series.balance.concat(series.value)) * 1.05;
+      var padL = 46, padB = 24, padT = 10, padR = 10;
+      var plotW = w - padL - padR, plotH = h - padT - padB;
+
+      // gridlines
+      esCtx.strokeStyle = 'rgba(255,255,255,0.08)';
+      esCtx.lineWidth = 1;
+      esCtx.fillStyle = 'rgba(200,205,218,0.6)';
+      esCtx.font = '10px Inter, sans-serif';
+      for (var g = 0; g <= 4; g++) {
+        var gy = padT + plotH - (plotH * g / 4);
+        esCtx.beginPath();
+        esCtx.moveTo(padL, gy);
+        esCtx.lineTo(w - padR, gy);
+        esCtx.stroke();
+        esCtx.fillText('$' + Math.round((maxVal * g / 4) / 1000) + 'k', 2, gy + 3);
+      }
+
+      function plot(arr, color) {
+        esCtx.beginPath();
+        esCtx.strokeStyle = color;
+        esCtx.lineWidth = 2.5;
+        for (var m = 0; m <= term; m++) {
+          var x = padL + (plotW * m / term);
+          var y = padT + plotH - (plotH * arr[m] / maxVal);
+          if (m === 0) esCtx.moveTo(x, y); else esCtx.lineTo(x, y);
+        }
+        esCtx.stroke();
+      }
+      plot(series.balance, '#FB7185');
+      plot(series.value, '#4FA3EE');
+    }
+
+    function esRender() {
+      var price = parseFloat(esPrice.value);
+      var down = parseFloat(esDown.value);
+      var apr = parseFloat(esApr.value);
+      var term = esState.term;
+
+      esPriceVal.textContent = fmt(price);
+      esDownVal.textContent = fmt(down);
+      esAprVal.textContent = apr.toFixed(2) + '%';
+
+      var series = buildSeries(price, down, apr, term);
+      esDrawChart(series, term);
+
+      var totalInterest = (series.M * term) - series.P;
+      esMonthly.textContent = fmt(series.M) + '/mo';
+      esInterest.textContent = fmt(totalInterest);
+
+      var beMonth = breakevenMonth(series, term);
+      if (beMonth === null) {
+        esDangerHeadline.textContent = 'Negative Equity Warning: this loan never reaches positive equity within its ' + term + '-month term.';
+      } else if (beMonth === 0) {
+        esDangerHeadline.textContent = 'You start with positive equity on day one at this down payment and rate.';
+      } else {
+        esDangerHeadline.textContent = 'Danger Zone: Month ' + beMonth + ' is roughly when this loan crosses into positive equity.';
+      }
+
+      if (esState.wholesale) {
+        var wholesalePrice = Math.max(0, price - RETAIL_MARKUP_MID);
+        var wholesaleSeries = buildSeries(wholesalePrice, down, apr, term);
+        var wholesaleBe = breakevenMonth(wholesaleSeries, term);
+        var monthsSaved = (beMonth === null ? term : beMonth) - (wholesaleBe === null ? term : wholesaleBe);
+        esWholesaleResult.classList.remove('hidden');
+        esWholesaleText.textContent =
+          'At a wholesale-sourced price of roughly ' + fmt(wholesalePrice) + ' (removing our published $6,500–$12,000 ' +
+          'typical retail markup, using the $' + Math.round(RETAIL_MARKUP_MID / 1000) + 'k midpoint), the same loan reaches ' +
+          'positive equity ' + (wholesaleBe === null ? 'still not within the term' : 'by month ' + wholesaleBe) +
+          (monthsSaved > 0 ? ' — roughly ' + monthsSaved + ' fewer month' + (monthsSaved === 1 ? '' : 's') + ' underwater.' : '.');
+      } else {
+        esWholesaleResult.classList.add('hidden');
+      }
+    }
+
+    [esPrice, esDown, esApr].forEach(function (el) { el.addEventListener('input', esRender); });
+    esRender();
+
+    // ============================================================
+    // TOOL 3: THEFT & INSURANCE RISK LOOKUP
+    // ============================================================
+    var TR_SEGMENTS = [
+      {
+        id: 'popular-crossover',
+        label: 'Popular Mid-Size SUV / Crossover (RAV4-class)',
+        tier: 'Elevated Risk',
+        badgeClass: 'badge-red',
+        note: 'This is the single most-targeted segment nationally: Équité Association’s 2024 data ranked the Toyota RAV4 as Canada’s most-stolen vehicle, with over 2,000 thefts and $1B+ in claims that year alone. High-volume, easy-to-resell-or-export crossovers in this class have generally carried a higher comprehensive insurance surcharge in Ontario.'
+      },
+      {
+        id: 'luxury-suv',
+        label: 'Luxury SUV (export-targeted)',
+        tier: 'Elevated Risk',
+        badgeClass: 'badge-red',
+        note: 'Higher-value SUVs with keyless-entry and push-button start have repeatedly drawn organized theft-ring and export attention in Ontario. Expect this segment to sit toward the higher end of comprehensive premiums; confirm the exact trim with your insurer, since anti-theft tech varies by model year.'
+      },
+      {
+        id: 'pickup',
+        label: 'Full-Size Pickup Truck',
+        tier: 'Moderate-Elevated Risk',
+        badgeClass: 'badge-yellow',
+        note: 'Full-size pickups are a frequent theft target in Canada, though typically somewhat less than the top-ranked crossover/SUV segment. Premiums vary meaningfully by trim and anti-theft package — get a quote on your specific configuration.'
+      },
+      {
+        id: 'sedan',
+        label: 'Compact or Mid-Size Sedan',
+        tier: 'Lower-Moderate Risk',
+        badgeClass: 'badge-yellow',
+        note: 'Sedans have generally drawn less organized-theft attention than late-model keyless SUVs and crossovers, though this shifts over time as thieves adapt. Still worth confirming current ratings with your insurer.'
+      },
+      {
+        id: 'cargo-van',
+        label: 'Full-Size Cargo Van / Fleet Vehicle',
+        tier: 'Lower Risk',
+        badgeClass: 'badge-green',
+        note: 'Full-size cargo vans and older-style fleet trucks without push-button start have generally drawn less organized-theft attention than late-model keyless SUVs. This can shift over time, so it’s still worth checking current ratings rather than assuming.'
+      },
+    ];
+
+    var trSelect = document.getElementById('trSelect');
+    TR_SEGMENTS.forEach(function (s) {
+      var opt = document.createElement('option');
+      opt.value = s.id;
+      opt.textContent = s.label;
+      trSelect.appendChild(opt);
+    });
+
+    var trResult = document.getElementById('trResult');
+    var trBadge = document.getElementById('trBadge');
+    var trNote = document.getElementById('trNote');
+
+    trSelect.addEventListener('change', function () {
+      var seg = TR_SEGMENTS.filter(function (s) { return s.id === trSelect.value; })[0];
+      if (!seg) { trResult.classList.add('hidden'); return; }
+      trBadge.className = seg.badgeClass + ' inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-display tracking-widest';
+      trBadge.textContent = seg.tier.toUpperCase();
+      trNote.textContent = seg.note;
+      trResult.classList.remove('hidden');
+    });
+
+    // ============================================================
+    // DEAL AUDIT INTAKE FORM
+    // ============================================================
+    var daDropzone = document.getElementById('daDropzone');
+    var daFileInput = document.getElementById('daFileInput');
+    var daFileLabel = document.getElementById('daFileLabel');
+    daDropzone.addEventListener('click', function () { daFileInput.click(); });
+    daDropzone.addEventListener('dragover', function (e) { e.preventDefault(); daDropzone.classList.add('drag'); });
+    daDropzone.addEventListener('dragleave', function () { daDropzone.classList.remove('drag'); });
+    daDropzone.addEventListener('drop', function (e) {
+      e.preventDefault();
+      daDropzone.classList.remove('drag');
+      if (e.dataTransfer.files.length) {
+        daFileInput.files = e.dataTransfer.files;
+        daFileLabel.textContent = e.dataTransfer.files[0].name + ' selected — remember to attach it in your email';
+      }
+    });
+    daFileInput.addEventListener('change', function () {
+      if (daFileInput.files.length) {
+        daFileLabel.textContent = daFileInput.files[0].name + ' selected — remember to attach it in your email';
+      }
+    });
+
+    document.getElementById('daForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var name = document.getElementById('daName').value;
+      var email = document.getElementById('daEmail').value;
+      var phone = document.getElementById('daPhone').value;
+      var whatsapp = document.getElementById('daWhatsapp').value;
+      var vehicle = document.getElementById('daVehicle').value;
+      var mileage = document.getElementById('daMileage').value;
+      var notes = document.getElementById('daNotes').value;
+
+      var bodyLines = [
+        'Name: ' + name,
+        'Email: ' + email,
+        'Phone: ' + (phone || '—'),
+        'WhatsApp: ' + (whatsapp || '—'),
+        'Vehicle: ' + (vehicle || '—'),
+        'Mileage on Quote: ' + (mileage || '—'),
+        '',
+        'Notes:',
+        notes || '—',
+        '',
+        '(Please attach the dealer worksheet, bill of sale, or Carfax file to this email before sending.)'
+      ];
+      var subject = encodeURIComponent('Deal Audit Request' + (vehicle ? ' - ' + vehicle : ''));
+      var body = encodeURIComponent(bodyLines.join('\n'));
+      window.location.href = 'mailto:sourcing@innovativeautosourcing.ca?subject=' + subject + '&body=' + body;
+    });
+
+    lucide.createIcons();
+  </script>
+
+</body>
+</html>
