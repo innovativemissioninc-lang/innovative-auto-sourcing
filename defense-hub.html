@@ -821,10 +821,16 @@
     }
 
     function breakevenMonth(series, term) {
+      // Find the LAST month the loan is underwater, not just the first month it happens
+      // to be even — a $0-down loan is technically "equal" at month 0 but dips negative
+      // right after, so month 0 must never be reported as breakeven unless equity never
+      // goes negative at all.
+      var everNegative = false, lastNegative = -1;
       for (var m = 0; m <= term; m++) {
-        if (series.value[m] >= series.balance[m]) return m;
+        if (series.balance[m] > series.value[m]) { everNegative = true; lastNegative = m; }
       }
-      return null; // never reaches positive equity within the term
+      if (!everNegative) return 0;
+      return (lastNegative + 1 <= term) ? lastNegative + 1 : null; // null = never recovers within the term
     }
 
     var esPrice = document.getElementById('esPrice');
