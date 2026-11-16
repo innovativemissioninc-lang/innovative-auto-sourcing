@@ -408,6 +408,12 @@
       .calc-top-cta { display: block; margin-top: 1.5rem; }
       .calc-section-divider { display: flex; align-items: center; gap: 0.75rem; margin: 2rem 0 1.25rem; font-family: 'Montserrat', sans-serif; font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.08em; color: #6B7280; text-transform: uppercase; }
       .calc-section-divider::before, .calc-section-divider::after { content: ''; flex: 1; height: 1px; background: rgba(212,175,55,0.2); }
+
+      .omvic-note { display: flex; gap: 0.75rem; align-items: flex-start; background: rgba(30,136,229,0.08); border: 1px solid rgba(30,136,229,0.35); border-radius: 0.75rem; padding: 1rem 1.25rem; margin-top: 1.5rem; color: #9CA3AF; }
+      .omvic-note i { color: #4FA3EE; }
+      .omvic-note p { font-size: 0.8125rem; line-height: 1.6; margin: 0; }
+      .omvic-note a { color: #4FA3EE; text-decoration: underline; }
+      .omvic-req-tag { display: inline-block; font-size: 0.625rem; font-weight: 700; letter-spacing: 0.03em; color: #FACC15; background: rgba(234,179,8,0.12); border: 1px solid rgba(234,179,8,0.4); border-radius: 0.3rem; padding: 0.1rem 0.4rem; margin-left: 0.4rem; white-space: nowrap; }
     </style>
 
     <!-- TOP-PINNED LIVE SAVINGS RESULT (mobile: visible before any scrolling/input) -->
@@ -460,6 +466,18 @@
       </div>
     </div>
 
+    <div class="omvic-note">
+      <i data-lucide="info" class="w-4 h-4 shrink-0" style="margin-top:2px;"></i>
+      <p>
+        <strong class="text-gray-200">A note on how to read the retail column:</strong> under Ontario's
+        Motor Vehicle Dealers Act, a registered dealer's advertised price is legally required to already
+        include the fees marked <span class="omvic-req-tag">OMVIC: MUST BE IN STICKER PRICE</span> below &mdash;
+        only HST and licensing may legally be added on top. We still show them broken out here because many
+        GTA dealers itemize them separately anyway, which is exactly the all-in pricing violation our
+        <a href="/defense-hub.html#fee-auditor">Fee &amp; OMVIC Compliance Auditor</a> helps you catch and push back on.
+      </p>
+    </div>
+
     <div class="table-responsive">
       <table class="calc-table">
         <thead>
@@ -495,8 +513,8 @@
           <tr class="cat-header"><td colspan="3">2. SAFETY INSPECTION &amp; MECHANICAL PARTS</td></tr>
           <tr>
             <td>DriveON Safety Certification</td>
-            <td>+$595.00</td>
-            <td>+$160.00 <span class="tag-sub">(Provincial Rate)</span></td>
+            <td>+$595.00 <span class="omvic-req-tag">OMVIC: MUST BE IN STICKER PRICE</span></td>
+            <td>+$160.00 <span class="tag-sub">(IAS Hub Rate)</span></td>
           </tr>
           <tr>
             <td>Safety Parts &amp; Mechanical Wear Items <span class="tag-detail">(Brakes, tires, suspension adjustments)</span></td>
@@ -507,12 +525,12 @@
           <tr class="cat-header"><td colspan="3">3. DEALERSHIP PROFIT VS. FIXED SOURCING FEE</td></tr>
           <tr>
             <td>Dealer Administration &amp; Documentation Fee</td>
-            <td>+$799.00</td>
+            <td>+$799.00 <span class="omvic-req-tag">OMVIC: MUST BE IN STICKER PRICE</span></td>
             <td class="text-success">$0.00 <span class="tag-sub">(Eliminated)</span></td>
           </tr>
           <tr>
             <td>Mandatory Anti-Theft / Security Glass Etch</td>
-            <td>+$499.00</td>
+            <td>+$499.00 <span class="omvic-req-tag">OMVIC: MUST BE IN STICKER PRICE</span></td>
             <td class="text-success">$0.00 <span class="tag-sub">(Eliminated)</span></td>
           </tr>
           <tr>
@@ -534,8 +552,8 @@
           <tr class="cat-header"><td colspan="3">4. REGULATORY, HST &amp; LICENSING</td></tr>
           <tr>
             <td>OMVIC Regulatory Transaction Fee</td>
-            <td>+$22.00</td>
-            <td>+$22.00 <span class="tag-sub">(Pass-Through)</span></td>
+            <td>+$22.00 <span class="omvic-req-tag">OMVIC: MUST BE IN STICKER PRICE</span></td>
+            <td>+$22.00 <span class="tag-sub">(Itemized on Our Open-Book Invoice)</span></td>
           </tr>
           <tr>
             <td>Ontario HST (13%)</td>
